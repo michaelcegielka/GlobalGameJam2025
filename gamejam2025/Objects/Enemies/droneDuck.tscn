@@ -23,7 +23,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.201503, 0.084493)
 shape = SubResource("SphereShape3D_lj6j5")
 
 [node name="Model" type="Node3D" parent="."]
-transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0.000124931, -5.96046e-08, -0.00530195)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0.000124931, 2.3, -0.00530195)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.239555, 0, 0, 0, 0.145174, 0, 0, 0, 0.301104, 0, 0.358, -0.541)
