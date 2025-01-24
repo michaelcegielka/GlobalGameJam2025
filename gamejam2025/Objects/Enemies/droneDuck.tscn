@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://iwg5jhuoe51q"]
+
+[ext_resource type="Script" path="res://Objects/Enemies/drone_duck.gd" id="1_hmfu7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lj6j5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlra8"]
+albedo_color = Color(0.286275, 0.85098, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_seybw"]
+material = SubResource("StandardMaterial3D_nlra8")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vh5uh"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6mmfl"]
+
+[node name="EnemyBody" type="CharacterBody3D"]
+collision_layer = 4
+script = ExtResource("1_hmfu7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.201503, 0.084493)
+shape = SubResource("SphereShape3D_lj6j5")
+
+[node name="Model" type="Node3D" parent="."]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0.000124931, 2.3, -0.00530195)
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.239555, 0, 0, 0, 0.145174, 0, 0, 0, 0.301104, 0, 0.358, -0.541)
+layers = 4
+mesh = SubResource("SphereMesh_seybw")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.337639, -0.000485673, 0.000506178, 0.000506179, 0.15808, 0.172886, -0.000891036, -0.0942337, 0.290018, -0.044, 0.195, 0.383)
+layers = 4
+mesh = SubResource("SphereMesh_seybw")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.51984, 0, 0, 0, 0.547051, 0, 0, 0, 0.581068, 0, 0.388, -0.264)
+layers = 4
+mesh = SubResource("SphereMesh_seybw")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.869192, 0, 0, 0, 0.611581, 0, 0, 0, 1, 0, 0.00753427, 0)
+layers = 4
+mesh = SubResource("SphereMesh_seybw")
+skeleton = NodePath("")
+
+[node name="Propeller" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.0665158, 0, 0, 0, -1.49005e-08, 0.0405023, 0, -0.340885, -1.77041e-09, 0, 0.829238, -0.263875)
+mesh = SubResource("CylinderMesh_vh5uh")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.0303883, 0, 0, 0, 0.116387, 0, 0, 0, 0.0303883, -0.00314315, 0.722, -0.268953)
+mesh = SubResource("CylinderMesh_6mmfl")
