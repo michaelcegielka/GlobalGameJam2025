@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://s0njjrds4vfx"]
+
+[node name="Enemy" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
