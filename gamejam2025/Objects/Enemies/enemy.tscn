@@ -4,11 +4,11 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lj6j5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8q825"]
-albedo_color = Color(1, 0.72549, 0, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80y7v"]
+albedo_color = Color(1, 0.815686, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_stcqb"]
-material = SubResource("StandardMaterial3D_8q825")
+material = SubResource("StandardMaterial3D_80y7v")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agmpv"]
 albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
@@ -18,6 +18,7 @@ metallic = 0.35
 material = SubResource("StandardMaterial3D_agmpv")
 
 [node name="EnemyBody" type="CharacterBody3D"]
+collision_layer = 4
 script = ExtResource("1_8gbia")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -28,25 +29,25 @@ shape = SubResource("SphereShape3D_lj6j5")
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0.000124931, -5.96046e-08, -0.00530195)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.239555, 0, 0, 0, 0.145174, 0, 0, 0, 0.301104, 0, 0.358, -0.541)
+transform = Transform3D(0.239555, -7.20292e-05, -0.000127547, 0.000118814, 0.145174, -0.000131707, 0.000101525, 6.34717e-05, 0.301104, 0.000124506, 0.358196, -0.540942)
 layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.337639, -0.000485673, 0.000506178, 0.000506179, 0.15808, 0.172886, -0.000891036, -0.0942337, 0.290018, -0.044, 0.195, 0.383)
+transform = Transform3D(0.337639, -0.000524188, 0.000297548, 0.00067403, 0.158121, 0.172759, -0.000747721, -0.0941648, 0.290094, -0.044186, 0.19477, 0.382968)
 layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.51984, 0, 0, 0, 0.547051, 0, 0, 0, 0.581068, 0, 0.388, -0.264)
+transform = Transform3D(0.51984, -0.000271424, -0.000246139, 0.00025783, 0.547051, -0.000254167, 0.000220312, 0.000239177, 0.581068, -7.71531e-06, 0.388075, -0.263929)
 layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.869192, 0, 0, 0, 0.611581, 0, 0, 0, 1, 0, 0.00753427, 0)
+transform = Transform3D(0.869192, -0.000303441, -0.000423598, 0.000431101, 0.611581, -0.000437414, 0.00036837, 0.00026739, 1, 6.92254e-05, 0.00749365, -9.57495e-05)
 layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("")
