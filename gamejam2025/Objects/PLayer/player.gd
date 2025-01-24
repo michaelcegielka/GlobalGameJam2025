@@ -2,14 +2,15 @@ extends CharacterBody3D
 
 enum States {JUMPING, FALLING, GROUNDED, FAST, DEAD}
 
-const Acceleration = 15.0
-const AirAcceleration = 5.0
+const Acceleration = 25.0
+const AirAcceleration = 15.0
 
 const Friction = 5.0
 const AirFriction = 1.0
 
 const MaxVelocity = 75.0
 const JumpStrength = 25.0
+const CoyoteTime = 0.1
 
 const Gravity = -80.0
 const AirGravity = -40.0
@@ -26,6 +27,7 @@ var current_dir := Vector3.ZERO
 var current_floor_normal := Vector3.UP
 var current_state := States.GROUNDED
 
+@onready var coyote_timer : Timer = $CoyoteTimer
 
 ### Camera
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
@@ -55,7 +57,7 @@ func control_cam(delta):
 	self.camera_3d.look_at(self.global_position)
 	
 	var distance_step = (self.MaxArmDistance - self.MinArmDistance) / 3.0
-	var velocity_scale = (self.velocity.length() - 30.0) / self.VelocityScale
+	var velocity_scale = (self.velocity.length() - 10.0) / self.VelocityScale
 	self.spring_arm_3d.spring_length = clamp(
 		self.MinArmDistance + distance_step * velocity_scale, 
 		self.MinArmDistance, self.MaxArmDistance)
@@ -78,6 +80,8 @@ func _physics_process(delta):
 			self.ground_move(delta)
 		self.States.JUMPING:
 			self.jump_move(delta)
+		self.States.FALLING:
+			self.fall_move(delta)
 
 
 func get_player_input(max_velo, accel, delta):
@@ -88,6 +92,7 @@ func get_player_input(max_velo, accel, delta):
 	if dir_len > 1:
 		self.current_dir / dir_len
 	if dir_len > 0.05:
+		
 		self.velocity = self.velocity.move_toward(max_velo * self.current_dir, 
 													accel * delta)
 
@@ -110,8 +115,11 @@ func ground_move(delta):
 	
 	if Input.is_action_just_pressed("Jump"):
 		self.current_state = self.States.JUMPING
-		self.velocity = self.JumpStrength * self.current_floor_normal
+		self.velocity += self.JumpStrength * self.current_floor_normal
 		self.global_position += 0.1 * self.current_floor_normal
+	elif not self.is_on_floor():
+		self.coyote_timer.start(self.CoyoteTime)
+		self.current_state = self.States.FALLING
 
 
 func jump_move(delta):
@@ -129,5 +137,28 @@ func jump_move(delta):
 	)
 	self.tilt_model(self.current_floor_normal)
 	
+	if self.is_on_floor():
+		self.current_state = self.States.GROUNDED
+
+
+func fall_move(delta):
+	self.get_player_input(self.MaxVelocity, self.AirAcceleration / 2.0, delta)
+	
+	self.velocity.y += 2.0*self.AirGravity * delta
+	self.move_and_slide()
+	self.rot_y_model(delta, self.Acceleration)
+	
+	self.velocity = self.velocity.move_toward(Vector3.ZERO, self.AirFriction * delta)
+	
+	self.control_cam(delta)
+	self.current_floor_normal = self.current_floor_normal.move_toward(
+		Vector3.UP, delta * self.AirAcceleration
+	)
+	self.tilt_model(self.current_floor_normal)
+	
+	if Input.is_action_just_pressed("Jump") and self.coyote_timer.time_left:
+		self.current_state = self.States.JUMPING
+		self.velocity += self.JumpStrength * Vector3.UP
+		self.global_position += 0.1 * self.current_floor_normal
 	if self.is_on_floor():
 		self.current_state = self.States.GROUNDED
