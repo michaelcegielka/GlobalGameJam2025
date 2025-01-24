@@ -1,12 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://s0njjrds4vfx"]
+[gd_scene load_steps=7 format=3 uid="uid://s0njjrds4vfx"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/enemy.gd" id="1_8gbia"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lj6j5"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8q825"]
+albedo_color = Color(1, 0.72549, 0, 1)
+
 [sub_resource type="SphereMesh" id="SphereMesh_stcqb"]
+material = SubResource("StandardMaterial3D_8q825")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agmpv"]
+albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
+metallic = 0.35
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pespu"]
+material = SubResource("StandardMaterial3D_agmpv")
 
 [node name="EnemyBody" type="CharacterBody3D"]
 script = ExtResource("1_8gbia")
@@ -20,24 +29,29 @@ transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 0.000124931, -5.96046e-
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.239555, 0, 0, 0, 0.145174, 0, 0, 0, 0.301104, 0, 0.358, -0.541)
+layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.337639, -0.000485673, 0.000506178, 0.000506179, 0.15808, 0.172886, -0.000891036, -0.0942337, 0.290018, -0.044, 0.195, 0.383)
+layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.51984, 0, 0, 0, 0.547051, 0, 0, 0, 0.581068, 0, 0.388, -0.264)
+layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.869192, 0, 0, 0, 0.611581, 0, 0, 0, 1, 0, 0.00753427, 0)
+layers = 4
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("")
 
 [node name="WeaponMesh" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.129604, -0.0394712, -0.0144622, 0.0168615, 0.0868509, 0.126931, -0.00915049, -0.399014, 0.029059, -0.391409, 0.169833, -0.347693)
+layers = 4
 mesh = SubResource("CylinderMesh_pespu")
