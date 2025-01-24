@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://nrtfjmfxo36m"]
+[gd_scene load_steps=10 format=3 uid="uid://nrtfjmfxo36m"]
 
 [ext_resource type="PackedScene" uid="uid://ore5g1k0lwj6" path="res://Objects/PLayer/player.tscn" id="1_40nht"]
 [ext_resource type="Texture2D" uid="uid://uu43m0lsdufj" path="res://icon.svg" id="2_yigkt"]
-[ext_resource type="PackedScene" uid="uid://s0njjrds4vfx" path="res://Objects/Enemies/enemy.tscn" id="3_frvh6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gpct"]
 albedo_texture = ExtResource("2_yigkt")
@@ -29,9 +28,6 @@ background_mode = 2
 sky = SubResource("Sky_73wsh")
 
 [node name="MainScene" type="Node3D"]
-
-[node name="Enemy" parent="." instance=ExtResource("3_frvh6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1991, -0.424191, -0.279251)
 
 [node name="Player" parent="." instance=ExtResource("1_40nht")]
 
