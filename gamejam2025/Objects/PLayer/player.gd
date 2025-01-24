@@ -26,7 +26,6 @@ var current_dir := Vector3.ZERO
 var current_floor_normal := Vector3.UP
 var current_state := States.GROUNDED
 
-@onready var velocity_dir_marker = $Model/VelocityDirMarker
 
 ### Camera
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
@@ -97,8 +96,8 @@ func ground_move(delta):
 	self.velocity.y = self.Gravity * delta
 	
 	var none_rotated_velo = self.velocity
-	self.velocity_dir_marker.position = self.velocity
-	self.velocity = (self.velocity_dir_marker.global_position - self.global_position)
+	var basis_rot = Quaternion(self.transform.basis.y, self.get_floor_normal()).normalized()
+	self.velocity = basis_rot * self.velocity
 	self.move_and_slide()
 	self.velocity = none_rotated_velo
 	

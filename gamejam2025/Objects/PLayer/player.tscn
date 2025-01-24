@@ -38,8 +38,6 @@ material_override = SubResource("StandardMaterial3D_srb6a")
 mesh = SubResource("BoxMesh_kqe2b")
 skeleton = NodePath("../../..")
 
-[node name="VelocityDirMarker" type="Marker3D" parent="Model"]
-
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 spring_length = 8.0
 
