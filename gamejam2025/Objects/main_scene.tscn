@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://nrtfjmfxo36m"]
+[gd_scene load_steps=11 format=3 uid="uid://nrtfjmfxo36m"]
 
 [ext_resource type="PackedScene" uid="uid://ore5g1k0lwj6" path="res://Objects/PLayer/player.tscn" id="1_40nht"]
 [ext_resource type="Texture2D" uid="uid://uu43m0lsdufj" path="res://icon.svg" id="2_yigkt"]
 [ext_resource type="ArrayMesh" uid="uid://cd11b2058h8po" path="res://_3d/bathtub.obj" id="3_t8sir"]
+[ext_resource type="PackedScene" uid="uid://s0njjrds4vfx" path="res://Objects/Enemies/enemy.tscn" id="4_pp62y"]
+[ext_resource type="PackedScene" uid="uid://iwg5jhuoe51q" path="res://Objects/Enemies/droneDuck.tscn" id="5_yjfma"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n0aft"]
 
@@ -41,3 +43,9 @@ mesh = ExtResource("3_t8sir")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D3/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_3ccqw")
+
+[node name="EnemyBody" parent="." instance=ExtResource("4_pp62y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.957, -15.918, -5.17033)
+
+[node name="EnemyBody2" parent="." instance=ExtResource("5_yjfma")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5031, -5.65372, 0.0611134)
