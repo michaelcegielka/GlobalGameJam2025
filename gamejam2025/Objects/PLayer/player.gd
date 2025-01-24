@@ -26,6 +26,8 @@ var current_dir := Vector3.ZERO
 var current_floor_normal := Vector3.UP
 var current_state := States.GROUNDED
 
+@onready var velocity_dir_marker = $Model/VelocityDirMarker
+
 ### Camera
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
 @onready var camera_3d : Camera3D = $SpringArm3D/Node3D/Camera3D
@@ -95,6 +97,8 @@ func ground_move(delta):
 	self.velocity.y = self.Gravity * delta
 	
 	var none_rotated_velo = self.velocity
+	self.velocity_dir_marker.position = self.velocity
+	self.velocity = (self.velocity_dir_marker.global_position - self.global_position)
 	self.move_and_slide()
 	self.velocity = none_rotated_velo
 	
