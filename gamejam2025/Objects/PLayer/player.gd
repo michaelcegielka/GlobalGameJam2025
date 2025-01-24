@@ -47,6 +47,7 @@ var current_state := States.FALLING
 ### Model:
 @onready var model = $Model
 @onready var model_rot_y = $Model/ModelRotY
+@onready var head_marker = $Model/ModelRotY/HeadMarker
 
 
 func _ready():
@@ -70,8 +71,8 @@ func control_cam(delta):
 	cam_rot_x = clamp(self.spring_arm_3d.rotation.x + cam_rot_x, self.MaxCamAngle, self.MinCamAngle)
 	self.spring_arm_3d.rotation.x = lerp_angle(
 		self.spring_arm_3d.global_rotation.x, cam_rot_x, delta)
-
-	self.camera_3d.look_at(self.global_position)
+		
+	self.camera_3d.look_at(self.head_marker.global_position)
 	
 	var distance_step = (self.MaxArmDistance - self.MinArmDistance) / 3.0
 	var velocity_scale = (self.velocity.length() - self.UnderVelocityAngle) / self.VelocityScale
@@ -182,7 +183,7 @@ func jump_move(delta):
 	
 	self.control_cam(delta)
 	self.current_floor_normal = self.current_floor_normal.move_toward(
-		Vector3.UP, delta * self.AirAcceleration
+		Vector3.UP, delta * self.AirAcceleration / 5.0
 	)
 	self.tilt_model(self.current_floor_normal)
 	
@@ -201,7 +202,7 @@ func fall_move(delta):
 	
 	self.control_cam(delta)
 	self.current_floor_normal = self.current_floor_normal.move_toward(
-		Vector3.UP, delta * self.AirAcceleration
+		Vector3.UP, delta * self.AirAcceleration / 5.0
 	)
 	self.tilt_model(self.current_floor_normal)
 	
