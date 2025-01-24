@@ -164,7 +164,7 @@ func ground_move(delta):
 		else:
 			var current_speed = self.velocity.length()
 			#self.velocity -= normal_part_of_velocity*self.current_floor_normal
-			self.velocity = (self.JumpStrength + current_speed) * self.current_floor_normal
+			self.velocity = (self.JumpStrength + current_speed/2.0) * self.current_floor_normal
 		self.global_position += 0.1 * self.current_floor_normal
 	elif not self.is_on_floor():
 		self.coyote_timer.start(self.CoyoteTime)

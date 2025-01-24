@@ -1,19 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://ore5g1k0lwj6"]
+[gd_scene load_steps=7 format=3 uid="uid://ore5g1k0lwj6"]
 
 [ext_resource type="Script" path="res://Objects/PLayer/player.gd" id="1_8ti7c"]
+[ext_resource type="ArrayMesh" uid="uid://cegvpmvkqh6bk" path="res://_3d/player.obj" id="2_yprfx"]
+[ext_resource type="Texture2D" uid="uid://cws0ylpu3va81" path="res://_3d/Soap_Normal.png" id="3_38n1w"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iext5"]
 radius = 0.8
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_5ir8s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_df5h6"]
+albedo_color = Color(0.951654, 0.44154, 0.58075, 1)
+normal_enabled = true
+normal_texture = ExtResource("3_38n1w")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srb6a"]
-diffuse_mode = 3
-specular_mode = 1
-albedo_color = Color(0.953729, 0.396283, 0.67324, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_kqe2b"]
-size = Vector3(1.5, 1, 2)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qbex"]
+transparency = 1
+albedo_color = Color(0.45098, 0.792157, 0.941176, 0.454902)
+roughness = 0.43
+rim_enabled = true
+rim_tint = 0.75
+clearcoat_enabled = true
+anisotropy_enabled = true
+anisotropy = 1.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 0
@@ -38,15 +47,11 @@ current = true
 [node name="ModelRotY" type="Node3D" parent="Model"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model/ModelRotY"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.646099, 0)
-mesh = SubResource("CylinderMesh_5ir8s")
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.385731, 0)
+mesh = ExtResource("2_yprfx")
 skeleton = NodePath("../../..")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/ModelRotY"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.316449, 0)
-material_override = SubResource("StandardMaterial3D_srb6a")
-mesh = SubResource("BoxMesh_kqe2b")
-skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_df5h6")
+surface_material_override/1 = SubResource("StandardMaterial3D_3qbex")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
