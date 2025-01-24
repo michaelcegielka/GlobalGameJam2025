@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://nrtfjmfxo36m"]
+[gd_scene load_steps=11 format=3 uid="uid://nrtfjmfxo36m"]
 
 [ext_resource type="PackedScene" uid="uid://ore5g1k0lwj6" path="res://Objects/PLayer/player.tscn" id="1_40nht"]
 [ext_resource type="Texture2D" uid="uid://uu43m0lsdufj" path="res://icon.svg" id="2_yigkt"]
+[ext_resource type="ArrayMesh" uid="uid://cd11b2058h8po" path="res://_3d/bathtub.obj" id="3_t8sir"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7gpct"]
 albedo_texture = ExtResource("2_yigkt")
@@ -56,3 +57,7 @@ environment = SubResource("Environment_fgrld")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, 0.520369, 0.853942, 0, -0.853942, 0.520369, 0, 3.87393, 4.81974)
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(75, 0, 0, 0, 75, 0, 0, 0, 75, 0, 0, 0)
+mesh = ExtResource("3_t8sir")
