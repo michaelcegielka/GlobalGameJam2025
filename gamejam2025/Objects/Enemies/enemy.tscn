@@ -1,14 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://s0njjrds4vfx"]
+[gd_scene load_steps=6 format=3 uid="uid://s0njjrds4vfx"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/enemy.gd" id="1_8gbia"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lj6j5"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80y7v"]
-albedo_color = Color(1, 0.815686, 0, 1)
-
 [sub_resource type="SphereMesh" id="SphereMesh_stcqb"]
-material = SubResource("StandardMaterial3D_80y7v")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agmpv"]
 albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
