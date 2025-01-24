@@ -6,15 +6,15 @@ const WallAngleMin = PI/8
 const WallAngleMax = PI/2.5
 const WallAngleStep = (WallAngleMax - WallAngleMin) / 2.0
 
-const WallAngleSlide = PI/4.0
+const WallAngleSlide = PI/6.0
 const SlideAmount = 25.0
 
 const Acceleration = 20.0
 const DashAcceleration = 80.0
 const AirAcceleration = 10.0
 
-const Friction = 5.0
-const AirFriction = 1.0
+const Friction = 2.0
+const AirFriction = 0.5
 
 const MaxVelocity = 35.0
 const DashVelocity = 50.0
@@ -140,7 +140,7 @@ func ground_move(delta):
 	self.velocity.y = self.Gravity * delta
 	
 	if self.get_floor_angle() >= self.WallAngleSlide:
-		var slide_accel = 3.0*Vector3(0 ,self.Gravity, 0.0).slide(self.get_floor_normal())
+		var slide_accel = 5.0*Vector3(0 ,self.Gravity, 0.0).slide(self.get_floor_normal())
 		self.velocity += delta * slide_accel
 	
 	var none_rotated_velo = self.velocity
@@ -163,9 +163,8 @@ func ground_move(delta):
 		if self.get_floor_angle() <= PI/8.0:
 			self.velocity += 2.0*self.JumpStrength * self.current_floor_normal
 		else:
-			var current_speed = self.velocity.length()
-			#self.velocity -= normal_part_of_velocity*self.current_floor_normal
-			self.velocity = (self.JumpStrength + current_speed/2.0) * self.current_floor_normal
+			self.velocity = basis_rot * self.velocity
+			self.velocity += self.JumpStrength * self.current_floor_normal
 		self.global_position += 0.1 * self.current_floor_normal
 	elif not self.is_on_floor():
 		self.coyote_timer.start(self.CoyoteTime)
