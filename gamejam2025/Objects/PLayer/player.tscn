@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://ore5g1k0lwj6"]
+[gd_scene load_steps=12 format=3 uid="uid://ore5g1k0lwj6"]
 
 [ext_resource type="Script" path="res://Objects/PLayer/player.gd" id="1_8ti7c"]
 [ext_resource type="ArrayMesh" uid="uid://cegvpmvkqh6bk" path="res://_3d/player.obj" id="2_yprfx"]
@@ -25,8 +25,34 @@ anisotropy = 1.0
 subsurf_scatter_strength = 1.0
 subsurf_scatter_skin_mode = true
 
+[sub_resource type="Curve" id="Curve_n77u2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), -2.9359, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m5pmj"]
+curve = SubResource("Curve_n77u2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gdwjm"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.2, 0.5)
+gravity = Vector3(0, -0.5, 0)
+scale_curve = SubResource("CurveTexture_m5pmj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4asf5"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.956863, 0.917647, 0.976471, 0.533333)
+
+[sub_resource type="SphereMesh" id="SphereMesh_w2vcv"]
+material = SubResource("StandardMaterial3D_4asf5")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 16
+
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 0
+collision_layer = 2
 floor_stop_on_slope = false
 script = ExtResource("1_8ti7c")
 
@@ -57,6 +83,12 @@ surface_material_override/1 = SubResource("StandardMaterial3D_3qbex")
 
 [node name="HeadMarker" type="Marker3D" parent="Model/ModelRotY"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61866, 0)
+
+[node name="SoapBubbles" type="GPUParticles3D" parent="Model/ModelRotY"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.349121, -1.02141)
+amount = 256
+process_material = SubResource("ParticleProcessMaterial_gdwjm")
+draw_pass_1 = SubResource("SphereMesh_w2vcv")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
