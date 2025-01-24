@@ -17,7 +17,7 @@ const Friction = 2.0
 const AirFriction = 0.5
 
 const MaxVelocity = 50.0
-const DashVelocity = 50.0
+const DashVelocity = 70.0
 const JumpStrength = 25.0
 const CoyoteTime = 0.1
 
@@ -55,7 +55,7 @@ func _ready():
 
 
 func control_cam(delta):
-	var cam_rot_y = Input.get_action_strength("CamLeft") - Input.get_action_strength("CamRight")
+	var cam_rot_y = Input.get_action_strength("CamRight") - Input.get_action_strength("CamLeft")
 #	var angle_diff = abs(self.spring_arm_3d.global_rotation.y + self.model_rot_y.global_rotation.y) 
 #	if cam_rot_y == 0 and angle_diff > self.MaxCamRotDifference:
 #		self.spring_arm_3d.global_rotation.y = lerp_angle(
