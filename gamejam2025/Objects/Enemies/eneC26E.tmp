@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://s0njjrds4vfx"]
+
+[ext_resource type="Script" path="res://Objects/Enemies/enemy.gd" id="1_8gbia"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lj6j5"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_stcqb"]
+
+[node name="Enemy" type="Node3D"]
+script = ExtResource("1_8gbia")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.201503, 0.084493)
+shape = SubResource("SphereShape3D_lj6j5")
+
+[node name="Node" type="Node3D" parent="CharacterBody3D"]
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="CharacterBody3D/Node"]
+transform = Transform3D(0.239555, 0, 0, 0, 0.145174, 0, 0, 0, 0.301104, 0.00396395, 0.358489, 0.541427)
+mesh = SubResource("SphereMesh_stcqb")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="CharacterBody3D/Node"]
+transform = Transform3D(0.33764, -0.000275402, 0.000264815, 0.000569569, 0.157998, -0.173137, 3.17475e-05, 0.0943714, 0.289869, -0.0440911, 0.195497, -0.383168)
+mesh = SubResource("SphereMesh_stcqb")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Node"]
+transform = Transform3D(0.51984, 0, 0, 0, 0.547051, 0, 0, 0, 0.581068, 0.000289679, 0.387995, 0.264401)
+mesh = SubResource("SphereMesh_stcqb")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Node"]
+transform = Transform3D(0.869192, 0, 0, 0, 0.611581, 0, 0, 0, 1, 0, 0.00753427, 0)
+mesh = SubResource("SphereMesh_stcqb")
+skeleton = NodePath("")
