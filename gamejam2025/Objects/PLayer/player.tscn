@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://ore5g1k0lwj6"]
+
+[ext_resource type="Script" path="res://Objects/PLayer/player.gd" id="1_8ti7c"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iext5"]
+radius = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5ir8s"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_srb6a"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.953729, 0.396283, 0.67324, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kqe2b"]
+size = Vector3(1.5, 1, 2)
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 0
+floor_stop_on_slope = false
+script = ExtResource("1_8ti7c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_iext5")
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="ModelRotY" type="Node3D" parent="Model"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/ModelRotY"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.646099, 0)
+mesh = SubResource("CylinderMesh_5ir8s")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/ModelRotY"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.316449, 0)
+material_override = SubResource("StandardMaterial3D_srb6a")
+mesh = SubResource("BoxMesh_kqe2b")
+skeleton = NodePath("../../..")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+spring_length = 8.0
+
+[node name="Node3D" type="Node3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42137, 8.29384)
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+current = true
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
