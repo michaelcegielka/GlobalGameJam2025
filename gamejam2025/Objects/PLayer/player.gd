@@ -9,14 +9,14 @@ const WallAngleStep = (WallAngleMax - WallAngleMin) / 2.0
 const WallAngleSlide = PI/6.0
 const SlideAmount = 25.0
 
-const Acceleration = 20.0
+const Acceleration = 40.0
 const DashAcceleration = 80.0
-const AirAcceleration = 10.0
+const AirAcceleration = 20.0
 
 const Friction = 2.0
 const AirFriction = 0.5
 
-const MaxVelocity = 35.0
+const MaxVelocity = 50.0
 const DashVelocity = 50.0
 const JumpStrength = 25.0
 const CoyoteTime = 0.1
@@ -74,16 +74,36 @@ func control_cam(delta):
 		
 	self.camera_3d.look_at(self.head_marker.global_position)
 	
+		
+	var horizontal_velocity = Vector3(self.velocity.x, 0, self.velocity.z)
+	var velocity_scale = (horizontal_velocity.length() - self.UnderVelocityAngle) / self.VelocityScale
 	var distance_step = (self.MaxArmDistance - self.MinArmDistance) / 3.0
-	var velocity_scale = (self.velocity.length() - self.UnderVelocityAngle) / self.VelocityScale
 	self.spring_arm_3d.spring_length = clamp(
 		self.MinArmDistance + distance_step * velocity_scale, 
-		self.MinArmDistance, self.MaxArmDistance)
+		self.MinArmDistance, self.MaxArmDistance
+	)
 
 
 func tilt_model(up_vector):
-	var b_rotation := Quaternion(self.model.transform.basis.y, up_vector)
-	self.model.transform.basis = Basis(b_rotation * self.model.basis.get_rotation_quaternion())
+	var damping_factor = 0.1
+	
+	match self.current_state:
+		States.JUMPING:
+			damping_factor = 0.05
+		States.FALLING:
+			damping_factor = 0.1
+		States.GROUNDED:
+			damping_factor = 0.2
+	
+	var current_up = self.model.transform.basis.y
+	var target_up = current_up.lerp(up_vector, damping_factor).normalized()
+	
+	var rotation_axis = current_up.cross(target_up).normalized()
+	var rotation_angle = current_up.angle_to(target_up)
+	
+	if rotation_axis.length() > 0 and not is_nan(rotation_angle):
+		var rotation = Basis(rotation_axis, rotation_angle)
+		self.model.transform.basis = rotation * self.model.transform.basis
 
 func rot_y_model(delta, angle_accel):
 	### Rotate y so model looks into walk direction:
@@ -140,7 +160,7 @@ func ground_move(delta):
 	self.velocity.y = self.Gravity * delta
 	
 	if self.get_floor_angle() >= self.WallAngleSlide:
-		var slide_accel = 5.0*Vector3(0 ,self.Gravity, 0.0).slide(self.get_floor_normal())
+		var slide_accel = 3.0*Vector3(0 ,self.Gravity, 0.0).slide(self.get_floor_normal())
 		self.velocity += delta * slide_accel
 	
 	var none_rotated_velo = self.velocity

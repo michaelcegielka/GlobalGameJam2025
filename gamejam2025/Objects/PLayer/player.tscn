@@ -13,6 +13,7 @@ normal_enabled = true
 normal_texture = ExtResource("3_38n1w")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qbex"]
+transparency = 1
 albedo_color = Color(0.58811, 0.847723, 0.966488, 0.454902)
 roughness = 0.43
 emission_enabled = true
