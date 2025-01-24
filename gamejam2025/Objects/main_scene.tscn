@@ -44,6 +44,7 @@ data = PackedVector3Array(50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0,
 [node name="MainScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_40nht")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19174, 1.07301, 1.0006)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_fgrld")
