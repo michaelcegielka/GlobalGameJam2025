@@ -1,0 +1,87 @@
+[gd_scene load_steps=4 format=3 uid="uid://d03owsy0w3hxq"]
+
+[ext_resource type="Script" path="res://Objects/InGame/in_game_interface.gd" id="1_ydl8t"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jyqwh"]
+size = Vector2(50, 50)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0jehd"]
+size = Vector2(100, 50)
+
+[node name="InGameInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ydl8t")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_jyqwh")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_jyqwh")
+
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_jyqwh")
+
+[node name="MarginContainer4" type="MarginContainer" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_jyqwh")
+
+[node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 520)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "SOAP METER:"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+texture_progress = SubResource("PlaceholderTexture2D_0jehd")
