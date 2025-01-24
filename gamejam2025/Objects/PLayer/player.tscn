@@ -23,6 +23,16 @@ script = ExtResource("1_8ti7c")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_iext5")
 
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+spring_length = 8.0
+
+[node name="Node3D" type="Node3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42137, 8.29384)
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+current = true
+
 [node name="Model" type="Node3D" parent="."]
 
 [node name="ModelRotY" type="Node3D" parent="Model"]
@@ -37,16 +47,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.316449, 0)
 material_override = SubResource("StandardMaterial3D_srb6a")
 mesh = SubResource("BoxMesh_kqe2b")
 skeleton = NodePath("../../..")
-
-[node name="SpringArm3D" type="SpringArm3D" parent="."]
-spring_length = 8.0
-
-[node name="Node3D" type="Node3D" parent="SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42137, 8.29384)
-
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D/Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-current = true
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
