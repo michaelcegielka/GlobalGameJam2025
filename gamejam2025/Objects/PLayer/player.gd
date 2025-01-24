@@ -11,7 +11,7 @@ const SlideAmount = 25.0
 
 const Acceleration = 20.0
 const DashAcceleration = 80.0
-const AirAcceleration = 15.0
+const AirAcceleration = 10.0
 
 const Friction = 5.0
 const AirFriction = 1.0
@@ -117,7 +117,7 @@ func get_player_input(max_velo, accel, delta):
 	self.current_dir = self.current_dir.rotated(Vector3.UP, self.spring_arm_3d.rotation.y)
 	if dir_len > 1:
 		self.current_dir / dir_len
-	if dir_len > 0.05:
+	if dir_len > 0.1:
 		self.velocity = self.velocity.move_toward(max_velo * self.current_dir, 
 													accel * delta)
 
@@ -138,18 +138,19 @@ func ground_move(delta):
 
 	self.velocity.y = self.Gravity * delta
 	
+	if self.get_floor_angle() >= self.WallAngleSlide:
+		var slide_accel = 3.0*Vector3(0 ,self.Gravity, 0.0).slide(self.get_floor_normal())
+		self.velocity += delta * slide_accel
+	
 	var none_rotated_velo = self.velocity
 	var basis_rot = Quaternion(self.transform.basis.y, self.get_floor_normal()).normalized()
 	self.velocity = basis_rot * self.velocity
-	
-	if self.get_floor_angle() >= self.WallAngleSlide:
-		var slide_accel = 20.0*Vector3(0 ,self.Gravity, 0.0).slide(self.get_floor_normal())
-		self.velocity += delta * slide_accel
 	
 	self.move_and_slide()
 	self.velocity = none_rotated_velo
 	
 	self.rot_y_model(delta, self.Acceleration)
+	
 	self.velocity = self.velocity.move_toward(Vector3.ZERO, self.Friction * delta)
 	
 	self.control_cam(delta)
@@ -158,7 +159,12 @@ func ground_move(delta):
 	
 	if Input.is_action_just_pressed("Jump"):
 		self.current_state = self.States.JUMPING
-		self.velocity += self.JumpStrength * self.current_floor_normal
+		if self.get_floor_angle() <= PI/8.0:
+			self.velocity += 2.0*self.JumpStrength * self.current_floor_normal
+		else:
+			var current_speed = self.velocity.length()
+			#self.velocity -= normal_part_of_velocity*self.current_floor_normal
+			self.velocity = (self.JumpStrength + current_speed) * self.current_floor_normal
 		self.global_position += 0.1 * self.current_floor_normal
 	elif not self.is_on_floor():
 		self.coyote_timer.start(self.CoyoteTime)
@@ -201,7 +207,7 @@ func fall_move(delta):
 	
 	if Input.is_action_just_pressed("Jump") and self.coyote_timer.time_left:
 		self.current_state = self.States.JUMPING
-		self.velocity += self.JumpStrength * Vector3.UP
+		self.velocity -= self.JumpStrength * Vector3.UP
 		self.global_position += 0.1 * self.current_floor_normal
 	if self.is_on_floor():
 		self.current_state = self.States.GROUNDED
