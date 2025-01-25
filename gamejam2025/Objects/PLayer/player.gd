@@ -139,7 +139,7 @@ func tilt_model(up_vector):
 		var player_rotation = self.model.transform.basis
 		var tilt_direction_global = player_rotation * tilt_direction_local
 		
-		var tilt_amount = velocity_scale * 0.5 
+		var tilt_amount = velocity_scale * 0.65 
 		var target_tilt = tilt_direction_global * tilt_amount
 		
 		target_up = (up_vector + target_tilt).normalized()
