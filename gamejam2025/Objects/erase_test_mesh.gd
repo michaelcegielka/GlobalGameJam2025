@@ -25,7 +25,7 @@ func _process(delta):
 
 func erase_dirt(position: Vector3):
 	var uv_position = world_to_texture_coords(position)
-	var radius = 20
+	var radius = 5
 	var radius_sq = radius * radius
 	
 	for x in range(-radius, radius):
@@ -41,8 +41,11 @@ func world_to_texture_coords(world_position: Vector3) -> Vector2:
 	var mesh_scale = global_transform.basis.get_scale()
 	var local_position = to_local(world_position) / mesh_scale
 	
-	var uv_x = (local_position.x / 100.0) + 0.5
-	var uv_y = (local_position.z / 100.0) + 0.5
+	var uv_x = (local_position.x / 450.0 * 0.6) + 0.3035
+	var uv_y = (local_position.z / 450.0 * 0.6) + 0.6965
+	
+	print(uv_x)
+	print(uv_y)
 	
 	
 	uv_x *= mask_image.get_width()
