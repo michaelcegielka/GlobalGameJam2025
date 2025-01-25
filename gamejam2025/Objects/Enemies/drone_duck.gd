@@ -23,7 +23,7 @@ func rotate_towards_player(delta):
 	var enemy_position = global_transform.origin
 	var direction = (player_position - enemy_position).normalized()
 	direction.y = 0
-	var target_basis = Basis().looking_at(direction, Vector3.UP)
+	var target_basis = Basis.looking_at(direction, Vector3.UP)
 	transform.basis = transform.basis.slerp(target_basis, rotation_speed * delta)
 
 func move_forward(delta):
@@ -36,5 +36,5 @@ func spin_propeller(delta):
 
 func _on_bomb_timer_timeout():
 	var bomb = bomb_scene.instantiate()
-	get_parent().add_child(bomb)
+	GlobalSignals.emit_signal("add_enemy", bomb)
 	bomb.global_transform.origin = global_transform.origin

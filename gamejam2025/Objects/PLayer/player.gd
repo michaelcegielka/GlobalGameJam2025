@@ -65,7 +65,16 @@ var prev_angle := 0.0
 func _ready():
 	PlayerStats.connect("got_soap", self.show_heal_particles)
 	self.soap_bubbles.emitting = false
+	self.set_physics_process(false)
 
+
+func reset():
+	self.soap_bubbles.emitting = false
+	self.current_state = States.FALLING
+	self.velocity = Vector3.ZERO
+	self.model.rotation = Vector3.ZERO
+	self.current_dir = Vector3.ZERO
+	self.camera_3d.current = true
 
 #################################################################
 ### Camera
@@ -155,6 +164,9 @@ func _physics_process(delta):
 	if self.is_on_floor(): new_angle = max(new_angle, self.get_floor_angle())
 	self.set_deferred("floor_max_angle", new_angle)
 	
+	if PlayerStats.soap_amount <= 0.0:
+		self.current_state = self.States.DEAD
+		PlayerStats.emit_signal("player_died")
 
 func get_player_input(max_velo, accel, delta):
 	self.current_dir.x = -Input.get_action_strength("Left") + Input.get_action_strength("Right")

@@ -57,7 +57,7 @@ func _on_hitbox_area_entered(_area):
 	# bubbles
 	for i in range(self.bubbles_on_death):
 		var new_bubble = self.Bubble.instantiate()
-		self.get_parent().add_child(new_bubble)
+		GlobalSignals.emit_signal("add_object", new_bubble)
 		new_bubble.global_position = self.global_position
 		new_bubble.global_position.y += randf_range(1.0, 3.0)
 		new_bubble.global_position.x += randf_range(-5.0, 5.0)
@@ -65,7 +65,7 @@ func _on_hitbox_area_entered(_area):
 	
 	# explosion:
 	var new_explo = self.ExploderParticles.instantiate()
-	self.get_parent().add_child(new_explo)
+	GlobalSignals.emit_signal("add_particle", new_explo)
 	new_explo.global_position = self.global_position
 	new_explo.set_material(self.body_material)
 	self.queue_free()

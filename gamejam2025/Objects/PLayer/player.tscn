@@ -66,7 +66,7 @@ shape = SubResource("SphereShape3D_iext5")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.4, 0)
-spring_length = 8.0
+spring_length = 9.0
 
 [node name="Node3D" type="Node3D" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42137, 8.29384)

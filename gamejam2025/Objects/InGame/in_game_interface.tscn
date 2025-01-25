@@ -26,6 +26,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TimeLabel" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Time"
+
 [node name="MarginContainer2" type="MarginContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
