@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://b41pp5w7pl5fl"]
+
+[ext_resource type="Texture2D" uid="uid://cimk25n8qvhia" path="res://Objects/PLayer/Textures/heal_particle.png" id="1_defnb"]
+[ext_resource type="Script" path="res://Objects/PLayer/heal_particles.gd" id="2_c76fs"]
+
+[sub_resource type="Curve" id="Curve_fsb55"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.120879), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7wfvr"]
+curve = SubResource("Curve_fsb55")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_c75sm"]
+emission_shape = 2
+emission_sphere_radius = 0.5
+angle_min = -90.0
+angle_max = 90.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 1.99998
+gravity = Vector3(0, -0.5, 0)
+scale_curve = SubResource("CurveTexture_7wfvr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3yn8"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.726339, 0.839072, 0.969201, 1)
+albedo_texture = ExtResource("1_defnb")
+emission_enabled = true
+emission = Color(0.875371, 0.673023, 0.931451, 1)
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2yyfi"]
+material = SubResource("StandardMaterial3D_x3yn8")
+size = Vector2(0.5, 0.5)
+orientation = 2
+
+[node name="HealParticles" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70681, 0.0335048)
+emitting = false
+amount = 32
+lifetime = 2.5
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_c75sm")
+draw_pass_1 = SubResource("PlaneMesh_2yyfi")
+script = ExtResource("2_c76fs")
+
+[connection signal="finished" from="." to="." method="_on_finished"]
