@@ -48,7 +48,7 @@ float rand(vec2 co) {
 float movingNoise(vec3 pos, float time) {
     vec2 uv = pos.xy + pos.z; // Combine coordinates for 3D noise
     uv += time * noise_speed_thin_film; // Animate noise over time
-    return rand(uv) * 2.0 - 1.0; // Noise in the range [-1, 1]
+    return 0.01; //rand(uv) * 2.0 - 1.0; // Noise in the range [-1, 1]
 }
 
 // Thin-film interference simulation with enhanced noise distortion
