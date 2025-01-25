@@ -4,6 +4,8 @@ const Bubble = preload("res://Objects/Obstacles/bubble.tscn")
 const ExploderParticles = preload("res://Objects/Enemies/Particles/duck_explode_particle.tscn")
 
 @onready var weapon_mesh: MeshInstance3D = $Model/WeaponMesh
+@onready var helmets = $Helmets
+
 
 var weapon_swing_speed = 100.0
 var weapon_swing_strength = 5.0
@@ -20,7 +22,9 @@ var surface_normal = Vector3.UP
 
 
 func _ready():
-	pass
+	var rand_idx = randi_range(0, 2)
+	if rand_idx < 2:
+		self.helmets.get_child(rand_idx).visible = true
 
 func set_player(player_unit):
 	self.player = player_unit

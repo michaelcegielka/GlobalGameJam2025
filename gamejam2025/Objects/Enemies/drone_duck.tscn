@@ -14,28 +14,25 @@ albedo_color = Color(0.286275, 0.85098, 0, 1)
 script = ExtResource("2_mu4bl")
 body_material = SubResource("StandardMaterial3D_aahmm")
 
-[node name="MeshInstance3D4" parent="Model" index="0"]
+[node name="MeshInstance3D3" parent="Model" index="3"]
 material_override = SubResource("StandardMaterial3D_aahmm")
 
-[node name="MeshInstance3D3" parent="Model" index="1"]
+[node name="MeshInstance3D2" parent="Model" index="4"]
 material_override = SubResource("StandardMaterial3D_aahmm")
-
-[node name="MeshInstance3D2" parent="Model" index="2"]
-material_override = SubResource("StandardMaterial3D_aahmm")
-
-[node name="MeshInstance3D" parent="Model" index="3"]
-material_override = SubResource("StandardMaterial3D_aahmm")
-
-[node name="WeaponMesh" parent="Model" index="4"]
-visible = false
 
 [node name="Propeller" type="MeshInstance3D" parent="Model" index="5"]
 transform = Transform3D(0.0665158, 0, 0, 0, -1.49005e-08, 0.0405023, 0, -0.340885, -1.77041e-09, 0, 0.829238, -0.263875)
 mesh = SubResource("CylinderMesh_po3b2")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Model" index="6"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Model" index="6"]
 transform = Transform3D(0.0303883, 0, 0, 0, 0.116387, 0, 0, 0, 0.0303883, -0.00314315, 0.722, -0.268953)
 mesh = SubResource("CylinderMesh_rpdkh")
+
+[node name="MeshInstance3D" parent="Model" index="7"]
+material_override = SubResource("StandardMaterial3D_aahmm")
+
+[node name="WeaponMesh" parent="Model" index="8"]
+visible = false
 
 [node name="BombTimer" type="Timer" parent="." index="3"]
 

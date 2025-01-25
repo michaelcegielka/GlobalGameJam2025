@@ -17,6 +17,10 @@ var goal_rot : Vector3
 @onready var end_screen_ui = $EndScreen
 
 
+### Enemies
+@onready var all_spawner := $Spawner
+var current_enemy_limit := 10.0
+
 var original_player_pos := Vector3.ZERO
 
 var cam_tween : Tween
@@ -109,3 +113,9 @@ func reset():
 	self.player.reset()
 	
 	self.start_game()
+
+
+func _on_spawn_timer_timeout():
+	if self.enemies.get_child_count() >= self.current_enemy_limit: return
+	for spawner in self.all_spawner.get_children():
+		spawner.spawn_ducks(self.player, 1)

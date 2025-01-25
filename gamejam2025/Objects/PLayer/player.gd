@@ -36,6 +36,14 @@ const MinArmDistance = 8.0
 const MaxArmDistance = 6.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
+### Make soap smaller
+const OriginalShiftSoapY = -0.28
+const FinalShiftSoapY = -0.49
+const OriginalShiftBoyY = 0.0
+const FinalShiftBoyY = -0.745
+const OriginalShiftParticleY = -0.4
+const FinalShiftParticleY = -0.75
+const FinalScaleY = 0.02
 ### Controll sutff
 var current_dir := Vector3.ZERO
 var current_floor_normal := Vector3.UP
@@ -50,6 +58,7 @@ var prev_angle := 0.0
 
 
 @onready var coyote_timer : Timer = $CoyoteTimer
+@onready var particle_cool_down_timer : Timer = $ParticleCoolDownTimer
 
 ### Camera
 @onready var spring_arm_3d : SpringArm3D = $SpringArm3D
@@ -57,6 +66,9 @@ var prev_angle := 0.0
 
 ### Model:
 @onready var model = $Model
+@onready var soap = $Model/player/Player/Skeleton3D/Soap
+@onready var bubble_boy = $Model/player/Player/Skeleton3D/BubbleBoy
+
 @onready var head_marker = $Model/HeadMarker
 @onready var soap_bubbles : GPUParticles3D = $Model/SoapBubbles
 @onready var animation_player : AnimationPlayer = $Model/player/AnimationPlayer
@@ -77,6 +89,7 @@ func reset():
 	self.current_dir = Vector3.ZERO
 	self.camera_3d.current = true
 	self.animation_player.play("IdleMove")
+	self.update_soap_thickness()
 
 #################################################################
 ### Camera
@@ -146,9 +159,17 @@ func rot_y_model(delta, angle_accel):
 										angle_accel/10.0 * delta)
 
 func show_heal_particles():
-	var heal_part = self.HealParticles.instantiate()
-	self.model.add_child(heal_part)
+	if self.particle_cool_down_timer.time_left <= 0.0:
+		var heal_part = self.HealParticles.instantiate()
+		self.model.add_child(heal_part)
+		self.particle_cool_down_timer.start()
 
+func update_soap_thickness():
+	var life_percent = PlayerStats.soap_amount / PlayerStats.MaxDashMeter
+	self.soap.scale.y = lerp(self.FinalScaleY, 1.0, life_percent)
+	self.soap.position.y = lerp(self.FinalShiftSoapY, self.OriginalShiftSoapY, life_percent)
+	self.bubble_boy.position.y = lerp(self.FinalShiftBoyY, self.OriginalShiftBoyY, life_percent)
+	self.soap_bubbles.position.y = lerp(self.FinalShiftParticleY, self.OriginalShiftParticleY, life_percent)
 #################################################################
 ### Controlls
 func _physics_process(delta):
@@ -167,6 +188,8 @@ func _physics_process(delta):
 		self.WallAngleMin, self.WallAngleMax)
 	if self.is_on_floor(): new_angle = max(new_angle, self.get_floor_angle())
 	self.set_deferred("floor_max_angle", new_angle)
+	
+	self.update_soap_thickness()
 	
 	if PlayerStats.soap_amount <= 0.0:
 		self.current_state = self.States.DEAD
@@ -260,7 +283,7 @@ func jump_move(delta):
 	self.velocity.y += self.AirGravity * delta
 	self.move_and_slide()
 	self.prev_angle = self.model.rotation.y
-	self.rot_y_model(delta, self.Acceleration)
+	self.rot_y_model(delta, 4.0*self.Acceleration)
 
 	self.trick_360(self.prev_angle, self.model.rotation.y)
 	self.trick_360(self.model.rotation.y, self.prev_angle)

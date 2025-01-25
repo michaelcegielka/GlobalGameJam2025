@@ -17,6 +17,7 @@ func _ready():
 	material_overlay.set("shader_param/mask_texture", mask_texture)
 	PlayerStats.connect("compute_score", self.compute_clean_score)
 	GlobalSignals.connect("reset_bathub", self.reset)
+	GlobalSignals.connect("put_dirt_local", self.add_dirt)
 
 func _process(_delta):
 	if player.current_state == player.States.GROUNDED:
@@ -38,7 +39,21 @@ func erase_dirt(position: Vector3):
 					mask_image.set_pixel(pixel_pos.x, pixel_pos.y, Color(0, 0, 0, 0))
 	
 	mask_texture.update(mask_image)
+
+func add_dirt(dirt_position: Vector3):
+	var uv_position = world_to_texture_coords(dirt_position)
+	var radius = 32
+	var radius_sq = radius * radius
 	
+	for x in range(-radius, radius):
+		for y in range(-radius, radius):
+			if x*x + y*y <= radius_sq:
+				var pixel_pos = uv_position + Vector2(x, y)
+				if pixel_pos.x >= 0 && pixel_pos.x < mask_image.get_width() && pixel_pos.y >= 0 && pixel_pos.y < mask_image.get_height():
+					mask_image.set_pixel(pixel_pos.x, pixel_pos.y, Color(1.0, 1.0, 1.0, 1.0))
+	
+	mask_texture.update(mask_image)
+
 func world_to_texture_coords(world_position: Vector3) -> Vector2:
 	var mesh_scale = global_transform.basis.get_scale()
 	var local_position = to_local(world_position) / mesh_scale
