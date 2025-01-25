@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7ab4bgojvvws"]
+[gd_scene load_steps=6 format=3 uid="uid://c7ab4bgojvvws"]
 
 [ext_resource type="PackedScene" uid="uid://s0njjrds4vfx" path="res://Objects/Enemies/enemy.tscn" id="1_b1buc"]
+[ext_resource type="Script" path="res://Objects/Enemies/drone_duck.gd" id="2_mu4bl"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aahmm"]
 albedo_color = Color(0.286275, 0.85098, 0, 1)
@@ -10,6 +11,8 @@ albedo_color = Color(0.286275, 0.85098, 0, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_rpdkh"]
 
 [node name="DroneDuck" instance=ExtResource("1_b1buc")]
+script = ExtResource("2_mu4bl")
+body_material = SubResource("StandardMaterial3D_aahmm")
 
 [node name="MeshInstance3D4" parent="Model" index="0"]
 material_override = SubResource("StandardMaterial3D_aahmm")
@@ -33,3 +36,7 @@ mesh = SubResource("CylinderMesh_po3b2")
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Model" index="6"]
 transform = Transform3D(0.0303883, 0, 0, 0, 0.116387, 0, 0, 0, 0.0303883, -0.00314315, 0.722, -0.268953)
 mesh = SubResource("CylinderMesh_rpdkh")
+
+[node name="BombTimer" type="Timer" parent="." index="3"]
+
+[connection signal="timeout" from="BombTimer" to="." method="_on_bomb_timer_timeout"]

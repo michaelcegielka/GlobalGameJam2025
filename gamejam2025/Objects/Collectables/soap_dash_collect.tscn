@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Objects/Collectables/soap_dash_collect.gd" id="1_788em"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_whlp3"]
-radius = 1.03976
+radius = 1.92599
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efpsu"]
 diffuse_mode = 3
@@ -11,7 +11,7 @@ specular_mode = 1
 albedo_color = Color(0.884786, 0.307908, 0.765441, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lft0n"]
-size = Vector3(2, 1, 1)
+size = Vector3(3, 1.5, 1.5)
 
 [sub_resource type="Animation" id="Animation_2b8dv"]
 resource_name = "Idle"
