@@ -1,6 +1,6 @@
 extends Node
 
-const DashCost = 3.0
+const DashCost = 2.0
 const WalkCost = 0.2
 
 const HitCost = 100.0
@@ -9,7 +9,7 @@ const HitKnockBack = 100.0
 const MaxDashMeter = 1000.0
 const SoapIncrease = 200.0
 
-const Trick360AirSoap = 25.0 
+const Trick360AirSoap = 30.0 
 
 var soap_amount := MaxDashMeter:
 	set(value):
@@ -34,6 +34,7 @@ func reset():
 	self.soap_amount = MaxDashMeter
 	
 	self.highscore_time = max(self.highscore_time, self.current_time)
+	self.highscore_clean = max(self.highscore_clean, self.current_score)
 	self.current_time = 0.0
 	self.current_score = 0.0
 

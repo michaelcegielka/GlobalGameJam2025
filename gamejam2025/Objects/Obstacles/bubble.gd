@@ -28,7 +28,7 @@ func _physics_process(delta):
 		self.current_dir = 1
 		
 func _on_hitbox_body_entered(body : Player):
-	PlayerStats.soap_amount += PlayerStats.SoapIncrease / 2.0
+	PlayerStats.soap_amount += PlayerStats.SoapIncrease
 	self.animation_player.play("Pop")
 	if body.global_position.y >= self.global_position.y + self.YOffSet:
 		body.velocity.y = 2.0*body.JumpStrength

@@ -107,7 +107,7 @@ func control_cam(delta):
 		self.MinArmDistance, self.MaxArmDistance
 	)
 
-	self.camera_3d.fov = 90 + velocity_scale * 9	
+	self.camera_3d.fov = min(90 + velocity_scale * 9, 150)
 
 #################################################################
 ### Model and visual stuff
