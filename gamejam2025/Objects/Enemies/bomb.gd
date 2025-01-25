@@ -1,15 +1,14 @@
-extends RigidBody3D
+extends CharacterBody3D
 
+const ExplosionParticle = preload("res://Objects/Enemies/ExplosionParticles.tscn")
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _ready():
+	self.velocity.y = -9.81
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_body_entered(body: Node) -> void:
-	pass # Replace with function body.
+func _physics_process(_delta):
+	self.move_and_slide()
+	if self.is_on_floor():
+		var explo = self.ExplosionParticle.instantiate()
+		self.get_parent().add_child(explo)
+		explo.global_position = self.global_position
+		self.queue_free()

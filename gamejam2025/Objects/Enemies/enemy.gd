@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 const Bubble = preload("res://Objects/Obstacles/bubble.tscn")
+const ExploderParticles = preload("res://Objects/Enemies/Particles/duck_explode_particle.tscn")
 
 @onready var weapon_mesh: MeshInstance3D = $Model/WeaponMesh
 
@@ -11,10 +12,14 @@ var speed = 6.0
 var rotation_speed = 1.0
 
 @export var bubbles_on_death := 2
+@export var body_material : StandardMaterial3D
 
 @export var player : Player
 var surface_normal = Vector3.UP
 
+
+func _ready():
+	pass
 
 func _physics_process(delta):
 	if player:
@@ -49,6 +54,18 @@ func update_surface_normal():
 
 
 func _on_hitbox_area_entered(_area):
-	pass
-	#for i in range(self.bubbles_on_death):
-	#	var new_bubble = 
+	# bubbles
+	for i in range(self.bubbles_on_death):
+		var new_bubble = self.Bubble.instantiate()
+		self.get_parent().add_child(new_bubble)
+		new_bubble.global_position = self.global_position
+		new_bubble.global_position.y += randf_range(1.0, 3.0)
+		new_bubble.global_position.x += randf_range(-5.0, 5.0)
+		new_bubble.global_position.z += randf_range(-5.0, 5.0)
+	
+	# explosion:
+	var new_explo = self.ExploderParticles.instantiate()
+	self.get_parent().add_child(new_explo)
+	new_explo.global_position = self.global_position
+	new_explo.set_material(self.body_material)
+	self.queue_free()

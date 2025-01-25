@@ -1,30 +1,22 @@
-extends CharacterBody3D
+extends "res://Objects/Enemies/enemy.gd"
 
-@onready var player: CharacterBody3D = $"../Player"
 @onready var bomb_scene: PackedScene = preload("res://Objects/Enemies/bomb.tscn")
+
+const BombDropTime := 3
+
+@onready var bomb_timer = $BombTimer
 @onready var propeller: MeshInstance3D = $Model/Propeller
 
-var speed = 3
-var rotation_speed = 1
-
-
-var bomb_drop_interval = 3
-var time_since_last_bomb = 0
-
 func _ready():
-	if not player:
-		print("Player nicht gefunden")
+	super._ready()
+	self.bomb_timer.start(self.BombDropTime)
+	
 
-func _process(delta):
+func _physics_process(delta):
 	if player:
 		rotate_towards_player(delta)
 		move_forward(delta)
 		spin_propeller(delta)
-		
-		time_since_last_bomb += delta
-		if time_since_last_bomb >= bomb_drop_interval:
-			drop_bomb()
-			time_since_last_bomb = 0
 
 func rotate_towards_player(delta):
 	var player_position = player.global_transform.origin
@@ -42,7 +34,7 @@ func move_forward(delta):
 func spin_propeller(delta):
 	propeller.rotate_y(40 * delta)
 
-func drop_bomb():
+func _on_bomb_timer_timeout():
 	var bomb = bomb_scene.instantiate()
-	bomb.global_transform.origin = global_transform.origin
 	get_parent().add_child(bomb)
+	bomb.global_transform.origin = global_transform.origin

@@ -1,6 +1,6 @@
 extends Node3D
 
-const GroundOffset = 1.0
+const GroundOffset = 1.5
 
 @onready var ray_cast_3d : RayCast3D = $RayCast3D
 

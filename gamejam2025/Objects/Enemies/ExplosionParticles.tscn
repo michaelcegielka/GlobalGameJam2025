@@ -1,4 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://nemrte5bvjbj"]
+[gd_scene load_steps=7 format=3 uid="uid://nemrte5bvjbj"]
+
+[ext_resource type="Script" path="res://Objects/Enemies/explosion_particles.gd" id="1_u3p34"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgm72"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.119935, 0.123679, 1)
 
 [sub_resource type="Curve" id="Curve_1yobv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.752137, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -17,16 +24,24 @@ scale_max = 1.5
 scale_curve = SubResource("CurveTexture_8pjno")
 
 [sub_resource type="SphereMesh" id="SphereMesh_3paaj"]
-radius = 0.3
-height = 0.3
+radius = 0.6
+height = 0.6
 
 [node name="ExplosionParticles" type="Node3D"]
+script = ExtResource("1_u3p34")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790534, 0)
+material_override = SubResource("StandardMaterial3D_lgm72")
+emitting = false
 amount = 24
 lifetime = 0.5
+one_shot = true
 explosiveness = 1.0
 fixed_fps = 60
+visibility_aabb = AABB(-40, -5, -40, 80, 10, 80)
 trail_lifetime = 0.2
 process_material = SubResource("ParticleProcessMaterial_hrg3l")
 draw_pass_1 = SubResource("SphereMesh_3paaj")
+
+[connection signal="finished" from="GPUParticles3D" to="." method="_on_gpu_particles_3d_finished"]

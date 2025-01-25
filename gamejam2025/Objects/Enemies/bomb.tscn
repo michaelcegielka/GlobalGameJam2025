@@ -10,7 +10,7 @@ albedo_color = Color(1, 0, 0.376471, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_7loj8"]
 material = SubResource("StandardMaterial3D_f0tvh")
 
-[node name="Bomb" type="RigidBody3D"]
+[node name="Bomb" type="CharacterBody3D"]
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_44a6y")
@@ -20,5 +20,3 @@ shape = SubResource("SphereShape3D_cp25f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_7loj8")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
