@@ -92,4 +92,5 @@ func _on_hurt_box_body_entered(body : Player):
 
 func _on_head_area_body_entered(body):
 	body.velocity.y = 2.0*body.JumpStrength
+	PlayerStats.emit_signal("show_pop_up")
 	self._on_hitbox_area_entered(null)

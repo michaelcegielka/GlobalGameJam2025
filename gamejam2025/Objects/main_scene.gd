@@ -14,11 +14,16 @@ var goal_rot : Vector3
 
 ### UI
 @onready var screen_animation_player : AnimationPlayer = $BlackScreen/ScreenAnimationPlayer
+@onready var duck_animation_player = $CanvasLayer/DuckAnimationPlayer
 @onready var end_screen_ui = $EndScreen
 
 
 ### Enemies
+const SpawnTime = 90.0
+@onready var spawn_timer = $SpawnTimer
 @onready var all_spawner := $Spawner
+
+var first_spawn := true
 var current_enemy_limit := 10.0
 
 var original_player_pos := Vector3.ZERO
@@ -34,7 +39,7 @@ func _ready():
 	PlayerStats.connect("player_died", self.end_screen)
 	self.end_screen_ui.connect("restart_game", self.reset)
 	self.original_player_pos = self.player.global_position
-	
+	self.set_process(false)
 	self.start_game()
 	
 
@@ -43,9 +48,11 @@ func start_game():
 
 func done_fading():
 	self.player.set_physics_process(true)
+	self.set_process(true)
 
 func end_screen():
 	self.player.set_physics_process(false)
+	self.set_process(false)
 	self.tween_cams(self.get_viewport().get_camera_3d(), self.final_cam, 2.0)
 	await self.cam_tween.finished
 	PlayerStats.emit_signal("compute_score")
@@ -107,6 +114,7 @@ func reset():
 	await self.screen_animation_player.animation_finished
 	
 	self.clear_all()
+	self.first_spawn = true
 	self.player.global_position = self.original_player_pos
 	PlayerStats.reset()
 	GlobalSignals.emit_signal("reset_bathub")
@@ -116,6 +124,11 @@ func reset():
 
 
 func _on_spawn_timer_timeout():
-	if self.enemies.get_child_count() >= self.current_enemy_limit: return
+	self.spawn_timer.start(self.SpawnTime)
+	if self.first_spawn:
+		self.first_spawn = false
+		self.duck_animation_player.play("ShowText")
+	elif len(self.enemies.get_children()) >= self.current_enemy_limit: return
+	
 	for spawner in self.all_spawner.get_children():
 		spawner.spawn_ducks(self.player, 1)

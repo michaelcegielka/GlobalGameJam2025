@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://dd1vlxn8cpo6x"]
+
+[ext_resource type="FontFile" uid="uid://b8ittsevfm2xi" path="res://_2d/RubikBubbles-Regular.ttf" id="1_8lq4i"]
+[ext_resource type="Script" path="res://Objects/PopUps/pop_up_text.gd" id="1_wp7ib"]
+
+[sub_resource type="Animation" id="Animation_fox2l"]
+resource_name = "PopUp"
+length = 2.0
+step = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:pixel_size")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.75, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0001, 0.03, 0.06, 0.03, 0.03, 0.0001]
+}
+
+[sub_resource type="Animation" id="Animation_w58dr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label3D:pixel_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.001]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_njerw"]
+_data = {
+"PopUp": SubResource("Animation_fox2l"),
+"RESET": SubResource("Animation_w58dr")
+}
+
+[node name="PopUPText" type="Node3D"]
+script = ExtResource("1_wp7ib")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+pixel_size = 0.001
+billboard = 1
+double_sided = false
+texture_filter = 0
+modulate = Color(0.358358, 0.795852, 0.975359, 1)
+text = "CLEAN"
+font = ExtResource("1_8lq4i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_njerw")
+}

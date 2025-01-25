@@ -8,6 +8,7 @@ const HideTime = 20.0
 @onready var timer = $Timer
 
 @export var snap_to_ground := true
+@export var show_pop_up := false
 
 func _ready():
 	self.set_physics_process(self.snap_to_ground)
@@ -20,6 +21,7 @@ func _physics_process(_delta):
 
 func _on_area_3d_body_entered(_body):
 	PlayerStats.soap_amount += PlayerStats.SoapIncrease
+	if self.show_pop_up: PlayerStats.emit_signal("show_pop_up")
 	self.visible = false
 	self.area_3d.set_deferred("monitoring", false)
 	self.timer.start(self.HideTime)

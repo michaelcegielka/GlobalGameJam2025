@@ -15,6 +15,7 @@ func jump_after_grind():
 func _on_grind_area_body_exited(_body):
 	if self.is_grinding:
 		self.jump_after_grind()
+		PlayerStats.emit_signal("show_pop_up")
 	self.is_grinding = false
 
 

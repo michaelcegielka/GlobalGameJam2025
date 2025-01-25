@@ -18,7 +18,7 @@ size_flags_vertical = 3
 theme = ExtResource("2_wvdu7")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 100)
+custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
@@ -37,6 +37,8 @@ alignment = 1
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.0385486, 0.464271, 0.584954, 1)
+theme_override_constants/outline_size = 50
 theme_override_font_sizes/font_size = 64
 text = "Score"
 horizontal_alignment = 1
@@ -49,6 +51,8 @@ size_flags_vertical = 3
 [node name="TimeLabelCurrent" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.0385486, 0.464271, 0.584954, 1)
+theme_override_constants/outline_size = 50
 text = "Time:"
 horizontal_alignment = 1
 
@@ -60,6 +64,8 @@ size_flags_vertical = 3
 [node name="ScoreLabelCurrent" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.0385486, 0.464271, 0.584954, 1)
+theme_override_constants/outline_size = 50
 text = "Cleaned:"
 horizontal_alignment = 1
 
@@ -75,6 +81,8 @@ alignment = 1
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.0385486, 0.464271, 0.584954, 1)
+theme_override_constants/outline_size = 50
 theme_override_font_sizes/font_size = 64
 text = "Highscore"
 horizontal_alignment = 1
@@ -87,6 +95,8 @@ size_flags_vertical = 3
 [node name="TimeLabelHighScore" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.0385486, 0.464271, 0.584954, 1)
+theme_override_constants/outline_size = 50
 text = "Time: "
 horizontal_alignment = 1
 
@@ -98,6 +108,8 @@ size_flags_vertical = 3
 [node name="ScoreLabelHighScore" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/font_outline_color = Color(0.0385486, 0.464271, 0.584954, 1)
+theme_override_constants/outline_size = 50
 text = "Cleaned:"
 horizontal_alignment = 1
 

@@ -36,4 +36,5 @@ func _on_hitbox_body_entered(body : Player):
 	self.animation_player.play("Pop")
 	if body.global_position.y >= self.global_position.y + self.YOffSet:
 		body.velocity.y = 2.0*body.JumpStrength
+		PlayerStats.emit_signal("show_pop_up")
 	
