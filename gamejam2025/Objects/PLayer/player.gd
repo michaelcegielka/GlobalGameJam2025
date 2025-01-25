@@ -32,8 +32,8 @@ const MinCamAngle = 0.5 # min angle for camera up
 const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
 
-const MinArmDistance = 3.0
-const MaxArmDistance = 4.0
+const MinArmDistance = 5.0
+const MaxArmDistance = 6.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
 ### Controll sutff

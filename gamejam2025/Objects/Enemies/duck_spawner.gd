@@ -3,7 +3,7 @@ extends Node3D
 @export var DuckScene : PackedScene
 @export var player : Player
 
-const SpawnRange = 10.0
+const SpawnRange = 20.0
 
 func spawn_ducks(player, idx):
 	for i in range(idx):
