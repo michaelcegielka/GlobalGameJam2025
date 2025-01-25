@@ -28,7 +28,7 @@ const CoyoteTime = 0.1
 const Gravity = -80.0
 const AirGravity = -40.0
 
-const CamSpeedRot = 5.0
+const CamSpeedRot = 8.0
 const MinCamAngle = 0.5 # min angle for camera up
 const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
@@ -100,7 +100,7 @@ func reset():
 #################################################################
 ### Camera
 func control_cam(delta):
-	var cam_rot_y = Input.get_action_strength("CamRight") - Input.get_action_strength("CamLeft")
+	var cam_rot_y = Input.get_action_strength("CamLeft") - Input.get_action_strength("CamRight")
 	if cam_rot_y == 0 and self.is_on_floor() and self.velocity.length() > self.UnderVelocityAngle:
 		self.spring_arm_3d.rotation.y = lerp_angle(self.spring_arm_3d.rotation.y, 
 					PI + self.model.rotation.y, delta)
