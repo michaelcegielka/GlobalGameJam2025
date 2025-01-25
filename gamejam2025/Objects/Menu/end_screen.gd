@@ -22,7 +22,7 @@ func show_end_screen():
 	self.restart_button.grab_focus()
 	
 	self.time_label_current.text = "Time: " + PlayerStats.trasform_time_to_string(PlayerStats.current_time)
-	self.score_label_current.text = "Score: " + "0.0"
+	self.score_label_current.text = "Score: " + str(PlayerStats.current_score)
 	
 	self.time_label_high_score.text = "Time: " + PlayerStats.trasform_time_to_string(PlayerStats.highscore_time)
 	self.score_label_high_score.text = "Score: " + str(PlayerStats.highscore_clean)

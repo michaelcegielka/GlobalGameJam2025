@@ -1,5 +1,7 @@
 extends MeshInstance3D
 
+const WhitePixelsTotal := 1254625
+
 @export var player: Player
 
 var mask_image: Image
@@ -13,13 +15,15 @@ func _ready():
 	mask_texture = ImageTexture.create_from_image(mask_image)
 
 	material_overlay.set("shader_param/mask_texture", mask_texture)
+	PlayerStats.connect("compute_score", self.compute_clean_score)
+	GlobalSignals.connect("reset_bathub", self.reset)
 
-
-func _process(delta):
+func _process(_delta):
 	if player.current_state == player.States.GROUNDED:
 		var player_position = player.global_position
 		erase_dirt(player_position)
 
+@warning_ignore("shadowed_variable_base_class")
 func erase_dirt(position: Vector3):
 	var uv_position = world_to_texture_coords(position)
 	var radius = 8
@@ -45,3 +49,15 @@ func world_to_texture_coords(world_position: Vector3) -> Vector2:
 	uv_y *= mask_image.get_height()
 	
 	return Vector2(uv_x, uv_y)
+
+
+func compute_clean_score():
+	var total_score = 0 
+	for i in range(self.mask_image.get_width()):
+		for j in range(self.mask_image.get_height()):
+			total_score += int(self.mask_image.get_pixel(i, j).r >= 0.99)
+	PlayerStats.current_score = self.WhitePixelsTotal - total_score
+
+func reset():
+	mask_image = Image.load_from_file(default_mask_path)
+	mask_texture = ImageTexture.create_from_image(mask_image)
