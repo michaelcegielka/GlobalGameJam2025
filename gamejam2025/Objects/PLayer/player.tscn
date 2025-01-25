@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ore5g1k0lwj6"]
+[gd_scene load_steps=13 format=3 uid="uid://ore5g1k0lwj6"]
 
 [ext_resource type="Script" path="res://Objects/PLayer/player.gd" id="1_8ti7c"]
 [ext_resource type="ArrayMesh" uid="uid://cegvpmvkqh6bk" path="res://_3d/player.obj" id="2_yprfx"]
@@ -43,7 +43,7 @@ scale_curve = SubResource("CurveTexture_m5pmj")
 transparency = 1
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.956863, 0.917647, 0.976471, 0.533333)
+albedo_color = Color(0.956863, 0.917647, 0.976471, 0.815686)
 
 [sub_resource type="SphereMesh" id="SphereMesh_w2vcv"]
 material = SubResource("StandardMaterial3D_4asf5")
@@ -51,6 +51,10 @@ radius = 0.2
 height = 0.4
 radial_segments = 16
 rings = 16
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3uoyj"]
+height = 4.0
+radius = 1.25
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
@@ -61,7 +65,7 @@ script = ExtResource("1_8ti7c")
 shape = SubResource("SphereShape3D_iext5")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35594, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.4, 0)
 spring_length = 8.0
 
 [node name="Node3D" type="Node3D" parent="SpringArm3D"]
@@ -73,24 +77,31 @@ current = true
 
 [node name="Model" type="Node3D" parent="."]
 
-[node name="ModelRotY" type="Node3D" parent="Model"]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/ModelRotY"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.385731, 0)
 mesh = ExtResource("2_yprfx")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_df5h6")
 surface_material_override/1 = SubResource("StandardMaterial3D_3qbex")
 
-[node name="HeadMarker" type="Marker3D" parent="Model/ModelRotY"]
+[node name="HeadMarker" type="Marker3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61866, 0)
 
-[node name="SoapBubbles" type="GPUParticles3D" parent="Model/ModelRotY"]
+[node name="SoapBubbles" type="GPUParticles3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.349121, -1.02141)
-amount = 256
+amount = 512
 process_material = SubResource("ParticleProcessMaterial_gdwjm")
 draw_pass_1 = SubResource("SphereMesh_w2vcv")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
 one_shot = true
+
+[node name="HurtBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12131, 1.56467)
+collision_layer = 16
+collision_mask = 0
+
+[node name="DashShape" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("CylinderShape3D_3uoyj")
+disabled = true

@@ -1,4 +1,7 @@
 extends CharacterBody3D
+class_name Player
+
+const HealParticles = preload("res://Objects/PLayer/heal_particles.tscn")
 
 enum States {JUMPING, FALLING, GROUNDED, FAST, DEAD}
 
@@ -38,6 +41,14 @@ var current_dir := Vector3.ZERO
 var current_floor_normal := Vector3.UP
 var current_state := States.FALLING
 
+### Combo stuff
+var start_angle_jump := 0.0
+var prev_angle := 0.0
+
+### Attacks:
+@onready var dash_shape = $HurtBox/DashShape
+
+
 @onready var coyote_timer : Timer = $CoyoteTimer
 
 ### Camera
@@ -46,26 +57,28 @@ var current_state := States.FALLING
 
 ### Model:
 @onready var model = $Model
-@onready var model_rot_y = $Model/ModelRotY
-@onready var head_marker = $Model/ModelRotY/HeadMarker
+@onready var head_marker = $Model/HeadMarker
+@onready var soap_bubbles : GPUParticles3D = $Model/SoapBubbles
+
 
 
 func _ready():
-	pass
+	PlayerStats.connect("got_soap", self.show_heal_particles)
+	self.soap_bubbles.emitting = false
 
 
+#################################################################
+### Camera
 func control_cam(delta):
 	var cam_rot_y = Input.get_action_strength("CamRight") - Input.get_action_strength("CamLeft")
-#	var angle_diff = abs(self.spring_arm_3d.global_rotation.y + self.model_rot_y.global_rotation.y) 
-#	if cam_rot_y == 0 and angle_diff > self.MaxCamRotDifference:
-#		self.spring_arm_3d.global_rotation.y = lerp_angle(
-#			self.spring_arm_3d.global_rotation.y, 
-	#		self.model_rot_y.global_rotation.y, 
-	#		5.0*delta)
-	#else:
-	self.spring_arm_3d.rotation.y = lerp_angle(self.spring_arm_3d.rotation.y, 
-						self.spring_arm_3d.rotation.y + cam_rot_y * self.CamSpeedRot, 
-						delta)
+	if cam_rot_y == 0 and self.is_on_floor() and self.velocity.length() > self.UnderVelocityAngle:
+		self.spring_arm_3d.rotation.y = lerp_angle(self.spring_arm_3d.rotation.y, 
+					PI + self.model.rotation.y, delta)
+	else:
+		self.spring_arm_3d.rotation.y = lerp_angle(self.spring_arm_3d.rotation.y, 
+							self.spring_arm_3d.rotation.y + cam_rot_y * self.CamSpeedRot, 
+							delta)
+	
 
 	var cam_rot_x = Input.get_action_strength("CamUp") - Input.get_action_strength("CamDown")
 	cam_rot_x = clamp(self.spring_arm_3d.rotation.x + cam_rot_x, self.MaxCamAngle, self.MinCamAngle)
@@ -83,7 +96,8 @@ func control_cam(delta):
 		self.MinArmDistance, self.MaxArmDistance
 	)
 
-
+#################################################################
+### Model and visual stuff
 func tilt_model(up_vector):
 	var damping_factor = 0.1
 	
@@ -102,17 +116,28 @@ func tilt_model(up_vector):
 	var rotation_angle = current_up.angle_to(target_up)
 	
 	if rotation_axis.length() > 0 and not is_nan(rotation_angle):
-		var rotation = Basis(rotation_axis, rotation_angle)
-		self.model.transform.basis = rotation * self.model.transform.basis
+		var new_rotation = Basis(rotation_axis, rotation_angle)
+		self.model.transform.basis = new_rotation * self.model.transform.basis
+
+
 
 func rot_y_model(delta, angle_accel):
 	### Rotate y so model looks into walk direction:
+	var angle = 0.0
 	if not self.current_dir == Vector3.ZERO:
-		var angle = Vector2(self.current_dir.x, self.current_dir.z).angle()#Vector2(self.velocity.x, self.velocity.z).angle()
-		self.model.rotation.y = lerp_angle(self.model.rotation.y, 
-												PI/2.0 - angle,
-												angle_accel/10.0 * delta)
+		angle = Vector2(self.current_dir.x, self.current_dir.z).angle()
+	else:
+		angle = Vector2(self.velocity.x, self.velocity.z).angle()
+	self.model.rotation.y = lerp_angle(self.model.rotation.y, 
+										PI/2.0 - angle,
+										angle_accel/10.0 * delta)
 
+func show_heal_particles():
+	var heal_part = self.HealParticles.instantiate()
+	self.model.add_child(heal_part)
+
+#################################################################
+### Controlls
 func _physics_process(delta):
 	match self.current_state:
 		self.States.GROUNDED:
@@ -137,7 +162,7 @@ func get_player_input(max_velo, accel, delta):
 	var dir_len = self.current_dir.length()
 	self.current_dir = self.current_dir.rotated(Vector3.UP, self.spring_arm_3d.rotation.y)
 	if dir_len > 1:
-		self.current_dir / dir_len
+		self.current_dir /= dir_len
 	if dir_len > 0.1:
 		self.velocity = self.velocity.move_toward(max_velo * self.current_dir, 
 													accel * delta)
@@ -148,15 +173,19 @@ func get_player_input(max_velo, accel, delta):
 func check_dash(delta):
 	if Input.is_action_pressed("Dash") and PlayerStats.soap_amount > 0:
 		PlayerStats.soap_amount -= PlayerStats.DashCost
+		self.dash_shape.set_deferred("disabled", false)
 		var y_velo = self.velocity.y
 		self.velocity = self.velocity.move_toward( 
 			self.DashVelocity*self.current_dir, 
 			self.DashAcceleration*delta)
 		self.velocity.y = y_velo
+	else:
+		self.dash_shape.set_deferred("disabled", true)
 
 func ground_move(delta):
+	self.soap_bubbles.emitting = (self.velocity.length() > 3)
 	self.get_player_input(self.MaxVelocity, self.Acceleration, delta)
-
+	PlayerStats.soap_amount -= PlayerStats.WalkCost
 	self.velocity.y = self.Gravity * delta
 	
 	if self.get_floor_angle() >= self.WallAngleSlide:
@@ -180,6 +209,7 @@ func ground_move(delta):
 	
 	if Input.is_action_just_pressed("Jump"):
 		self.current_state = self.States.JUMPING
+		self.start_angle_jump = fposmod(self.model.rotation.y - PI, 2*PI)
 		if self.get_floor_angle() <= PI/8.0:
 			self.velocity += 2.0*self.JumpStrength * self.current_floor_normal
 		else:
@@ -192,11 +222,17 @@ func ground_move(delta):
 
 
 func jump_move(delta):
+	if self.velocity.y < 0: self.soap_bubbles.emitting = false
+	
 	self.get_player_input(self.MaxVelocity, self.AirAcceleration, delta)
 	
 	self.velocity.y += self.AirGravity * delta
 	self.move_and_slide()
+	self.prev_angle = self.model.rotation.y
 	self.rot_y_model(delta, self.Acceleration)
+
+	self.trick_360(self.prev_angle, self.model.rotation.y)
+	self.trick_360(self.model.rotation.y, self.prev_angle)
 	
 	self.velocity = self.velocity.move_toward(Vector3.ZERO, self.AirFriction * delta)
 	
@@ -210,7 +246,15 @@ func jump_move(delta):
 		self.current_state = self.States.GROUNDED
 
 
+func trick_360(angle_1, angle_2):
+	var mod_angle_1 = fposmod(angle_1 - self.start_angle_jump, 2*PI)
+	var mod_angle_2 = fposmod(angle_2 - self.start_angle_jump, 2*PI)
+	if mod_angle_1 < 2*PI and mod_angle_1 >= PI:
+		if mod_angle_2 >= 0 and mod_angle_2 < PI:
+			PlayerStats.soap_amount += PlayerStats.Trick360AirSoap
+
 func fall_move(delta):
+	self.soap_bubbles.emitting = false
 	self.get_player_input(self.MaxVelocity, self.AirAcceleration / 2.0, delta)
 	
 	self.velocity.y += 2.0*self.AirGravity * delta
@@ -226,6 +270,7 @@ func fall_move(delta):
 	self.tilt_model(self.current_floor_normal)
 	
 	if Input.is_action_just_pressed("Jump") and self.coyote_timer.time_left:
+		self.start_angle_jump = fposmod(self.model.rotation.y - PI, 2*PI)
 		self.current_state = self.States.JUMPING
 		self.velocity -= self.JumpStrength * Vector3.UP
 		self.global_position += 0.1 * self.current_floor_normal

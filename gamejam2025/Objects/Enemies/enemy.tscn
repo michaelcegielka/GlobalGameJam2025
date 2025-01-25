@@ -1,8 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://s0njjrds4vfx"]
+[gd_scene load_steps=8 format=3 uid="uid://s0njjrds4vfx"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/enemy.gd" id="1_8gbia"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lj6j5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a74n1"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.997844, 0.592995, 3.85046e-07, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_stcqb"]
 
@@ -12,6 +17,9 @@ metallic = 0.35
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pespu"]
 material = SubResource("StandardMaterial3D_agmpv")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jcqlx"]
+radius = 4.86943
 
 [node name="EnemyBody" type="CharacterBody3D"]
 collision_layer = 4
@@ -27,24 +35,28 @@ transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0.000124931, 2.39124, -0.0053
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.239555, -7.20292e-05, -0.000127547, 0.000118814, 0.145174, -0.000131707, 0.000101525, 6.34717e-05, 0.301104, 0.000124506, 0.358196, -0.540942)
 layers = 4
+material_override = SubResource("StandardMaterial3D_a74n1")
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.337639, -0.000524188, 0.000297548, 0.00067403, 0.158121, 0.172759, -0.000747721, -0.0941648, 0.290094, -0.044186, 0.19477, 0.382968)
 layers = 4
+material_override = SubResource("StandardMaterial3D_a74n1")
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.51984, -0.000271424, -0.000246139, 0.00025783, 0.547051, -0.000254167, 0.000220312, 0.000239177, 0.581068, -7.71531e-06, 0.388075, -0.263929)
 layers = 4
+material_override = SubResource("StandardMaterial3D_a74n1")
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("../MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.869192, -0.000303441, -0.000423598, 0.000431101, 0.611581, -0.000437414, 0.00036837, 0.00026739, 1, 6.92254e-05, 0.00749365, -9.57495e-05)
 layers = 4
+material_override = SubResource("StandardMaterial3D_a74n1")
 mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("")
 
@@ -52,3 +64,13 @@ skeleton = NodePath("")
 transform = Transform3D(0.129604, -0.0394712, -0.0144622, 0.0168615, 0.0868509, 0.126931, -0.00915049, -0.399014, 0.029059, -0.391409, 0.169833, -0.347693)
 layers = 4
 mesh = SubResource("CylinderMesh_pespu")
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52272, 0)
+collision_layer = 0
+collision_mask = 48
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_jcqlx")
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

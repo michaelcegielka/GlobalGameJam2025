@@ -1,0 +1,176 @@
+[gd_scene load_steps=9 format=3 uid="uid://dn1wwj75uytl1"]
+
+[ext_resource type="Script" path="res://Objects/Obstacles/bubble.gd" id="1_oefaa"]
+
+[sub_resource type="Shader" id="Shader_cxd6c"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.3.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_toon, specular_toon;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform float rim : hint_range(0.0, 1.0, 0.01);
+uniform float rim_tint : hint_range(0.0, 1.0, 0.01);
+uniform sampler2D texture_rim : hint_default_white, filter_linear_mipmap, repeat_enable;
+
+uniform float clearcoat : hint_range(0.0, 1.0, 0.01);
+uniform float clearcoat_roughness : hint_range(0.0, 1.0, 0.01);
+uniform sampler2D texture_clearcoat : hint_default_white, filter_linear_mipmap, repeat_enable;
+
+uniform vec4 backlight : source_color;
+uniform sampler2D texture_backlight : hint_default_black, filter_linear_mipmap, repeat_enable;
+
+uniform float amplitude : hint_range(0.05, 0.2, 0.01);
+uniform float osci_speed : hint_range(0.2, 1.0, 0.1);
+
+uniform float pop_bubble : hint_range(0.0, 1.0, 0.01);
+
+void vertex(){
+	VERTEX += amplitude*NORMAL*sin(TIME * osci_speed + 4.0*PI*UV.x + 2.0*PI*UV.y);
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+
+	// Vertex Color Use as Albedo: Enabled
+	albedo_tex *= COLOR;
+
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	ALPHA *= albedo.a * albedo_tex.a * step(pop_bubble, UV.y);
+
+	// Rim: Enabled
+	vec2 rim_tex = texture(texture_rim, base_uv).xy;
+	RIM = rim * rim_tex.x;
+	RIM_TINT = rim_tint * rim_tex.y;
+
+	// Clearcoat: Enabled
+	vec2 clearcoat_tex = texture(texture_clearcoat, base_uv).xy;
+	CLEARCOAT = clearcoat * clearcoat_tex.x;
+	CLEARCOAT_ROUGHNESS = clearcoat_roughness * clearcoat_tex.y;
+
+	// Backlight: Enabled
+	vec3 backlight_tex = texture(texture_backlight, base_uv).rgb;
+	BACKLIGHT = (backlight.rgb + backlight_tex);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xpg71"]
+resource_local_to_scene = true
+render_priority = 0
+shader = SubResource("Shader_cxd6c")
+shader_parameter/albedo = Color(0.917647, 0.87451, 0.972549, 0.152941)
+shader_parameter/roughness = 0.75
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/rim = 1.0
+shader_parameter/rim_tint = 1.0
+shader_parameter/clearcoat = 1.0
+shader_parameter/clearcoat_roughness = 1.0
+shader_parameter/backlight = Color(0.980392, 0.74902, 0.752941, 1)
+shader_parameter/amplitude = 0.05
+shader_parameter/osci_speed = 1.0
+shader_parameter/pop_bubble = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_q6cpg"]
+resource_local_to_scene = true
+radius = 2.5
+height = 5.0
+radial_segments = 32
+rings = 16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_usfyk"]
+resource_local_to_scene = true
+radius = 1.816
+
+[sub_resource type="Animation" id="Animation_dyfnb"]
+resource_name = "Pop"
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:material_override:shader_parameter/pop_bubble")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dsqgc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:material_override:shader_parameter/pop_bubble")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4vj3d"]
+_data = {
+"Pop": SubResource("Animation_dyfnb"),
+"RESET": SubResource("Animation_dsqgc")
+}
+
+[node name="Bubble" type="Node3D"]
+script = ExtResource("1_oefaa")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+material_override = SubResource("ShaderMaterial_xpg71")
+mesh = SubResource("SphereMesh_q6cpg")
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("SphereShape3D_usfyk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4vj3d")
+}
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -6,6 +6,8 @@ extends CharacterBody3D
 
 var speed = 3
 var rotation_speed = 1
+
+
 var bomb_drop_interval = 3
 var time_since_last_bomb = 0
 
