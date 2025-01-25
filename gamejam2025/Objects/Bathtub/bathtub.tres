@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://msrt2s1ujxkt"]
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://ddxtnxtxkhjy7"]
 
 [ext_resource type="Texture2D" uid="uid://cf8b22qs3ybxl" path="res://Objects/Bathtub/dirty_glass_43_92_roughness.jpg" id="1_vg844"]
 [ext_resource type="Texture2D" uid="uid://c5l2xamf1hkxp" path="res://Objects/Bathtub/dirty_glass_43_92_metallic.jpg" id="2_jgqrm"]
