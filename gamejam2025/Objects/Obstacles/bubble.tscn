@@ -174,4 +174,7 @@ libraries = {
 "": SubResource("AnimationLibrary_4vj3d")
 }
 
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, -4, 0)
+
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

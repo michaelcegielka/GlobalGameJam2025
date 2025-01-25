@@ -9,6 +9,7 @@ const Velocity = 3.5
 @onready var mesh : MeshInstance3D = $Mesh
 @onready var collision_shape_3d : CollisionShape3D = $Hitbox/CollisionShape3D
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
+@onready var ray_cast_3d = $RayCast3D
 
 var current_dir := -1
 var start_y := 0.0
@@ -26,7 +27,9 @@ func _physics_process(delta):
 		self.current_dir = -1
 	elif -self.start_y + self.global_position.y < self.MovementRange:
 		self.current_dir = 1
-		
+	if not self.ray_cast_3d.is_colliding():
+		self.start_y -= 4.0*delta
+
 func _on_hitbox_body_entered(body : Player):
 	PlayerStats.soap_amount += PlayerStats.SoapIncrease
 	self.animation_player.play("Pop")
