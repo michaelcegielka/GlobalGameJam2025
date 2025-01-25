@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://ore5g1k0lwj6"]
+[gd_scene load_steps=15 format=3 uid="uid://ore5g1k0lwj6"]
 
 [ext_resource type="Script" path="res://Objects/PLayer/player.gd" id="1_8ti7c"]
 [ext_resource type="PackedScene" uid="uid://brbbceyyo8n2v" path="res://_3d/player.glb" id="2_3o81h"]
 [ext_resource type="Shader" path="res://Objects/PLayer/bubble_simple.gdshader" id="3_qoltx"]
 [ext_resource type="Texture2D" uid="uid://bq3wyn1ecswce" path="res://_3d/SoapBumpMap.png" id="4_suq18"]
+[ext_resource type="Texture2D" uid="uid://bbd3h5dpdmkqi" path="res://_3d/player_Soap_Normal.png" id="5_qn4l7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iext5"]
 radius = 0.8
@@ -25,9 +26,11 @@ shader_parameter/noise_strength = 5.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_df5h6"]
+diffuse_mode = 3
+specular_mode = 1
 albedo_color = Color(0.951654, 0.44154, 0.58075, 1)
 roughness = 0.46
-normal_enabled = true
+normal_texture = ExtResource("5_qn4l7")
 clearcoat_enabled = true
 clearcoat_roughness = 0.0
 heightmap_scale = 3.393
@@ -102,12 +105,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28, 0)
 transform = Transform3D(-1.1, 0, -1.66095e-07, 0, 1.1, 0, 1.66095e-07, 0, -1.1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Model/player/Player" index="0"]
-bones/2/rotation = Quaternion(0.99732, 8.72142e-09, 1.1889e-07, 0.0731602)
-bones/3/rotation = Quaternion(0.987794, 1.8569e-08, 1.17754e-07, 0.155768)
+bones/1/position = Vector3(-0.0776578, 1.53762, 4.47783)
+bones/1/rotation = Quaternion(-0.616433, 0.2731, -0.241172, 0.698042)
+bones/2/position = Vector3(0.610086, 2.01345, 4.42529)
+bones/2/rotation = Quaternion(0.62441, -0.307301, -0.405658, 0.592554)
+bones/2/scale = Vector3(1, 1, 1.00001)
+bones/3/position = Vector3(-0.274621, 1.39659, 2.45952)
+bones/3/rotation = Quaternion(0.451198, 0.260221, -0.659581, -0.541903)
 bones/3/scale = Vector3(1, 1, 1)
+bones/4/position = Vector3(-0.0861664, 2.4417, 3.31777)
+bones/4/rotation = Quaternion(0.175851, 0.735637, 0.206716, 0.620632)
+bones/5/position = Vector3(1.49401e-23, 0.522403, 1.58713)
+bones/5/rotation = Quaternion(-0.707107, 1.8333e-17, 3.1034e-17, 0.707107)
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/rotation = Quaternion(0.99732, 2.76267e-09, -1.24849e-07, -0.0731602)
-bones/7/rotation = Quaternion(0.987794, 6.80623e-09, -1.29517e-07, -0.155768)
+bones/6/position = Vector3(-0.769109, 1.74308, 4.3995)
+bones/6/rotation = Quaternion(0.508433, -0.541653, -0.300047, 0.598398)
+bones/6/scale = Vector3(1, 1, 1.00001)
+bones/7/position = Vector3(0.18667, 1.44532, 2.39289)
+bones/7/rotation = Quaternion(0.522104, 0.550922, -0.647407, -0.0689645)
 bones/7/scale = Vector3(1, 1, 1)
 
 [node name="BubbleBoy" parent="Model/player/Player/Skeleton3D" index="0"]
@@ -120,7 +135,7 @@ material_override = SubResource("StandardMaterial3D_df5h6")
 playback_default_blend_time = 0.4
 
 [node name="HeadMarker" type="Marker3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61866, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
 
 [node name="SoapBubbles" type="GPUParticles3D" parent="Model"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -1.345)

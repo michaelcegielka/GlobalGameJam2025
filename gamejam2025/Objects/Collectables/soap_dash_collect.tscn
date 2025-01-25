@@ -1,6 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwobrhpbxngmq"]
+[gd_scene load_steps=9 format=3 uid="uid://dwobrhpbxngmq"]
 
 [ext_resource type="Script" path="res://Objects/Collectables/soap_dash_collect.gd" id="1_788em"]
+[ext_resource type="Texture2D" uid="uid://cws0ylpu3va81" path="res://_3d/Soap_Normal.png" id="2_n15cb"]
+[ext_resource type="PackedScene" uid="uid://cyxoalk5l2y28" path="res://_3d/soap.glb" id="3_1p3gi"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_whlp3"]
 radius = 1.92599
@@ -8,10 +10,8 @@ radius = 1.92599
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efpsu"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.884786, 0.307908, 0.765441, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_lft0n"]
-size = Vector3(3, 1.5, 1.5)
+albedo_color = Color(0.929522, 0.561265, 0.918996, 1)
+normal_texture = ExtResource("2_n15cb")
 
 [sub_resource type="Animation" id="Animation_2b8dv"]
 resource_name = "Idle"
@@ -88,7 +88,12 @@ shape = SubResource("SphereShape3D_whlp3")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_efpsu")
-mesh = SubResource("BoxMesh_lft0n")
+
+[node name="soap" parent="MeshInstance3D" instance=ExtResource("3_1p3gi")]
+transform = Transform3D(-0.048641, -0.00965752, -0.99877, 0.998817, -0.000470307, -0.0486385, 2.98023e-08, -0.999954, 0.00966892, -0.0576206, 0.0624828, 0.10271)
+
+[node name="Soap" parent="MeshInstance3D/soap" index="0"]
+material_override = SubResource("StandardMaterial3D_efpsu")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, -10, 0)
@@ -104,3 +109,5 @@ one_shot = true
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+
+[editable path="MeshInstance3D/soap"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://nrtfjmfxo36m"]
+[gd_scene load_steps=21 format=3 uid="uid://nrtfjmfxo36m"]
 
 [ext_resource type="Script" path="res://Objects/main_scene.gd" id="1_7is67"]
 [ext_resource type="PackedScene" uid="uid://ore5g1k0lwj6" path="res://Objects/PLayer/player.tscn" id="1_40nht"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://dettanh8g3s76" path="res://Objects/Bathtub/bathtub.tscn" id="9_m7x11"]
 [ext_resource type="PackedScene" uid="uid://chfwpm7hb8edl" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
 [ext_resource type="PackedScene" uid="uid://8pijhl33d36n" path="res://Objects/Obstacles/ramp.tscn" id="11_r4sra"]
+[ext_resource type="PackedScene" uid="uid://pvkhv2ejruqy" path="res://Objects/Obstacles/grind_rail.tscn" id="12_hpu5s"]
+[ext_resource type="PackedScene" uid="uid://c2m6uu3waqjq4" path="res://Objects/Obstacles/deo.tscn" id="13_pl8pg"]
 
 [sub_resource type="Animation" id="Animation_4yj2r"]
 resource_name = "FadeBlackIn"
@@ -162,6 +164,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -78.9766, 4.44427, -75.6351)
 [node name="SoapDashCollect13" parent="Collectables" instance=ExtResource("5_5mqlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.7356, 21.0585, -69.5831)
 
+[node name="SoapDashCollect16" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -70.7356, 41.5539, -69.5831)
+
 [node name="SoapDashCollect9" parent="Collectables" instance=ExtResource("5_5mqlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.3214, 5.34816, -5.41599)
 snap_to_ground = false
@@ -170,8 +175,36 @@ snap_to_ground = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.592, 5.34816, 9.27475)
 snap_to_ground = false
 
+[node name="SoapDashCollect14" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.3214, 29.113, -5.41599)
+snap_to_ground = false
+
+[node name="SoapDashCollect15" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.592, 29.113, 9.27475)
+snap_to_ground = false
+
 [node name="SoapDashCollect2" parent="Collectables" instance=ExtResource("5_5mqlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -101.403, 9.15002, 9.77887)
+
+[node name="SoapDashCollect17" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.5913, 6.74091, 33.2838)
+snap_to_ground = false
+
+[node name="SoapDashCollect18" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.2829, 6.74091, 60.5374)
+snap_to_ground = false
+
+[node name="SoapDashCollect19" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.849, 21.4505, 60.5374)
+snap_to_ground = false
+
+[node name="SoapDashCollect20" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.1608, 21.4505, 89.0652)
+snap_to_ground = false
+
+[node name="SoapDashCollect21" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.0053, 6.57372, 58.9294)
+snap_to_ground = false
 
 [node name="SoapDashCollect3" parent="Collectables" instance=ExtResource("5_5mqlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.451, 9.15002, 9.77887)
@@ -229,6 +262,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 280
 [node name="Sponge" parent="FixElements" instance=ExtResource("7_2pjk2")]
 transform = Transform3D(0.957923, 0, 0.287026, 0, 1, 0, -0.287026, 0, 0.957923, 84.9485, 2.24305, -54.3213)
 
+[node name="Sponge4" parent="FixElements" instance=ExtResource("7_2pjk2")]
+transform = Transform3D(0.957923, 0, 0.287026, 0, 1, 0, -0.287026, 0, 0.957923, -46.4446, -15.9308, 3.60761)
+
 [node name="Sponge2" parent="FixElements" instance=ExtResource("7_2pjk2")]
 transform = Transform3D(0.770012, 0, -0.638029, 0, 1, 0, 0.638029, 0, 0.770012, 68.653, 2.24305, -76.0788)
 
@@ -243,6 +279,24 @@ transform = Transform3D(-0.936145, 0, 0.351613, 0, 1, 0, -0.351613, 0, -0.936145
 
 [node name="Ramp3" parent="FixElements" instance=ExtResource("11_r4sra")]
 transform = Transform3D(0.936059, 0, -0.351842, 0, 1, 0, 0.351842, 0, 0.936059, 37.1529, -18.1402, 14.31)
+
+[node name="GrindRail" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
+transform = Transform3D(0.826973, 0, 0.562242, 0, 1, 0, -0.562242, 0, 0.826973, -82.7689, 3.09031, 46.3421)
+player = NodePath("../../Player")
+
+[node name="GrindRail2" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
+transform = Transform3D(0.826305, 0, -0.563224, 0, 1, 0, 0.563224, 0, 0.826305, 67.4615, 18.579, 74.867)
+player = NodePath("../../Player")
+
+[node name="GrindRail3" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
+transform = Transform3D(-0.541958, 0, -0.840406, 0, 1, 0, 0.840406, 0, -0.541958, 61.547, 3.14597, 70.0507)
+player = NodePath("../../Player")
+
+[node name="Deo" parent="FixElements" instance=ExtResource("13_pl8pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.5759, 8.64629, 88.0007)
+
+[node name="Deo2" parent="FixElements" instance=ExtResource("13_pl8pg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.2138, 8.64629, 64.7522)
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 30.0

@@ -3,7 +3,7 @@ class_name Player
 
 const HealParticles = preload("res://Objects/PLayer/heal_particles.tscn")
 
-enum States {JUMPING, FALLING, GROUNDED, FAST, DEAD}
+enum States {JUMPING, FALLING, GROUNDED, FAST, DEAD, GRINDING}
 
 const WallAngleMin = PI/8
 const WallAngleMax = PI/2.5
@@ -18,6 +18,7 @@ const AirAcceleration = 20.0
 
 const Friction = 2.0
 const AirFriction = 0.5
+const GrindFriction = 1.0
 
 const MaxVelocity = 50.0
 const DashVelocity = 70.0
@@ -44,10 +45,14 @@ const FinalShiftBoyY = -0.745
 const OriginalShiftParticleY = -0.4
 const FinalShiftParticleY = -0.75
 const FinalScaleY = 0.02
+### Head location
+const OriginalHeadPos = Vector3(0.0, 2.6, 0.0)
+const DeadHeadPos = Vector3(0.0, 0.5, 11.0)
 ### Controll sutff
 var current_dir := Vector3.ZERO
 var current_floor_normal := Vector3.UP
 var current_state := States.FALLING
+
 var was_dashing_before := false
 ### Combo stuff
 var start_angle_jump := 0.0
@@ -89,6 +94,7 @@ func reset():
 	self.current_dir = Vector3.ZERO
 	self.camera_3d.current = true
 	self.animation_player.play("IdleMove")
+	self.head_marker.position = self.OriginalHeadPos
 	self.update_soap_thickness()
 
 #################################################################
@@ -190,6 +196,10 @@ func _physics_process(delta):
 			self.jump_move(delta)
 		self.States.FALLING:
 			self.fall_move(delta)
+		self.States.DEAD:
+			self.dead_move(delta)
+		self.States.GRINDING:
+			self.grind_move(delta)
 
 	# set current wall angle to enable drive on walls
 	var velocity_scale = (self.velocity.length() - self.UnderVelocityAngle) / self.VelocityScale
@@ -202,8 +212,10 @@ func _physics_process(delta):
 	self.update_soap_thickness()
 	
 	if PlayerStats.soap_amount <= 0.0:
+		self.velocity.x = 0.0
+		self.velocity.z = 0.0
 		self.current_state = self.States.DEAD
-		PlayerStats.emit_signal("player_died")
+		self.animation_player.play("Death_Ground")
 
 func get_player_input(max_velo, accel, delta):
 	self.current_dir.x = -Input.get_action_strength("Left") + Input.get_action_strength("Right")
@@ -280,6 +292,7 @@ func ground_move(delta):
 
 func start_jump():
 	self.current_state = self.States.JUMPING
+	PlayerStats.soap_amount -= PlayerStats.JumpCost
 	self.start_angle_jump = fposmod(self.model.rotation.y - PI, 2*PI)
 	if not Input.is_action_pressed("Dash"):
 		self.animation_player.play("Jump")
@@ -341,3 +354,36 @@ func fall_move(delta):
 	if self.is_on_floor():
 		self.animation_player.play("IdleMove")
 		self.current_state = self.States.GROUNDED
+
+
+func dead_move(delta):
+	self.soap_bubbles.emitting = false
+	self.velocity += Vector3(0, self.Gravity, 0) * delta
+	self.move_and_slide()
+	self.head_marker.position = lerp(self.head_marker.position, 
+		self.DeadHeadPos, 2.0*delta)
+	self.control_cam(delta)
+	
+	if not self.animation_player.is_playing():
+		PlayerStats.emit_signal("player_died")
+
+
+func grind_move(delta):
+	self.soap_bubbles.emitting = false
+	self.velocity.y = self.Gravity * delta
+	
+	self.velocity *= (1.0 + 1.*delta)
+	self.move_and_slide()
+	
+	var grind_angle = Vector2(self.velocity.x, self.velocity.z).angle()
+	self.model.rotation.y = grind_angle
+	
+	self.velocity = self.velocity.move_toward(Vector3.ZERO, self.GrindFriction * delta)
+	
+	self.control_cam(delta)
+	self.tilt_model(Vector3.UP)
+	
+	if Input.is_action_just_pressed("Jump"):
+		self.start_jump()
+		self.velocity += self.JumpStrength * self.current_floor_normal
+		self.global_position += 0.1 * self.current_floor_normal
