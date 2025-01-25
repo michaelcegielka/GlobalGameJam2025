@@ -16,4 +16,4 @@ func show_pop_up():
 	if not self.animation_player.is_playing():
 		self.label_3d.text = self.StringList[self.rand_idx]
 		self.animation_player.play("PopUp")
-		self.rand_idx = randi_range(0, len(self.StringList))
+		self.rand_idx = randi_range(0, len(self.StringList)-1)

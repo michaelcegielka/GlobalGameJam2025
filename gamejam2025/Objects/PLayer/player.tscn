@@ -31,7 +31,6 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.951654, 0.44154, 0.58075, 1)
 roughness = 0.46
-normal_enabled = true
 normal_texture = ExtResource("5_qn4l7")
 clearcoat_enabled = true
 clearcoat_roughness = 0.0
