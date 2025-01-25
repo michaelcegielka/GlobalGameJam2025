@@ -27,6 +27,7 @@ func _physics_process(delta):
 		self.current_dir = -1
 	elif -self.start_y + self.global_position.y < self.MovementRange:
 		self.current_dir = 1
+	
 	if not self.ray_cast_3d.is_colliding():
 		self.start_y -= 4.0*delta
 

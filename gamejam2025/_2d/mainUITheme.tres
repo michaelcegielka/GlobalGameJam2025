@@ -1,15 +1,30 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://fybj3w55sxgm"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bt3hpldff7hr1"]
 
 [ext_resource type="FontFile" uid="uid://b8ittsevfm2xi" path="res://_2d/RubikBubbles-Regular.ttf" id="1_klyll"]
+[ext_resource type="Texture2D" uid="uid://c3fjab5ch8m7l" path="res://_2d/button_focus.png" id="1_wnaaf"]
 [ext_resource type="Texture2D" uid="uid://c6dl76wp55pjf" path="res://_2d/button.png" id="1_xcewp"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iw3no"]
+texture = ExtResource("1_wnaaf")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5cqyv"]
+texture = ExtResource("1_wnaaf")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2yq45"]
 texture = ExtResource("1_xcewp")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3xm56"]
+texture = ExtResource("1_wnaaf")
+
 [resource]
 default_font = ExtResource("1_klyll")
 default_font_size = 46
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
 Button/colors/font_outline_color = Color(0, 0.322667, 0.44, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
 Button/constants/outline_size = 17
 Button/font_sizes/font_size = 32
+Button/styles/focus = SubResource("StyleBoxTexture_iw3no")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_5cqyv")
 Button/styles/normal = SubResource("StyleBoxTexture_2yq45")
+Button/styles/pressed = SubResource("StyleBoxTexture_3xm56")

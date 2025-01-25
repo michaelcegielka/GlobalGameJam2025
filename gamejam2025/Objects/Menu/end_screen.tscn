@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5mf2pryfd5ac"]
+[gd_scene load_steps=3 format=3 uid="uid://b5mf2pryfd5ac"]
 
 [ext_resource type="Script" path="res://Objects/Menu/end_screen.gd" id="1_yfdds"]
+[ext_resource type="Theme" uid="uid://bt3hpldff7hr1" path="res://_2d/mainUITheme.tres" id="2_wvdu7"]
 
 [node name="EndScreen" type="CanvasLayer"]
 layer = 10
@@ -12,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_wvdu7")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
@@ -41,7 +43,7 @@ layout_mode = 2
 
 [node name="TimeLabelCurrent" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-text = "Time: "
+text = "Time:"
 horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]

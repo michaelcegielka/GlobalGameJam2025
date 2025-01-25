@@ -8,7 +8,7 @@ const YOffSet = 0.2 # for jump when land on top
 func _on_player_detect_body_entered(body : Player):
 	self.animation_player.play("HitTop")
 	if body.global_position.y > self.global_position.y + YOffSet:
-		body.velocity.y += 2.0*body.JumpStrength
+		body.velocity.y += 3.0*body.JumpStrength
 		body.current_state = body.States.JUMPING
 	else:
 		var dir = -self.global_position.direction_to(body.global_position)

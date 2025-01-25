@@ -24,6 +24,8 @@ var highscore_time := 0.0
 var current_time := 0.0
 var current_score := 0.0
 
+var sound_on := true
+
 @warning_ignore("unused_signal")
 signal got_soap
 @warning_ignore("unused_signal")

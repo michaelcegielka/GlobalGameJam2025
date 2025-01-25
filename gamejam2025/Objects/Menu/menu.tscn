@@ -1,89 +1,116 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgchpewibxajk"]
+[gd_scene load_steps=5 format=3 uid="uid://cgchpewibxajk"]
 
 [ext_resource type="Script" path="res://Objects/Menu/menu.gd" id="1_i5wli"]
 [ext_resource type="Texture2D" uid="uid://cjrt2d6thc7ks" path="res://_2d/DUCKSLAYER.png" id="2_3ssd1"]
-[ext_resource type="Theme" uid="uid://fybj3w55sxgm" path="res://_2d/mainUITheme.tres" id="3_bfh3y"]
+[ext_resource type="Theme" uid="uid://bt3hpldff7hr1" path="res://_2d/mainUITheme.tres" id="3_bfh3y"]
+[ext_resource type="Texture2D" uid="uid://2sxre3tp2oo8" path="res://_2d/startscreeen.png" id="4_n3ebw"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_bfh3y")
 script = ExtResource("1_i5wli")
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("4_n3ebw")
+expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = -70
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer2"]
-custom_minimum_size = Vector2(800, 350)
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("2_3ssd1")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/HBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer2/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
+texture = ExtResource("2_3ssd1")
+expand_mode = 2
 
-[node name="Start Game" type="Button" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(250, 50)
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+
+[node name="Start Game" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Exit")
 focus_neighbor_bottom = NodePath("../Options")
-theme = ExtResource("3_bfh3y")
+mouse_filter = 2
+button_mask = 0
 text = "Start Game"
 
-[node name="Options" type="Button" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
+[node name="Options" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Start Game")
 focus_neighbor_bottom = NodePath("../Exit")
-theme = ExtResource("3_bfh3y")
-text = "Options"
+mouse_filter = 2
+button_mask = 0
+text = "Sound: On"
 
-[node name="Exit" type="Button" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
+[node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Start Game")
-theme = ExtResource("3_bfh3y")
+mouse_filter = 2
+button_mask = 0
 text = "Exit"
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer2/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(0, 50)
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(0, 35)
 layout_mode = 2
-size_flags_vertical = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer2/HBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer2/Start Game" to="." method="_on_start_game_pressed"]
-[connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer2/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer2/HBoxContainer/VBoxContainer2/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/Start Game" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/Exit" to="." method="_on_exit_pressed"]
