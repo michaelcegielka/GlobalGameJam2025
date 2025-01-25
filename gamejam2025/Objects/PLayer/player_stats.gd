@@ -2,7 +2,7 @@ extends Node
 
 const DashCost = 2.0
 const WalkCost = 0.2
-const JumpCost = 40.0
+const JumpCost = 25.0
 
 const HitCost = 150.0
 const HitKnockBack = 25.0

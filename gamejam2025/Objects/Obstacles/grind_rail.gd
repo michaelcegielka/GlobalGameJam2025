@@ -28,7 +28,7 @@ func _on_grind_area_body_entered(_body):
 		if abs(amount_z) > abs(amount_x):
 			self.is_grinding = true
 			var non_y_speed = Vector2(self.player.velocity.x, self.player.velocity.z).length()
-			self.player.velocity = sign(amount_z) * non_y_speed * grind_dir
+			self.player.velocity = sign(amount_z) * max(non_y_speed, 2.0) * grind_dir
 			self.player.current_state = self.player.States.GRINDING
 			# set position onto rail:
 			var local_pos = self.player.global_position - self.path_3d.global_position

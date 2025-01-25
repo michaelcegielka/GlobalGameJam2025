@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Objects/Collectables/soap_dash_collect.gd" id="1_788em"]
 [ext_resource type="Texture2D" uid="uid://cws0ylpu3va81" path="res://_3d/Soap_Normal.png" id="2_n15cb"]
-[ext_resource type="PackedScene" uid="uid://cyxoalk5l2y28" path="res://_3d/soap.glb" id="3_1p3gi"]
+[ext_resource type="PackedScene" uid="uid://csjt0i1cyfbr4" path="res://_3d/soap.glb" id="3_1p3gi"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_whlp3"]
-radius = 1.92599
+radius = 2.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efpsu"]
 diffuse_mode = 3

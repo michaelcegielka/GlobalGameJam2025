@@ -17,7 +17,7 @@ specular_mode = 1
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_o3s6l"]
 height = 40.6718
-radius = 1.5
+radius = 2.0
 
 [sub_resource type="Curve3D" id="Curve3D_0ha5o"]
 _data = {
