@@ -72,6 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42137, 8.29384)
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D/Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 current = true
+fov = 110.0
 
 [node name="Model" type="Node3D" parent="."]
 

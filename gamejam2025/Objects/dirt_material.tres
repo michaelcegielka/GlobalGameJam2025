@@ -1,9 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c6apf7d3pysb4"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c6apf7d3pysb4"]
 
 [ext_resource type="Shader" path="res://Objects/dirt.gdshader" id="1_282o2"]
-[ext_resource type="Texture2D" uid="uid://cws0ylpu3va81" path="res://_3d/Soap_Normal.png" id="2_2ryuu"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_282o2")
-shader_parameter/dirt_texture = ExtResource("2_2ryuu")

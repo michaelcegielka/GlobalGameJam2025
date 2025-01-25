@@ -32,8 +32,8 @@ const MinCamAngle = 0.5 # min angle for camera up
 const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
 
-const MinArmDistance = 8.0
-const MaxArmDistance = 16.0
+const MinArmDistance = 3.0
+const MaxArmDistance = 4.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
 ### Controll sutff
@@ -101,12 +101,14 @@ func control_cam(delta):
 		
 	var horizontal_velocity = Vector3(self.velocity.x, 0, self.velocity.z)
 	var velocity_scale = (horizontal_velocity.length() - self.UnderVelocityAngle) / self.VelocityScale
-	var distance_step = (self.MaxArmDistance - self.MinArmDistance) / 3.0
+	var distance_step = (self.MaxArmDistance - self.MinArmDistance) / 5.0
 	self.spring_arm_3d.spring_length = clamp(
 		self.MinArmDistance + distance_step * velocity_scale, 
 		self.MinArmDistance, self.MaxArmDistance
 	)
 
+	self.camera_3d.fov = 90 + velocity_scale * 7	
+	
 #################################################################
 ### Model and visual stuff
 func tilt_model(up_vector):
