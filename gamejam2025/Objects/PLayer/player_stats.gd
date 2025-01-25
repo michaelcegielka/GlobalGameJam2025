@@ -10,7 +10,7 @@ const HitKnockBack = 25.0
 const MaxDashMeter = 1000.0
 const SoapIncrease = 100.0
 
-const Trick360AirSoap = 6.0 
+const Trick360AirSoap = 8.0 
 
 var soap_amount := MaxDashMeter:
 	set(value):
@@ -32,6 +32,8 @@ signal got_soap
 signal player_died
 @warning_ignore("unused_signal")
 signal compute_score
+@warning_ignore("unused_signal")
+signal show_pop_up
 
 func reset():
 	self.soap_amount = MaxDashMeter
