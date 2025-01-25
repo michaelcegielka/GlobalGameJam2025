@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://s0njjrds4vfx" path="res://Objects/Enemies/enemy.tscn" id="8_oku5e"]
 [ext_resource type="PackedScene" uid="uid://c7ab4bgojvvws" path="res://Objects/Enemies/drone_duck.tscn" id="9_3o82p"]
 [ext_resource type="PackedScene" uid="uid://dettanh8g3s76" path="res://Objects/Bathtub/bathtub.tscn" id="9_m7x11"]
-[ext_resource type="PackedScene" uid="uid://chfwpm7hb8edl" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
+[ext_resource type="PackedScene" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
 
 [sub_resource type="Animation" id="Animation_4yj2r"]
 resource_name = "FadeBlackIn"
