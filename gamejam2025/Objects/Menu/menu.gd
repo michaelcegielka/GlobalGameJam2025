@@ -1,7 +1,6 @@
 extends Control
 
-@onready var start_game = $"MarginContainer/VBoxContainer/VBoxContainer/Start Game"
-
+@onready var start_game = $"VBoxContainer2/HBoxContainer/VBoxContainer2/Start Game"
 
 
 func _ready():
