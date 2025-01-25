@@ -1,7 +1,6 @@
 extends Node3D
 
 @export var DuckScene : PackedScene
-@export var player : Player
 
 const SpawnRange = 20.0
 
@@ -13,7 +12,3 @@ func spawn_ducks(player, idx):
 		new_duck.set_player(player)
 		new_duck.global_position.x += randf_range(-SpawnRange, SpawnRange)
 		new_duck.global_position.z += randf_range(-SpawnRange, SpawnRange)
-
-
-func _on_timer_timeout():
-	self.spawn_ducks(self.player, 1)

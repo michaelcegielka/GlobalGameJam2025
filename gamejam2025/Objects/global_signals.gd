@@ -10,3 +10,5 @@ signal add_enemy
 signal add_collectable
 @warning_ignore("unused_signal")
 signal reset_bathub
+@warning_ignore("unused_signal")
+signal put_dirt_local

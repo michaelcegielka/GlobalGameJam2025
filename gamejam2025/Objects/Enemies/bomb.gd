@@ -11,4 +11,5 @@ func _physics_process(_delta):
 		var explo = self.ExplosionParticle.instantiate()
 		GlobalSignals.emit_signal("add_particle", explo)
 		explo.global_position = self.global_position
+		GlobalSignals.emit_signal("put_dirt_local", self.global_position)
 		self.queue_free()

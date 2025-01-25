@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://s0njjrds4vfx" path="res://Objects/Enemies/enemy.tscn" id="8_oku5e"]
 [ext_resource type="PackedScene" uid="uid://c7ab4bgojvvws" path="res://Objects/Enemies/drone_duck.tscn" id="9_3o82p"]
 [ext_resource type="PackedScene" uid="uid://dettanh8g3s76" path="res://Objects/Bathtub/bathtub.tscn" id="9_m7x11"]
-[ext_resource type="PackedScene" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
+[ext_resource type="PackedScene" uid="uid://chfwpm7hb8edl" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
 
 [sub_resource type="Animation" id="Animation_4yj2r"]
 resource_name = "FadeBlackIn"
@@ -80,7 +80,7 @@ _data = {
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n0aft"]
 sky_top_color = Color(0.149387, 0.466179, 0.722176, 1)
 sky_horizon_color = Color(0.929568, 0.802664, 0.908861, 1)
-ground_bottom_color = Color(0.55542, 0.424204, 0.142778, 1)
+ground_bottom_color = Color(0.582921, 0.777612, 0.985227, 1)
 
 [sub_resource type="Sky" id="Sky_73wsh"]
 sky_material = SubResource("ProceduralSkyMaterial_n0aft")
@@ -151,47 +151,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80773, 9.15002, 93.1333)
 
 [node name="Spawner" type="Node3D" parent="."]
 
-[node name="DuckSpawner" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.9425, 69.2024, 168.97)
 DuckScene = ExtResource("8_oku5e")
-player = NodePath("../../Player")
 
-[node name="DuckSpawner2" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner2" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.7133, 69.2024, 174.627)
 DuckScene = ExtResource("8_oku5e")
-player = NodePath("../../Player")
 
-[node name="DuckSpawner3" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner3" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.0941, 69.2024, -178.001)
 DuckScene = ExtResource("8_oku5e")
-player = NodePath("../../Player")
 
-[node name="DuckSpawner4" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner4" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.03, 69.2024, -179.698)
 DuckScene = ExtResource("8_oku5e")
-player = NodePath("../../Player")
 
-[node name="DuckSpawner5" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner5" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, -97.3458)
 DuckScene = ExtResource("8_oku5e")
-player = NodePath("../../Player")
 
-[node name="DuckSpawner6" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner6" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, -116.441)
 DuckScene = ExtResource("9_3o82p")
-player = NodePath("../../Player")
 
-[node name="DuckSpawner7" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner7" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, 114.891)
 DuckScene = ExtResource("9_3o82p")
-player = NodePath("../../Player")
 
-[node name="DuckSpawner8" parent="Spawner" node_paths=PackedStringArray("player") instance=ExtResource("11_2oa1m")]
+[node name="DuckSpawner8" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 163.868, 69.2024, 137.319)
 DuckScene = ExtResource("9_3o82p")
-player = NodePath("../../Player")
 
 [node name="FinalCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 280, 0)
 
 [node name="Ground" parent="." instance=ExtResource("9_m7x11")]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
