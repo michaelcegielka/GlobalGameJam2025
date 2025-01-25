@@ -1,21 +1,19 @@
 extends MeshInstance3D
 
-@export var player: CharacterBody3D
-
 var mask_image: Image
 var mask_texture: ImageTexture
-@export var default_mask_path: String = "res://Objects/Bathtub/bath_mask.png"
+var player : Player
+
 func _ready():
+	self.player = self.get_tree().get_first_node_in_group("Player")
 	
-	if !player:
-		push_error("Player not assigned!")
-		return
-	
-	mask_image = Image.load_from_file(default_mask_path)
+	var width = 2048
+	var height = 2048
+	mask_image = Image.create(width, height, false, Image.FORMAT_RGBA8)
+	mask_image.fill(Color(1, 1, 1, 1))
 	mask_texture = ImageTexture.create_from_image(mask_image)
 
 	material_overlay.set("shader_param/mask_texture", mask_texture)
-
 
 func _process(delta):
 	if player.current_state == player.States.GROUNDED:
@@ -24,7 +22,7 @@ func _process(delta):
 
 func erase_dirt(position: Vector3):
 	var uv_position = world_to_texture_coords(position)
-	var radius = 8
+	var radius = 5
 	var radius_sq = radius * radius
 	
 	for x in range(-radius, radius):
@@ -40,8 +38,12 @@ func world_to_texture_coords(world_position: Vector3) -> Vector2:
 	var mesh_scale = global_transform.basis.get_scale()
 	var local_position = to_local(world_position) / mesh_scale
 	
-	var uv_x = (local_position.x / 400.0) + 0.504
-	var uv_y = (local_position.z / 400.0) + 0.497	
+	var uv_x = (local_position.x / 450.0 * 0.6) + 0.3035
+	var uv_y = (local_position.z / 450.0 * 0.6) + 0.6965
+	
+	print(uv_x)
+	print(uv_y)
+	
 	
 	uv_x *= mask_image.get_width()
 	uv_y *= mask_image.get_height()

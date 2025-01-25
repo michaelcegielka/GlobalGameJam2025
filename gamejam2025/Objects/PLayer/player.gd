@@ -108,7 +108,7 @@ func control_cam(delta):
 	)
 
 	self.camera_3d.fov = 90 + velocity_scale * 7	
-	
+
 #################################################################
 ### Model and visual stuff
 func tilt_model(up_vector):
