@@ -126,26 +126,36 @@ func control_cam(delta):
 ### Model and visual stuff
 func tilt_model(up_vector):
 	var damping_factor = 0.1
+	var target_up
 	
-	match self.current_state:
-		States.JUMPING:
-			damping_factor = 0.05
-		States.FALLING:
-			damping_factor = 0.1
-		States.GROUNDED:
-			damping_factor = 0.2
+	if self.current_state == States.GROUNDED:
+		var input_direction = Input.get_action_strength("Right") - Input.get_action_strength("Left")
+		
+		var horizontal_velocity = Vector3(self.velocity.x, 0, self.velocity.z)
+		var velocity_scale = clamp(horizontal_velocity.length() / self.MaxVelocity, 0, 1)
+		
+		var tilt_direction_local = Vector3.LEFT * input_direction
+		
+		var player_rotation = self.model.transform.basis
+		var tilt_direction_global = player_rotation * tilt_direction_local
+		
+		var tilt_amount = velocity_scale * 0.65 
+		var target_tilt = tilt_direction_global * tilt_amount
+		
+		target_up = (up_vector + target_tilt).normalized()
+	else:
+		target_up = up_vector
+		damping_factor = 0.2
 	
 	var current_up = self.model.transform.basis.y
-	var target_up = current_up.lerp(up_vector, damping_factor).normalized()
+	var new_up = current_up.lerp(target_up, damping_factor).normalized()
 	
-	var rotation_axis = current_up.cross(target_up).normalized()
-	var rotation_angle = current_up.angle_to(target_up)
+	var rotation_axis = current_up.cross(new_up).normalized()
+	var rotation_angle = current_up.angle_to(new_up)
 	
 	if rotation_axis.length() > 0 and not is_nan(rotation_angle):
 		var new_rotation = Basis(rotation_axis.normalized(), rotation_angle)
 		self.model.transform.basis = new_rotation * self.model.transform.basis
-
-
 
 func rot_y_model(delta, angle_accel):
 	### Rotate y so model looks into walk direction:

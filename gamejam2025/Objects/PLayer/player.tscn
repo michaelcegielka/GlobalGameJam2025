@@ -102,19 +102,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28, 0)
 transform = Transform3D(-1.1, 0, -1.66095e-07, 0, 1.1, 0, 1.66095e-07, 0, -1.1, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Model/player/Player" index="0"]
-bones/2/position = Vector3(0.105056, 1.7379, 0.44075)
 bones/2/rotation = Quaternion(0.99732, 8.72142e-09, 1.1889e-07, 0.0731602)
-bones/3/position = Vector3(2.89594e-14, 2.96454, 0.533789)
-bones/3/rotation = Quaternion(0.829433, -0.0870746, 0.21762, 0.50705)
+bones/3/rotation = Quaternion(0.987794, 1.8569e-08, 1.17754e-07, 0.155768)
 bones/3/scale = Vector3(1, 1, 1)
-bones/4/rotation = Quaternion(0.0170648, 0.698927, -0.112368, 0.706104)
-bones/5/position = Vector3(1.49401e-23, 0, 1.58713)
-bones/5/rotation = Quaternion(-0.707107, 2.46835e-17, 2.46835e-17, 0.707107)
 bones/5/scale = Vector3(1, 1, 1)
-bones/6/position = Vector3(-3.85315e-08, 1.7379, -0.44075)
 bones/6/rotation = Quaternion(0.99732, 2.76267e-09, -1.24849e-07, -0.0731602)
-bones/7/position = Vector3(-0.0488272, 3.00461, -0.565802)
-bones/7/rotation = Quaternion(0.904429, 0.00262209, 0.317892, -0.28451)
+bones/7/rotation = Quaternion(0.987794, 6.80623e-09, -1.29517e-07, -0.155768)
 bones/7/scale = Vector3(1, 1, 1)
 
 [node name="BubbleBoy" parent="Model/player/Player/Skeleton3D" index="0"]
