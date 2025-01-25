@@ -59,6 +59,7 @@ var prev_angle := 0.0
 @onready var model = $Model
 @onready var head_marker = $Model/HeadMarker
 @onready var soap_bubbles : GPUParticles3D = $Model/SoapBubbles
+@onready var animation_player : AnimationPlayer = $Model/player/AnimationPlayer
 
 
 
@@ -184,6 +185,7 @@ func get_player_input(max_velo, accel, delta):
 
 func check_dash(delta):
 	if Input.is_action_pressed("Dash") and PlayerStats.soap_amount > 0:
+		self.animation_player.play("Boost_active")
 		PlayerStats.soap_amount -= PlayerStats.DashCost
 		self.dash_shape.set_deferred("disabled", false)
 		var y_velo = self.velocity.y
@@ -195,6 +197,7 @@ func check_dash(delta):
 		self.dash_shape.set_deferred("disabled", true)
 
 func ground_move(delta):
+	self.animation_player.play("IdleMove")
 	self.soap_bubbles.emitting = (self.velocity.length() > 3)
 	self.get_player_input(self.MaxVelocity, self.Acceleration, delta)
 	PlayerStats.soap_amount -= PlayerStats.WalkCost
@@ -220,8 +223,7 @@ func ground_move(delta):
 	self.tilt_model(self.get_floor_normal())
 	
 	if Input.is_action_just_pressed("Jump"):
-		self.current_state = self.States.JUMPING
-		self.start_angle_jump = fposmod(self.model.rotation.y - PI, 2*PI)
+		self.start_jump()
 		if self.get_floor_angle() <= PI/8.0:
 			self.velocity += 2.0*self.JumpStrength * self.current_floor_normal
 		else:
@@ -231,6 +233,13 @@ func ground_move(delta):
 	elif not self.is_on_floor():
 		self.coyote_timer.start(self.CoyoteTime)
 		self.current_state = self.States.FALLING
+
+
+func start_jump():
+	self.current_state = self.States.JUMPING
+	self.start_angle_jump = fposmod(self.model.rotation.y - PI, 2*PI)
+	if not Input.is_action_pressed("Dash"):
+		self.animation_player.play("Jump")
 
 
 func jump_move(delta):
@@ -282,8 +291,7 @@ func fall_move(delta):
 	self.tilt_model(self.current_floor_normal)
 	
 	if Input.is_action_just_pressed("Jump") and self.coyote_timer.time_left:
-		self.start_angle_jump = fposmod(self.model.rotation.y - PI, 2*PI)
-		self.current_state = self.States.JUMPING
+		self.start_jump()
 		self.velocity -= self.JumpStrength * Vector3.UP
 		self.global_position += 0.1 * self.current_floor_normal
 	if self.is_on_floor():
