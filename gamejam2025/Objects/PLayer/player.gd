@@ -32,7 +32,7 @@ const MinCamAngle = 0.5 # min angle for camera up
 const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
 
-const MinArmDistance = 5.0
+const MinArmDistance = 8.0
 const MaxArmDistance = 6.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
@@ -107,7 +107,7 @@ func control_cam(delta):
 		self.MinArmDistance, self.MaxArmDistance
 	)
 
-	self.camera_3d.fov = 90 + velocity_scale * 7	
+	self.camera_3d.fov = 90 + velocity_scale * 9	
 
 #################################################################
 ### Model and visual stuff
