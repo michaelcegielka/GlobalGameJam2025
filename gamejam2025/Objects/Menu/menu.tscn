@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgchpewibxajk"]
 
 [ext_resource type="Script" path="res://Objects/Menu/menu.gd" id="1_i5wli"]
-[ext_resource type="Texture2D" uid="uid://cgmleyts5u6q3" path="res://_2d/DUCKSLAYER.svg" id="2_o28br"]
+[ext_resource type="Texture2D" uid="uid://b7ylquwbsergm" path="res://_2d/DUCKSLAYER.svg" id="2_o28br"]
 
 [node name="Menu" type="Control"]
 layout_mode = 3

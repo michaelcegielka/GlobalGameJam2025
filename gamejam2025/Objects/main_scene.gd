@@ -14,6 +14,7 @@ var goal_rot : Vector3
 
 ### UI
 @onready var screen_animation_player : AnimationPlayer = $BlackScreen/ScreenAnimationPlayer
+@onready var end_screen_ui = $EndScreen
 
 
 var original_player_pos := Vector3.ZERO
@@ -27,7 +28,7 @@ func _ready():
 	GlobalSignals.connect("add_object", self.add_object)
 	GlobalSignals.connect("add_particle", self.add_particle)
 	PlayerStats.connect("player_died", self.end_screen)
-	
+	self.end_screen_ui.connect("restart_game", self.reset)
 	self.original_player_pos = self.player.global_position
 	
 	self.start_game()
@@ -46,9 +47,7 @@ func end_screen():
 	
 	self.screen_animation_player.play("FadeBlackOut")
 	await self.screen_animation_player.animation_finished
-	self.reset()
-	self.start_game()
-	
+	self.end_screen_ui.show_end_screen()
 
 
 func tween_cams(current_cam : Camera3D, new_cam : Camera3D, tween_time : float = 1.5):
@@ -106,3 +105,5 @@ func reset():
 	self.player.global_position = self.original_player_pos
 	PlayerStats.reset()
 	self.player.reset()
+	
+	self.start_game()
