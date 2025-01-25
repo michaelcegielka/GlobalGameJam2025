@@ -33,14 +33,14 @@ const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
 
 const MinArmDistance = 8.0
-const MaxArmDistance = 16.0
+const MaxArmDistance = 6.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
 ### Controll sutff
 var current_dir := Vector3.ZERO
 var current_floor_normal := Vector3.UP
 var current_state := States.FALLING
-
+var was_dashing_before := false
 ### Combo stuff
 var start_angle_jump := 0.0
 var prev_angle := 0.0
@@ -76,6 +76,7 @@ func reset():
 	self.model.rotation = Vector3.ZERO
 	self.current_dir = Vector3.ZERO
 	self.camera_3d.current = true
+	self.animation_player.play("IdleMove")
 
 #################################################################
 ### Camera
@@ -100,11 +101,13 @@ func control_cam(delta):
 		
 	var horizontal_velocity = Vector3(self.velocity.x, 0, self.velocity.z)
 	var velocity_scale = (horizontal_velocity.length() - self.UnderVelocityAngle) / self.VelocityScale
-	var distance_step = (self.MaxArmDistance - self.MinArmDistance) / 3.0
+	var distance_step = (self.MaxArmDistance - self.MinArmDistance) / 5.0
 	self.spring_arm_3d.spring_length = clamp(
 		self.MinArmDistance + distance_step * velocity_scale, 
 		self.MinArmDistance, self.MaxArmDistance
 	)
+
+	self.camera_3d.fov = 90 + velocity_scale * 9	
 
 #################################################################
 ### Model and visual stuff
@@ -126,7 +129,7 @@ func tilt_model(up_vector):
 	var rotation_angle = current_up.angle_to(target_up)
 	
 	if rotation_axis.length() > 0 and not is_nan(rotation_angle):
-		var new_rotation = Basis(rotation_axis, rotation_angle)
+		var new_rotation = Basis(rotation_axis.normalized(), rotation_angle)
 		self.model.transform.basis = new_rotation * self.model.transform.basis
 
 
@@ -184,8 +187,13 @@ func get_player_input(max_velo, accel, delta):
 
 
 func check_dash(delta):
-	if Input.is_action_pressed("Dash") and PlayerStats.soap_amount > 0:
-		self.animation_player.play("Boost_active")
+	if Input.is_action_pressed("Dash") and PlayerStats.soap_amount > 0 and not self.current_dir == Vector3.ZERO:
+		if not self.was_dashing_before:
+			self.animation_player.play("Boost_Start")
+			self.animation_player.queue("Boost_active")
+			self.was_dashing_before = true
+		elif len(self.animation_player.get_queue()) == 0:
+			self.animation_player.play("Boost_active")
 		PlayerStats.soap_amount -= PlayerStats.DashCost
 		self.dash_shape.set_deferred("disabled", false)
 		var y_velo = self.velocity.y
@@ -194,10 +202,12 @@ func check_dash(delta):
 			self.DashAcceleration*delta)
 		self.velocity.y = y_velo
 	else:
+		if self.was_dashing_before:
+			self.was_dashing_before = false
+			self.animation_player.play("Boost_end")
 		self.dash_shape.set_deferred("disabled", true)
 
 func ground_move(delta):
-	self.animation_player.play("IdleMove")
 	self.soap_bubbles.emitting = (self.velocity.length() > 3)
 	self.get_player_input(self.MaxVelocity, self.Acceleration, delta)
 	PlayerStats.soap_amount -= PlayerStats.WalkCost
@@ -264,6 +274,7 @@ func jump_move(delta):
 	self.tilt_model(self.current_floor_normal)
 	
 	if self.is_on_floor():
+		self.animation_player.play("IdleMove")
 		self.current_state = self.States.GROUNDED
 
 
@@ -295,4 +306,5 @@ func fall_move(delta):
 		self.velocity -= self.JumpStrength * Vector3.UP
 		self.global_position += 0.1 * self.current_floor_normal
 	if self.is_on_floor():
+		self.animation_player.play("IdleMove")
 		self.current_state = self.States.GROUNDED

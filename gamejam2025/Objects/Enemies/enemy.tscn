@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://s0njjrds4vfx"]
+[gd_scene load_steps=10 format=3 uid="uid://s0njjrds4vfx"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/enemy.gd" id="1_8gbia"]
 
@@ -7,7 +7,7 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.997844, 0.592995, 3.85046e-07, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_lj6j5"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gvm0k"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_stcqb"]
 
@@ -21,14 +21,21 @@ material = SubResource("StandardMaterial3D_agmpv")
 [sub_resource type="SphereShape3D" id="SphereShape3D_jcqlx"]
 radius = 4.86943
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_hxmr2"]
+radius = 2.40857
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w7er7"]
+radius = 3.51025
+
 [node name="EnemyBody" type="CharacterBody3D"]
 collision_layer = 4
+floor_max_angle = 1.39626
 script = ExtResource("1_8gbia")
 body_material = SubResource("StandardMaterial3D_a74n1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.201503, 0.084493)
-shape = SubResource("SphereShape3D_lj6j5")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00743, 0.084493)
+shape = SubResource("CapsuleShape3D_gvm0k")
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0.000124931, 2.39124, -0.00530195)
@@ -74,4 +81,22 @@ collision_mask = 48
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("SphereShape3D_jcqlx")
 
+[node name="HurtBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55565, 4.32755, -4.75712)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("SphereShape3D_hxmr2")
+
+[node name="HeadArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.04469, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HeadArea"]
+shape = SubResource("CylinderShape3D_w7er7")
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
+[connection signal="body_entered" from="HeadArea" to="." method="_on_head_area_body_entered"]

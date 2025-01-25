@@ -8,3 +8,5 @@ signal add_object
 signal add_enemy
 @warning_ignore("unused_signal")
 signal add_collectable
+@warning_ignore("unused_signal")
+signal reset_bathub

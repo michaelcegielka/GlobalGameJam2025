@@ -1,0 +1,108 @@
+[gd_scene load_steps=13 format=3 uid="uid://ore5g1k0lwj6"]
+
+[ext_resource type="Script" path="res://Objects/PLayer/player.gd" id="1_8ti7c"]
+[ext_resource type="ArrayMesh" uid="uid://cegvpmvkqh6bk" path="res://_3d/player.obj" id="2_yprfx"]
+[ext_resource type="Texture2D" uid="uid://cws0ylpu3va81" path="res://_3d/Soap_Normal.png" id="3_38n1w"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iext5"]
+radius = 0.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_df5h6"]
+albedo_color = Color(0.951654, 0.44154, 0.58075, 1)
+normal_enabled = true
+normal_texture = ExtResource("3_38n1w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3qbex"]
+transparency = 1
+albedo_color = Color(0.58811, 0.847723, 0.966488, 0.454902)
+roughness = 0.43
+emission_enabled = true
+emission = Color(0.209098, 0.573661, 0.780904, 1)
+rim_enabled = true
+rim_tint = 0.75
+clearcoat_enabled = true
+anisotropy_enabled = true
+anisotropy = 1.0
+subsurf_scatter_strength = 1.0
+subsurf_scatter_skin_mode = true
+
+[sub_resource type="Curve" id="Curve_n77u2"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0879121), -2.9359, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m5pmj"]
+curve = SubResource("Curve_n77u2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gdwjm"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 0.2, 0.5)
+gravity = Vector3(0, -0.5, 0)
+scale_curve = SubResource("CurveTexture_m5pmj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4asf5"]
+transparency = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.956863, 0.917647, 0.976471, 0.815686)
+
+[sub_resource type="SphereMesh" id="SphereMesh_w2vcv"]
+material = SubResource("StandardMaterial3D_4asf5")
+radius = 0.2
+height = 0.4
+radial_segments = 16
+rings = 16
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3uoyj"]
+height = 4.0
+radius = 1.25
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+floor_stop_on_slope = false
+script = ExtResource("1_8ti7c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_iext5")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 2.4, 0)
+spring_length = 8.0
+
+[node name="Node3D" type="Node3D" parent="SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.42137, 8.29384)
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+current = true
+fov = 110.0
+
+[node name="Model" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model"]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, -0.385731, 0)
+mesh = ExtResource("2_yprfx")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_df5h6")
+surface_material_override/1 = SubResource("StandardMaterial3D_3qbex")
+
+[node name="HeadMarker" type="Marker3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.61866, 0)
+
+[node name="SoapBubbles" type="GPUParticles3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.349121, -1.02141)
+amount = 512
+process_material = SubResource("ParticleProcessMaterial_gdwjm")
+draw_pass_1 = SubResource("SphereMesh_w2vcv")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="HurtBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12131, 1.56467)
+collision_layer = 16
+collision_mask = 0
+
+[node name="DashShape" type="CollisionShape3D" parent="HurtBox"]
+shape = SubResource("CylinderShape3D_3uoyj")
+disabled = true

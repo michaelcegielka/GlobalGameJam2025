@@ -1,8 +1,14 @@
 extends "res://Objects/Enemies/enemy.gd"
 
+const YMin = 15
+const YMax = 25
+const HeightRange = 2
+
 @onready var bomb_scene: PackedScene = preload("res://Objects/Enemies/bomb.tscn")
 
 const BombDropTime := 3
+
+var height_goal = 0.0
 
 @onready var bomb_timer = $BombTimer
 @onready var propeller: MeshInstance3D = $Model/Propeller
@@ -10,6 +16,8 @@ const BombDropTime := 3
 func _ready():
 	super._ready()
 	self.bomb_timer.start(self.BombDropTime)
+	self.rotation_speed = 1.5
+	self.height_goal = randf_range(self.YMin, self.YMax)
 	
 
 func _physics_process(delta):
@@ -23,12 +31,17 @@ func rotate_towards_player(delta):
 	var enemy_position = global_transform.origin
 	var direction = (player_position - enemy_position).normalized()
 	direction.y = 0
-	var target_basis = Basis.looking_at(direction, Vector3.UP)
-	transform.basis = transform.basis.slerp(target_basis, rotation_speed * delta)
+	self.current_dir = lerp(self.current_dir, direction, self.rotation_speed*delta)
+	self.current_dir = self.current_dir.normalized()
+	transform.basis = Basis.looking_at(self.current_dir, Vector3.UP)
 
 func move_forward(delta):
-	var move_direction = -transform.basis.z
-	velocity = move_direction * speed
+	self.velocity = self.current_dir * speed
+	if self.global_position.y < self.height_goal - self.HeightRange:
+		self.velocity.y += 20
+	elif self.global_position.y > self.height_goal + self.HeightRange:
+		self.velocity.y -= 20
+		
 	move_and_slide()
 
 func spin_propeller(delta):

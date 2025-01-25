@@ -44,9 +44,7 @@ func end_screen():
 	self.player.set_physics_process(false)
 	self.tween_cams(self.get_viewport().get_camera_3d(), self.final_cam, 2.0)
 	await self.cam_tween.finished
-	
-	self.screen_animation_player.play("FadeBlackOut")
-	await self.screen_animation_player.animation_finished
+	PlayerStats.emit_signal("compute_score")
 	self.end_screen_ui.show_end_screen()
 
 
@@ -101,9 +99,13 @@ func clear_all():
 		i.queue_free()
 
 func reset():
+	self.screen_animation_player.play("FadeBlackOut")
+	await self.screen_animation_player.animation_finished
+	
 	self.clear_all()
 	self.player.global_position = self.original_player_pos
 	PlayerStats.reset()
+	GlobalSignals.emit_signal("reset_bathub")
 	self.player.reset()
 	
 	self.start_game()

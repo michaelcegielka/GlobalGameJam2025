@@ -46,14 +46,20 @@ layout_mode = 2
 
 [node name="Start Game" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Options")
 text = "Start Game"
 
 [node name="Options" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Start Game")
+focus_neighbor_bottom = NodePath("../Exit")
 text = "Options"
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Options")
+focus_neighbor_bottom = NodePath("../Start Game")
 text = "Exit"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer/Start Game" to="." method="_on_start_game_pressed"]
