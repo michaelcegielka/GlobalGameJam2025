@@ -100,7 +100,7 @@ func clear_all():
 	for i in self.obstacles.get_children():
 		i.queue_free()
 	for i in self.collectables.get_children():
-		i.queue_free()
+		i.reset()
 
 func reset():
 	self.screen_animation_player.play("FadeBlackOut")
