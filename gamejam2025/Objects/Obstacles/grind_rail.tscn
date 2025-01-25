@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://pvkhv2ejruqy"]
+[gd_scene load_steps=8 format=3 uid="uid://pvkhv2ejruqy"]
 
 [ext_resource type="Script" path="res://Objects/Obstacles/grind_rail.gd" id="1_0okxh"]
 [ext_resource type="ArrayMesh" uid="uid://bv61dpo1p2f7t" path="res://Objects/Obstacles/Meshes/Toothbrush.obj" id="2_7bloy"]
@@ -19,11 +19,19 @@ specular_mode = 1
 height = 40.6718
 radius = 1.5
 
+[sub_resource type="Curve3D" id="Curve3D_0ha5o"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, -20, 0, 0, 0, 0, 0, 0, 0, 0, 20),
+"tilts": PackedFloat32Array(0, 0)
+}
+point_count = 2
+
 [node name="GrindRail" type="Node3D"]
 script = ExtResource("1_0okxh")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.15616, 0)
+collision_layer = 64
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
@@ -42,6 +50,10 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GrindArea"]
 shape = SubResource("CylinderShape3D_o3s6l")
+
+[node name="Path3D" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.73, 0)
+curve = SubResource("Curve3D_0ha5o")
 
 [connection signal="body_entered" from="GrindArea" to="." method="_on_grind_area_body_entered"]
 [connection signal="body_exited" from="GrindArea" to="." method="_on_grind_area_body_exited"]

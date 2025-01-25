@@ -369,7 +369,7 @@ func dead_move(delta):
 
 
 func grind_move(delta):
-	self.soap_bubbles.emitting = false
+	self.soap_bubbles.emitting = true
 	self.velocity.y = self.Gravity * delta
 	
 	self.velocity *= (1.0 + 1.*delta)

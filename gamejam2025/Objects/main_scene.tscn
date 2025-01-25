@@ -187,11 +187,11 @@ snap_to_ground = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -101.403, 9.15002, 9.77887)
 
 [node name="SoapDashCollect17" parent="Collectables" instance=ExtResource("5_5mqlw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -91.5913, 6.74091, 33.2838)
+transform = Transform3D(0.991712, 0, 0.128484, 0, 1, 0, -0.128484, 0, 0.991712, -76.8365, 5.45114, 46.3642)
 snap_to_ground = false
 
 [node name="SoapDashCollect18" parent="Collectables" instance=ExtResource("5_5mqlw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -73.2829, 6.74091, 60.5374)
+transform = Transform3D(0.991712, 0, 0.128484, 0, 1, 0, -0.128484, 0, 0.991712, -55.1782, 5.45114, 71.0395)
 snap_to_ground = false
 
 [node name="SoapDashCollect19" parent="Collectables" instance=ExtResource("5_5mqlw")]
@@ -281,7 +281,7 @@ transform = Transform3D(-0.936145, 0, 0.351613, 0, 1, 0, -0.351613, 0, -0.936145
 transform = Transform3D(0.936059, 0, -0.351842, 0, 1, 0, 0.351842, 0, 0.936059, 37.1529, -18.1402, 14.31)
 
 [node name="GrindRail" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
-transform = Transform3D(0.826973, 0, 0.562242, 0, 1, 0, -0.562242, 0, 0.826973, -82.7689, 3.09031, 46.3421)
+transform = Transform3D(0.74788, 0, 0.663835, 0, 1, 0, -0.663835, 0, 0.74788, -66.4095, 1.80053, 58.1806)
 player = NodePath("../../Player")
 
 [node name="GrindRail2" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
