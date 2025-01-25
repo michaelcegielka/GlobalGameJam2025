@@ -3,6 +3,9 @@ extends Node
 const DashCost = 1.0
 const WalkCost = 0.05
 
+const HitCost = 50.0
+const HitKnockBack = 100.0
+
 const MaxDashMeter = 1000.0
 const SoapIncrease = 200.0
 
@@ -29,3 +32,10 @@ func reset():
 	
 	self.highscore_time = max(self.highscore_time, self.current_time)
 	self.current_time = 0.0
+
+
+func trasform_time_to_string(time_in_seconds):
+	var minutes = self.current_time / 60 # seconds variable should be an int
+	var hours = self.current_time / 3600
+	var leftover_seconds = fmod(PlayerStats.current_time, 60.0)
+	return "( %02d:%02d:%02d )" % [hours, minutes, leftover_seconds]
