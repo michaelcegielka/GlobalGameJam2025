@@ -130,7 +130,7 @@ shadow_enabled = true
 directional_shadow_max_distance = 500.0
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_40nht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.2283, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.0291, 0)
 
 [node name="Collectables" type="Node3D" parent="."]
 
@@ -262,7 +262,7 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 280
 transform = Transform3D(0.957923, 0, 0.287026, 0, 1, 0, -0.287026, 0, 0.957923, 84.9485, 2.24305, -54.3213)
 
 [node name="Sponge4" parent="FixElements" instance=ExtResource("7_2pjk2")]
-transform = Transform3D(0.957923, 0, 0.287026, 0, 1, 0, -0.287026, 0, 0.957923, -46.4446, -15.9308, 3.60761)
+transform = Transform3D(0.957923, 0, 0.287026, 0, 1, 0, -0.287026, 0, 0.957923, -46.4446, -14.9439, 3.60761)
 
 [node name="Sponge2" parent="FixElements" instance=ExtResource("7_2pjk2")]
 transform = Transform3D(0.770012, 0, -0.638029, 0, 1, 0, 0.638029, 0, 0.770012, 68.653, 2.24305, -76.0788)
