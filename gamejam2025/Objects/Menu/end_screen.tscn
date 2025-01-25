@@ -13,6 +13,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("2_wvdu7")
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
@@ -34,24 +36,30 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
 text = "Score"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="TimeLabelCurrent" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Time:"
 horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="ScoreLabelCurrent" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Cleaned:"
 horizontal_alignment = 1
 
@@ -66,24 +74,30 @@ alignment = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 64
 text = "Highscore"
 horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="TimeLabelHighScore" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Time: "
 horizontal_alignment = 1
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="ScoreLabelHighScore" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+size_flags_vertical = 3
 text = "Cleaned:"
 horizontal_alignment = 1
 
@@ -92,7 +106,7 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
@@ -104,10 +118,14 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="RestartButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 focus_neighbor_left = NodePath("../QuitButton")
 focus_neighbor_right = NodePath("../QuitButton")
+mouse_filter = 2
+button_mask = 0
 text = "Restart"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
@@ -115,10 +133,14 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
 [node name="QuitButton" type="Button" parent="VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 0
 focus_neighbor_left = NodePath("../RestartButton")
 focus_neighbor_right = NodePath("../RestartButton")
+mouse_filter = 2
+button_mask = 0
 text = "Quit"
 
 [node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer/HBoxContainer2"]
