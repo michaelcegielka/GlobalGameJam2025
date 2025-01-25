@@ -8,7 +8,7 @@ specular_mode = 1
 albedo_color = Color(0.739064, 0.545543, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_olqk0"]
-size = Vector3(5, 2, 5)
+size = Vector3(8, 2, 8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8518"]
 diffuse_mode = 3
@@ -16,13 +16,13 @@ specular_mode = 1
 albedo_color = Color(0.19529, 0.346026, 0.104467, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sh18h"]
-size = Vector3(5, 0.2, 5)
+size = Vector3(8, 0.2, 8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_267yw"]
-size = Vector3(4.6, 0.2, 4.6)
+size = Vector3(7.5, 0.2, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w2s8n"]
-size = Vector3(5.4, 2.6, 5.4)
+size = Vector3(8.3, 2.6, 8.3)
 
 [sub_resource type="Animation" id="Animation_s3vtm"]
 resource_name = "HitTop"

@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://8pijhl33d36n"]
+
+[ext_resource type="Script" path="res://Objects/Obstacles/ramp.gd" id="1_3lpfc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_arad3"]
+albedo_color = Color(0.829914, 0.299971, 0.0128215, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hwaf7"]
+size = Vector3(1, 15, 7.623)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gnxpw"]
+height = 15.0
+radius = 0.841959
+
+[node name="Ramp" type="Node3D"]
+script = ExtResource("1_3lpfc")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.21899, -2.18527)
+material_override = SubResource("StandardMaterial3D_arad3")
+use_collision = true
+collision_mask = 0
+size = Vector3(15, 13.13, 13.366)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGBox3D"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 4.24555, 5.82528)
+operation = 2
+radius = 8.31133
+height = 16.0
+sides = 64
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGBox3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0.000453786, 0, -0.000453786, 1, -1.27526, 5.45577, -4.39553)
+operation = 2
+size = Vector3(18, 5.591, 5.808)
+
+[node name="Area1" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area1"]
+transform = Transform3D(-4.37114e-08, -1, 2.29591e-15, 0.925725, -4.04647e-08, -0.378196, 0.378196, -1.65315e-08, 0.925725, 0.0373993, 3.05428, 1.46198)
+shape = SubResource("BoxShape3D_hwaf7")
+
+[node name="Area2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.63634, -4.30413)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area2"]
+transform = Transform3D(-4.37114e-08, -1, 0, 0.853987, -3.7329e-08, -0.520294, 0.520294, -2.27428e-08, 0.853987, 0.0373993, 0.275951, -0.408305)
+shape = SubResource("CylinderShape3D_gnxpw")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="Area1" to="." method="_on_area_1_body_entered"]
+[connection signal="body_entered" from="Area2" to="." method="_on_area_2_body_entered"]

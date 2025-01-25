@@ -4,11 +4,11 @@ const DashCost = 2.0
 const WalkCost = 0.2
 const JumpCost = 40.0
 
-const HitCost = 100.0
-const HitKnockBack = 100.0
+const HitCost = 150.0
+const HitKnockBack = 25.0
 
 const MaxDashMeter = 1000.0
-const SoapIncrease = 200.0
+const SoapIncrease = 100.0
 
 const Trick360AirSoap = 6.0 
 

@@ -15,15 +15,19 @@ specular_mode = 1
 albedo_color = Color(0.614458, 0.357032, 5.77569e-07, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_stcqb"]
+radial_segments = 32
+rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6envy"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0, 0, 0, 1)
+albedo_color = Color(0.784225, 0, 0.229651, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_x7hi6"]
 radius = 0.1
 height = 0.4
+radial_segments = 32
+rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agmpv"]
 albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
