@@ -23,6 +23,7 @@ func show_pop_up():
 # bascially nur copy paste vom oberen. nicht so hübsch
 func show_combo_trick(trick, points):
 	if not self.animation_player.is_playing():
-		self.label_3d.text = trick + "  " + str(points)
+		var rand_string  = self.StringList[self.rand_idx]
+		self.label_3d.text = rand_string + "  " + str(points)
 		self.animation_player.play("PopUp")
 		self.rand_idx = randi_range(0, len(self.StringList)-1)
