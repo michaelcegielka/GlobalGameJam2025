@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgkyi8xtjgcy5"]
+
+[ext_resource type="AudioStream" uid="uid://bbm0vylfku3a3" path="res://Objects/InGame/DuckSlayer_MainTheme_FirstLoop.mp3" id="1_t5v44"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_t5v44")
+autoplay = true

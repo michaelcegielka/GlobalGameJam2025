@@ -1,7 +1,7 @@
 extends "res://Objects/Enemies/enemy.gd"
 
-const YMin = 15
-const YMax = 25
+const YMin = 14
+const YMax = 22
 const HeightRange = 2
 
 @onready var bomb_scene: PackedScene = preload("res://Objects/Enemies/bomb.tscn")
@@ -49,5 +49,5 @@ func spin_propeller(_delta):
 
 func _on_bomb_timer_timeout():
 	var bomb = bomb_scene.instantiate()
-	GlobalSignals.emit_signal("add_enemy", bomb)
+	GlobalSignals.emit_signal("add_object", bomb)
 	bomb.global_transform.origin = global_transform.origin

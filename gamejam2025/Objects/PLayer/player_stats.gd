@@ -1,6 +1,6 @@
 extends Node
 
-const DashCost = 2.0
+const DashCost = 120.0
 const WalkCost = 0.2
 const JumpCost = 25.0
 

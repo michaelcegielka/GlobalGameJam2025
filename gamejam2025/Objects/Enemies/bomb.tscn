@@ -1,14 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://115824458f55"]
+[gd_scene load_steps=6 format=3 uid="uid://115824458f55"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/bomb.gd" id="1_44a6y"]
+[ext_resource type="Material" uid="uid://bja38kpklr44l" path="res://Objects/Enemies/Materials/bomb_material.tres" id="2_0m38t"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_cp25f"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f0tvh"]
-albedo_color = Color(0.441781, 0.471467, 0.019532, 1)
-
 [sub_resource type="SphereMesh" id="SphereMesh_7loj8"]
-material = SubResource("StandardMaterial3D_f0tvh")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x6gok"]
+radius = 0.92895
 
 [node name="Bomb" type="CharacterBody3D"]
 collision_layer = 8
@@ -19,4 +19,14 @@ script = ExtResource("1_44a6y")
 shape = SubResource("SphereShape3D_cp25f")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_0m38t")
 mesh = SubResource("SphereMesh_7loj8")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_x6gok")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
