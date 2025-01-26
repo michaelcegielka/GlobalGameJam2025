@@ -78,6 +78,7 @@ func _on_hitbox_area_entered(_area):
 		new_bubble.global_position.z += randf_range(-5.0, 5.0)
 	
 	# explosion:
+	GlobalSignals.emit_signal("erase_dirt_local", self.global_position, 50)
 	var new_explo = self.ExploderParticles.instantiate()
 	GlobalSignals.emit_signal("add_particle", new_explo)
 	new_explo.global_position = self.global_position

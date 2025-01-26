@@ -19,17 +19,17 @@ func _ready():
 	PlayerStats.connect("compute_score", self.compute_clean_score)
 	GlobalSignals.connect("reset_bathub", self.reset)
 	GlobalSignals.connect("put_dirt_local", self.add_dirt)
+	GlobalSignals.connect("erase_dirt_local", self.erase_dirt)
 
 func _process(_delta):
 	if player.current_state == player.States.GROUNDED:
 		var player_position = player.global_position
-		erase_dirt(player_position)
+		erase_dirt(player_position, 8)
 		
 
 @warning_ignore("shadowed_variable_base_class")
-func erase_dirt(position: Vector3):
+func erase_dirt(position: Vector3, radius = 8):
 	var uv_position = world_to_texture_coords(position)
-	var radius = 8
 	var radius_sq = radius * radius
 	
 	for x in range(-radius, radius):
