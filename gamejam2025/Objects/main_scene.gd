@@ -1,5 +1,11 @@
 extends Node3D
 
+const IncreaseDifficultyTime = 120.0
+const IncreaseDifficultyTime2 = 300.0
+const DefaultEnemyLimit = 5
+const EnemyLimit1 = 9
+const EnemyLimit2 = 14
+
 @onready var player = $Player
 
 @onready var collectables = $Collectables
@@ -19,12 +25,13 @@ var goal_rot : Vector3
 
 
 ### Enemies
-const SpawnTime = 90.0
+@export var SpawnTime = 30.0
 @onready var spawn_timer = $SpawnTimer
 @onready var all_spawner := $Spawner
 
 var first_spawn := true
 var current_enemy_limit := 10.0
+var current_difficulty = 0
 
 var original_player_pos := Vector3.ZERO
 
@@ -125,10 +132,28 @@ func reset():
 
 func _on_spawn_timer_timeout():
 	self.spawn_timer.start(self.SpawnTime)
+	### comput difficulty
+	if PlayerStats.current_time > self.IncreaseDifficultyTime2:
+		self.current_difficulty = 2
+		print("diff, 2")
+		self.current_enemy_limit = self.EnemyLimit2
+	elif PlayerStats.current_time > self.IncreaseDifficultyTime:
+		self.current_difficulty = 1
+		self.current_enemy_limit = self.EnemyLimit1
+		print("diff, 1")
+	else:
+		self.current_difficulty = 0
+		self.current_enemy_limit = self.DefaultEnemyLimit
+	### Check if we need to show something or we have already enough enemies
 	if self.first_spawn:
 		self.first_spawn = false
 		self.duck_animation_player.play("ShowText")
-	elif len(self.enemies.get_children()) >= self.current_enemy_limit: return
 	
+	var current_enemies = self.enemies.get_child_count()
+
+	### spawn ducks
 	for spawner in self.all_spawner.get_children():
-		spawner.spawn_ducks(self.player, 1)
+		if current_enemies > self.current_enemy_limit:
+			return
+		current_enemies += 1
+		spawner.spawn_ducks(self.player, 1, randi_range(0, self.current_difficulty))

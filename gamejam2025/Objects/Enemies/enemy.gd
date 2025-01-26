@@ -4,14 +4,14 @@ const Bubble = preload("res://Objects/Obstacles/bubble.tscn")
 const ExploderParticles = preload("res://Objects/Enemies/Particles/duck_explode_particle.tscn")
 
 @onready var weapon_mesh: MeshInstance3D = $Model/WeaponMesh
-@onready var helmets = $Helmets
+@onready var helmets = $Model/Helmets
 
 
 var weapon_swing_speed = 100.0
 var weapon_swing_strength = 5.0
 
-var speed = 6.0
-var rotation_speed = 0.25
+@export var speed = 6.0
+@export var rotation_speed = 0.25
 var current_dir := Vector3.FORWARD
 
 @export var bubbles_on_death := 2
@@ -22,8 +22,8 @@ var surface_normal = Vector3.UP
 
 
 func _ready():
-	var rand_idx = randi_range(0, 2)
-	if rand_idx < 2:
+	var rand_idx = randi_range(0, self.helmets.get_child_count())
+	if rand_idx < self.helmets.get_child_count():
 		self.helmets.get_child(rand_idx).visible = true
 
 func set_player(player_unit):

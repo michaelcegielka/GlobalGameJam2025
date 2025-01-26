@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://s0njjrds4vfx"]
+[gd_scene load_steps=22 format=3 uid="uid://s0njjrds4vfx"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/enemy.gd" id="1_8gbia"]
 
@@ -30,11 +30,13 @@ radial_segments = 32
 rings = 16
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_agmpv"]
-albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
-metallic = 0.35
+albedo_color = Color(0.617455, 0.617455, 0.617455, 1)
+metallic = 0.5
+roughness = 0.0
+clearcoat_enabled = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_pespu"]
-material = SubResource("StandardMaterial3D_agmpv")
+top_radius = 0.05
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p0bpk"]
 diffuse_mode = 3
@@ -63,14 +65,34 @@ height = 0.5
 radial_segments = 32
 rings = 2
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4aymi"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cfkib"]
+size = Vector3(3.2, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lmans"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.213069, 0.366606, 0.806951, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rk0h6"]
+top_radius = 1.5
+bottom_radius = 1.5
+height = 0.3
+radial_segments = 16
+rings = 2
+
 [sub_resource type="SphereShape3D" id="SphereShape3D_jcqlx"]
-radius = 4.86943
+radius = 6.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hxmr2"]
 radius = 3.45281
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w7er7"]
-radius = 3.51025
+radius = 4.0
 
 [node name="EnemyBody" type="CharacterBody3D"]
 collision_layer = 4
@@ -83,7 +105,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00743, 0.084493)
 shape = SubResource("CapsuleShape3D_gvm0k")
 
 [node name="Model" type="Node3D" parent="."]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0.000124931, 2.39124, -0.00530195)
+transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0.000124931, 2.71591, -0.00530195)
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.239555, -7.20292e-05, -0.000127547, 0.000118814, 0.145174, -0.000131707, 0.000101525, 6.34717e-05, 0.301104, 0.000124506, 0.358196, -0.540942)
@@ -130,32 +152,52 @@ skeleton = NodePath("")
 [node name="WeaponMesh" type="MeshInstance3D" parent="Model"]
 transform = Transform3D(0.129604, -0.0394712, -0.0144622, 0.0168615, 0.0868509, 0.126931, -0.00915049, -0.399014, 0.029059, -0.391409, 0.169833, -0.347693)
 layers = 4
+material_override = SubResource("StandardMaterial3D_agmpv")
 mesh = SubResource("CylinderMesh_pespu")
 
-[node name="Helmets" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.26505, -1.76728)
+[node name="Helmets" type="Node3D" parent="Model"]
+transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, -1.56164e-05, 0.443643, -0.220247)
 
-[node name="Helm0" type="Node3D" parent="Helmets"]
-transform = Transform3D(1, 0, 0, 0, 0.937105, -0.349046, 0, 0.349046, 0.937105, 0, 0.846927, 0.0811085)
+[node name="Helm0" type="Node3D" parent="Model/Helmets"]
+transform = Transform3D(1, 0, 0, 0, 0.937105, -0.349046, 0, 0.349046, 0.937105, 0, 0.846928, 0.30068)
 visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Helmets/Helm0"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Helmets/Helm0"]
 material_override = SubResource("StandardMaterial3D_p0bpk")
 mesh = SubResource("CylinderMesh_c4rh6")
 
-[node name="Helm1" type="Node3D" parent="Helmets"]
+[node name="Helm1" type="Node3D" parent="Model/Helmets"]
 transform = Transform3D(1, 0, 0, 0, 0.937105, -0.349046, 0, 0.349046, 0.937105, 0, 0.846927, 0.0811085)
 visible = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Helmets/Helm1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Helmets/Helm1"]
 material_override = SubResource("StandardMaterial3D_cjbu4")
 mesh = SubResource("CylinderMesh_cdg4l")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Helmets/Helm1/MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, -8.9407e-08, 0, 8.9407e-08, 1, 0, -0.763503, -2.53795)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Helmets/Helm1/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -8.9407e-08, 0, 8.9407e-08, 1, 0, -0.818297, -2.68506)
 material_override = SubResource("StandardMaterial3D_cjbu4")
 mesh = SubResource("CylinderMesh_cxl82")
 skeleton = NodePath("../..")
+
+[node name="Helm2" type="Node3D" parent="Model/Helmets"]
+transform = Transform3D(1, 0, 0, 0, 0.937105, -0.349046, 0, 0.349046, 0.937105, 0, 0.846927, 0.0811085)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Helmets/Helm2"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0.351768, -0.131024)
+material_override = SubResource("StandardMaterial3D_4aymi")
+mesh = SubResource("BoxMesh_cfkib")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Helmets/Helm2/MeshInstance3D"]
+transform = Transform3D(-0.22504, -0.970738, 0.0838212, 0.974303, -0.22504, 0.00957155, 0.00957152, 0.0838212, 0.996436, 1.94266, -1.17747, 0.0580919)
+material_override = SubResource("StandardMaterial3D_lmans")
+mesh = SubResource("CylinderMesh_rk0h6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Model/Helmets/Helm2/MeshInstance3D"]
+transform = Transform3D(0.301455, -0.946846, -0.112284, 0.953322, 0.301455, 0.0173863, 0.0173863, -0.112284, 0.993525, -1.96651, -1.17747, 0.0580914)
+material_override = SubResource("StandardMaterial3D_lmans")
+mesh = SubResource("CylinderMesh_rk0h6")
 
 [node name="Hitbox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52272, 0)

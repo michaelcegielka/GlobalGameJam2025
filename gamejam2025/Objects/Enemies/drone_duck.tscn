@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7ab4bgojvvws"]
+[gd_scene load_steps=7 format=3 uid="uid://c7ab4bgojvvws"]
 
 [ext_resource type="PackedScene" uid="uid://s0njjrds4vfx" path="res://Objects/Enemies/enemy.tscn" id="1_b1buc"]
 [ext_resource type="Script" path="res://Objects/Enemies/drone_duck.gd" id="2_mu4bl"]
@@ -6,13 +6,21 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aahmm"]
 albedo_color = Color(0.286275, 0.85098, 0, 1)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_n5hum"]
+radius = 3.29128
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_po3b2"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_rpdkh"]
 
 [node name="DroneDuck" instance=ExtResource("1_b1buc")]
+collision_mask = 5
 script = ExtResource("2_mu4bl")
 body_material = SubResource("StandardMaterial3D_aahmm")
+
+[node name="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.91314, 0.084493)
+shape = SubResource("SphereShape3D_n5hum")
 
 [node name="MeshInstance3D3" parent="Model" index="3"]
 material_override = SubResource("StandardMaterial3D_aahmm")
@@ -36,7 +44,7 @@ visible = false
 
 [node name="BombTimer" type="Timer" parent="." index="3"]
 
-[node name="HurtBox" parent="." index="4"]
+[node name="HurtBox" parent="." index="5"]
 visible = false
 
 [node name="CollisionShape3D" parent="HurtBox" index="0"]

@@ -239,7 +239,7 @@ func check_dash(delta):
 			self.was_dashing_before = true
 		elif len(self.animation_player.get_queue()) == 0:
 			self.animation_player.play("Boost_active")
-		PlayerStats.soap_amount -= PlayerStats.DashCost
+		PlayerStats.soap_amount -= PlayerStats.DashCost * delta
 		self.dash_shape.set_deferred("disabled", false)
 		var y_velo = self.velocity.y
 		self.velocity = self.velocity.move_toward( 

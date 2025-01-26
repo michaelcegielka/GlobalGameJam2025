@@ -1,9 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://nemrte5bvjbj"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/explosion_particles.gd" id="1_u3p34"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vu5s1"]
-albedo_color = Color(0.441781, 0.471467, 0.019532, 1)
+[ext_resource type="Material" uid="uid://bja38kpklr44l" path="res://Objects/Enemies/Materials/bomb_material.tres" id="2_4gswh"]
 
 [sub_resource type="Curve" id="Curve_1yobv"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.752137, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -32,7 +30,7 @@ script = ExtResource("1_u3p34")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.790534, 0)
-material_override = SubResource("StandardMaterial3D_vu5s1")
+material_override = ExtResource("2_4gswh")
 emitting = false
 amount = 24
 lifetime = 2.0

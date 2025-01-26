@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://nrtfjmfxo36m"]
+[gd_scene load_steps=23 format=3 uid="uid://nrtfjmfxo36m"]
 
 [ext_resource type="Script" path="res://Objects/main_scene.gd" id="1_7is67"]
 [ext_resource type="PackedScene" uid="uid://ore5g1k0lwj6" path="res://Objects/PLayer/player.tscn" id="1_40nht"]
@@ -7,8 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://d03owsy0w3hxq" path="res://Objects/InGame/in_game_interface.tscn" id="4_xuby6"]
 [ext_resource type="PackedScene" uid="uid://dwobrhpbxngmq" path="res://Objects/Collectables/soap_dash_collect.tscn" id="5_5mqlw"]
 [ext_resource type="PackedScene" uid="uid://gu5yli2fhgw3" path="res://Objects/Obstacles/sponge.tscn" id="7_2pjk2"]
-[ext_resource type="PackedScene" uid="uid://s0njjrds4vfx" path="res://Objects/Enemies/enemy.tscn" id="8_oku5e"]
-[ext_resource type="PackedScene" uid="uid://c7ab4bgojvvws" path="res://Objects/Enemies/drone_duck.tscn" id="9_3o82p"]
 [ext_resource type="PackedScene" uid="uid://dettanh8g3s76" path="res://Objects/Bathtub/bathtub.tscn" id="9_m7x11"]
 [ext_resource type="PackedScene" uid="uid://chfwpm7hb8edl" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
 [ext_resource type="PackedScene" uid="uid://8pijhl33d36n" path="res://Objects/Obstacles/ramp.tscn" id="11_r4sra"]
@@ -362,35 +360,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80773, 9.15002, 100.047)
 
 [node name="DuckSpawner" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.9425, 69.2024, 168.97)
-DuckScene = ExtResource("8_oku5e")
 
 [node name="DuckSpawner2" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.7133, 69.2024, 174.627)
-DuckScene = ExtResource("8_oku5e")
 
 [node name="DuckSpawner3" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.0941, 69.2024, -178.001)
-DuckScene = ExtResource("8_oku5e")
 
 [node name="DuckSpawner4" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -84.03, 69.2024, -179.698)
-DuckScene = ExtResource("8_oku5e")
 
 [node name="DuckSpawner5" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, -97.3458)
-DuckScene = ExtResource("8_oku5e")
 
 [node name="DuckSpawner6" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, -116.441)
-DuckScene = ExtResource("9_3o82p")
 
 [node name="DuckSpawner7" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, 114.891)
-DuckScene = ExtResource("9_3o82p")
 
 [node name="DuckSpawner8" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 163.868, 69.2024, 137.319)
-DuckScene = ExtResource("9_3o82p")
 
 [node name="FinalCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 280, 0)
@@ -439,7 +429,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.5759, 8.64629, 88.0007)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.2138, 8.64629, 64.7522)
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 60.0
+wait_time = 30.0
 one_shot = true
 autostart = true
 
