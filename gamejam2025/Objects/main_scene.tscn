@@ -182,7 +182,6 @@ sky = SubResource("Sky_73wsh")
 reflected_light_source = 2
 tonemap_mode = 1
 tonemap_exposure = 1.2
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.005
 
 [node name="MainScene" type="Node3D"]
@@ -439,6 +438,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58.5759, 8.64629, 88.0007)
 
 [node name="Deo2" parent="FixElements" instance=ExtResource("13_pl8pg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.2138, 8.64629, 64.7522)
+
+[node name="Sponge5" parent="FixElements" instance=ExtResource("7_2pjk2")]
+transform = Transform3D(1.4919, 0, 0, 0, 1, 0, 0, 0, 1.4919, 0, -13.8897, 0)
+visible = false
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 60.0
