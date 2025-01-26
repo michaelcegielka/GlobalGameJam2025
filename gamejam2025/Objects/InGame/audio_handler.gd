@@ -6,8 +6,8 @@ extends Node3D
 @onready var sound_effect_player = $SoundEffects.get_children()
 @onready var sound_effect_player_everywhere = $AlwaysSoundEffects.get_children()
 
-const BgmVolume = 0.1
-const SoundVolume = 2.0
+const BgmVolume = -8.0
+const SoundVolume = -2.0
 
 var current_player_idx := 0
 var current_player_everywhere_idx := 0

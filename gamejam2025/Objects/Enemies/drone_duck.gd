@@ -51,3 +51,7 @@ func _on_bomb_timer_timeout():
 	var bomb = bomb_scene.instantiate()
 	GlobalSignals.emit_signal("add_object", bomb)
 	bomb.global_transform.origin = global_transform.origin
+
+
+func trigger_explosion(local_position: Vector3, radius: int):
+	pass

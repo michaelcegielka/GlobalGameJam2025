@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+const DUCK_DEATH = preload("res://Objects/Enemies/Sounds/duck_death.wav")
+const DUCK_QUACK = preload("res://Objects/Enemies/Sounds/duck_quack.wav")
+
 const Bubble = preload("res://Objects/Obstacles/bubble.tscn")
 const ExploderParticles = preload("res://Objects/Enemies/Particles/duck_explode_particle.tscn")
 
@@ -32,6 +35,8 @@ func set_player(player_unit):
 	self.current_dir.y = 0.0
 
 func _physics_process(delta):
+	if randf() < 0.01:
+		AudioHandler.add_sound_effect(self.DUCK_QUACK, self.global_position)
 	if player:
 		update_surface_normal()
 		rotate_towards_player(delta)
@@ -78,7 +83,8 @@ func _on_hitbox_area_entered(_area):
 		new_bubble.global_position.z += randf_range(-5.0, 5.0)
 	
 	# explosion:
-	trigger_explosion(self.global_position, 30)
+	trigger_explosion(self.global_position, 25)
+	AudioHandler.add_sound_effect(self.DUCK_DEATH, self.global_position)
 	var new_explo = self.ExploderParticles.instantiate()
 	GlobalSignals.emit_signal("add_particle", new_explo)
 	new_explo.global_position = self.global_position
