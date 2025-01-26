@@ -51,7 +51,6 @@ billboard = 1
 double_sided = false
 texture_filter = 0
 modulate = Color(0.358358, 0.795852, 0.975359, 1)
-text = "CLEAN"
 font = ExtResource("1_8lq4i")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
