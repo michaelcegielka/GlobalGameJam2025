@@ -12,13 +12,13 @@ const SoundVolume = -2.0
 var current_player_idx := 0
 var current_player_everywhere_idx := 0
 var current_bgm_player := 0
-var music_fade_time := 4.0
+var music_fade_time := 3.0
 var continuous_bgm_transition := false
 
 var background_tweener : Tween
 
-func add_sound_effect(sound, position, pitch=1.0, hear_dist=10, volume_shift=0.0):
-	self.sound_effect_player[self.current_player_idx].global_position = position
+func add_sound_effect(sound, local_position, pitch=1.0, hear_dist=10, volume_shift=0.0):
+	self.sound_effect_player[self.current_player_idx].global_position = local_position
 	self.sound_effect_player[self.current_player_idx].stream = sound
 	if not is_instance_of(sound, AudioStreamWAV):
 		self.sound_effect_player[self.current_player_idx].stream.loop = false

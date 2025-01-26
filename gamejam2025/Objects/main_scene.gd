@@ -2,7 +2,7 @@ extends Node3D
 
 #######
 ### Sounds
-const DUCK_SLAYER_MAIN_THEME = preload("res://Objects/InGame/DuckSlayer_MainTheme_V01.mp3")
+const DUCK_SLAYER_MAIN_THEME = preload("res://Objects/InGame/DuckSlayer_MainTheme_cut.wav")
 const DUCK_QUACK = preload("res://Objects/Enemies/Sounds/duck_quack.wav")
 #######
 
@@ -60,10 +60,9 @@ func _ready():
 	self.set_process(false)
 	self.start_game()
 	
-	AudioHandler.set_bgm(self.DUCK_SLAYER_MAIN_THEME)
-	
 
 func start_game():
+	AudioHandler.set_bgm(self.DUCK_SLAYER_MAIN_THEME)
 	self.screen_animation_player.play("FadeBlackIn")
 
 func done_fading():

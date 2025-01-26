@@ -113,6 +113,7 @@ func _ready():
 func reset():
 	self.soap_bubbles.emitting = false
 	self.current_state = States.FALLING
+	self.spring_arm_3d.rotation.y = PI/2
 	self.velocity = Vector3.ZERO
 	self.model.rotation = Vector3.ZERO
 	self.current_dir = Vector3.ZERO

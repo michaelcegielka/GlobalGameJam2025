@@ -458,7 +458,7 @@ transform = Transform3D(1.4919, 0, 0, 0, 1, 0, 0, 0, 1.4919, 0, -13.8897, 0)
 visible = false
 
 [node name="SpawnTimer" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 5.0
 one_shot = true
 autostart = true
 

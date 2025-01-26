@@ -1,5 +1,7 @@
 extends Node3D
 
+const BUBBLE_PLOP = preload("res://Objects/Menu/Sounds/bubble_plop.wav")
+
 const MinRadius = 2.5
 const MaxRadius = 3.5
 const YOffSet = 0.25 # for jump when land on top
@@ -34,6 +36,7 @@ func _physics_process(delta):
 func _on_hitbox_body_entered(body : Player):
 	PlayerStats.soap_amount += PlayerStats.SoapIncrease
 	self.animation_player.play("Pop")
+	AudioHandler.add_sound_effect(self.BUBBLE_PLOP, self.global_position)
 	if body.global_position.y >= self.global_position.y + self.YOffSet:
 		body.velocity.y = 2.0*body.JumpStrength
 		PlayerStats.emit_signal("show_pop_up")

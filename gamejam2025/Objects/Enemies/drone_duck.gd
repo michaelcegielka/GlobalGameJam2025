@@ -53,5 +53,5 @@ func _on_bomb_timer_timeout():
 	bomb.global_transform.origin = global_transform.origin
 
 
-func trigger_explosion(local_position: Vector3, radius: int):
+func trigger_explosion(_local_position: Vector3, _radius: int):
 	pass

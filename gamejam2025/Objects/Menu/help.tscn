@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dywpmqhdlslaj"]
+[gd_scene load_steps=4 format=3 uid="uid://dnminv2rt2xxm"]
 
 [ext_resource type="Script" path="res://Objects/Menu/help.gd" id="1_6d6lj"]
 [ext_resource type="Texture2D" uid="uid://db24vf7pap7dh" path="res://_2d/controls_titlescreen.png" id="1_hcf1y"]
-[ext_resource type="Theme" uid="uid://fybj3w55sxgm" path="res://_2d/mainUITheme.tres" id="2_6kaxk"]
+[ext_resource type="Theme" uid="uid://bt3hpldff7hr1" path="res://_2d/mainUITheme.tres" id="2_6kaxk"]
 
 [node name="Help" type="Control"]
 layout_mode = 3

@@ -52,8 +52,8 @@ func randomize_weapon_rotation(delta):
 func move_forward(_delta):
 	var move_direction = -transform.basis.z
 	self.velocity = move_direction * speed
-	if not self.is_on_floor():
-		self.velocity.y -= 20.0
+	#if not self.is_on_floor():
+	#	self.velocity.y -= 20.0
 	move_and_slide()
 
 func rotate_towards_player(delta):
