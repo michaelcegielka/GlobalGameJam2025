@@ -402,6 +402,9 @@ func end_combo():
 	if not can_start_combo:
 		return
 		
+	if get_floor_angle() > 1:
+		return
+		
 	self.is_in_combo = false
 	
 	self.combo_multiplier = self.unique_tricks_in_combo.size()
