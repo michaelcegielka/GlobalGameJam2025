@@ -12,6 +12,9 @@ const SoapIncrease = 100.0
 
 const Trick360AirSoap = 8.0 
 
+var current_enemy_limit := 12.0
+var current_ducks := 0
+
 var soap_amount := MaxDashMeter:
 	set(value):
 		if value > soap_amount:
@@ -22,7 +25,7 @@ var highscore_clean := 0.0
 var highscore_time := 0.0
 
 var current_time := 0.0
-var current_score := 0.0
+var current_score := 0
 
 var sound_on := true
 
@@ -34,6 +37,8 @@ signal player_died
 signal compute_score
 @warning_ignore("unused_signal")
 signal show_pop_up
+@warning_ignore("unused_signal")
+signal show_combo_trick
 
 func reset():
 	self.soap_amount = MaxDashMeter
@@ -42,6 +47,7 @@ func reset():
 	self.highscore_clean = max(self.highscore_clean, self.current_score)
 	self.current_time = 0.0
 	self.current_score = 0.0
+	self.current_ducks = 0.0
 
 func trasform_time_to_string(time_in_seconds):
 	var minutes = time_in_seconds / 60 # seconds variable should be an int

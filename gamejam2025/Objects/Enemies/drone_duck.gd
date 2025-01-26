@@ -35,7 +35,7 @@ func rotate_towards_player(delta):
 	self.current_dir = self.current_dir.normalized()
 	transform.basis = Basis.looking_at(self.current_dir, Vector3.UP)
 
-func move_forward(delta):
+func move_forward(_delta):
 	self.velocity = self.current_dir * speed
 	if self.global_position.y < self.height_goal - self.HeightRange:
 		self.velocity.y += 20
@@ -44,8 +44,8 @@ func move_forward(delta):
 		
 	move_and_slide()
 
-func spin_propeller(delta):
-	propeller.rotate_y(40 * delta)
+func spin_propeller(_delta):
+	propeller.rotate_y(40 * _delta)
 
 func _on_bomb_timer_timeout():
 	var bomb = bomb_scene.instantiate()

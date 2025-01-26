@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://8pijhl33d36n"]
+[gd_scene load_steps=5 format=3 uid="uid://b20r5ym40unqh"]
 
 [ext_resource type="Script" path="res://Objects/Obstacles/ramp.gd" id="1_3lpfc"]
 

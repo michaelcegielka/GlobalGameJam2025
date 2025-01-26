@@ -6,29 +6,30 @@ const WhitePixelsTotal := 1282207
 
 var mask_image: Image
 var mask_texture: ImageTexture
-@export var default_mask_path: String = "res://Objects/Bathtub/bath_mask.png"
+const default_mask_path: String = "res://Objects/Bathtub/bath_mask.png"
 
 func _ready():
 	self.player = self.get_tree().get_first_node_in_group("Player")
-	
-	mask_image = Image.load_from_file(default_mask_path)
+
+	var mask_image_resource = preload(default_mask_path)
+	mask_image = mask_image_resource.get_image()
 	mask_texture = ImageTexture.create_from_image(mask_image)
 
 	material_overlay.set("shader_param/mask_texture", mask_texture)
 	PlayerStats.connect("compute_score", self.compute_clean_score)
 	GlobalSignals.connect("reset_bathub", self.reset)
 	GlobalSignals.connect("put_dirt_local", self.add_dirt)
+	GlobalSignals.connect("erase_dirt_local", self.erase_dirt)
 
 func _process(_delta):
 	if player.current_state == player.States.GROUNDED:
 		var player_position = player.global_position
-		erase_dirt(player_position)
+		erase_dirt(player_position, 8)
 		
 
 @warning_ignore("shadowed_variable_base_class")
-func erase_dirt(position: Vector3):
+func erase_dirt(position: Vector3, radius = 8):
 	var uv_position = world_to_texture_coords(position)
-	var radius = 8
 	var radius_sq = radius * radius
 	
 	for x in range(-radius, radius):
@@ -72,7 +73,7 @@ func compute_clean_score():
 	for i in range(self.mask_image.get_width()):
 		for j in range(self.mask_image.get_height()):
 			total_score += int(self.mask_image.get_pixel(i, j).r >= 0.99)
-	PlayerStats.current_score = (self.WhitePixelsTotal - total_score) / 100
+	PlayerStats.current_score = max((self.WhitePixelsTotal - total_score) / 100, 0)
 
 func reset():
 	mask_image = Image.load_from_file(default_mask_path)

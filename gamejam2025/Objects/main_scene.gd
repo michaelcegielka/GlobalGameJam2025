@@ -27,6 +27,8 @@ var goal_rot : Vector3
 ### Enemies
 @export var SpawnTime = 30.0
 @onready var spawn_timer = $SpawnTimer
+var start_spawn_time
+
 @onready var all_spawner := $Spawner
 
 var first_spawn := true
@@ -38,7 +40,9 @@ var original_player_pos := Vector3.ZERO
 var cam_tween : Tween
 
 
+
 func _ready():
+	start_spawn_time = spawn_timer.get("wait_time")
 	GlobalSignals.connect("add_enemy", self.add_enemy)
 	GlobalSignals.connect("add_collectable", self.add_collectable)
 	GlobalSignals.connect("add_object", self.add_object)
@@ -64,7 +68,7 @@ func end_screen():
 	await self.cam_tween.finished
 	PlayerStats.emit_signal("compute_score")
 	self.end_screen_ui.show_end_screen()
-
+	spawn_timer.stop()
 
 func tween_cams(current_cam : Camera3D, new_cam : Camera3D, tween_time : float = 1.5):
 	var goal_pos = new_cam.global_position
@@ -127,7 +131,12 @@ func reset():
 	GlobalSignals.emit_signal("reset_bathub")
 	self.player.reset()
 	
+	spawn_timer.wait_time = start_spawn_time
+	spawn_timer.start()
+	current_wave = 1
+	
 	self.start_game()
+
 
 
 func _on_spawn_timer_timeout():

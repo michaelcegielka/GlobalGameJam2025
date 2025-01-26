@@ -8,6 +8,8 @@ specular_mode = 1
 albedo_color = Color(0.997844, 0.592995, 3.85046e-07, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gvm0k"]
+radius = 2.167
+height = 9.334
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te0bi"]
 diffuse_mode = 3
@@ -44,8 +46,9 @@ specular_mode = 1
 albedo_color = Color(0.454807, 0.288118, 0.050485, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_c4rh6"]
-top_radius = 0.8
-bottom_radius = 3.0
+top_radius = 1.4
+bottom_radius = 5.25
+height = 3.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cjbu4"]
 diffuse_mode = 3
@@ -89,7 +92,7 @@ rings = 2
 radius = 6.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_hxmr2"]
-radius = 3.45281
+radius = 5.443
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w7er7"]
 radius = 4.0
@@ -101,7 +104,7 @@ script = ExtResource("1_8gbia")
 body_material = SubResource("StandardMaterial3D_a74n1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00743, 0.084493)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.43247, 0.084493)
 shape = SubResource("CapsuleShape3D_gvm0k")
 
 [node name="Model" type="Node3D" parent="."]
@@ -150,7 +153,7 @@ mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("")
 
 [node name="WeaponMesh" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.129604, -0.0394712, -0.0144622, 0.0168615, 0.0868509, 0.126931, -0.00915049, -0.399014, 0.029059, -0.391409, 0.169833, -0.347693)
+transform = Transform3D(0.123593, -0.134335, -0.00704408, 0.0168615, 0.0868509, 0.126931, -0.040071, -0.377789, 0.0316854, -0.444214, 0.169833, -0.347693)
 layers = 4
 material_override = SubResource("StandardMaterial3D_agmpv")
 mesh = SubResource("CylinderMesh_pespu")
@@ -205,6 +208,7 @@ collision_layer = 0
 collision_mask = 48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+transform = Transform3D(0.999946, 0, 0, 0, 0.999946, 0, 0, 0, 0.999946, 0, -0.596684, 0)
 shape = SubResource("SphereShape3D_jcqlx")
 
 [node name="HurtBox" type="Area3D" parent="."]
@@ -213,7 +217,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HurtBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26703, 0, 1.63909)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26703, -1.08602, -0.18785)
 shape = SubResource("SphereShape3D_hxmr2")
 
 [node name="HeadArea" type="Area3D" parent="."]
@@ -222,6 +226,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="HeadArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.39322, 0)
 shape = SubResource("CylinderShape3D_w7er7")
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

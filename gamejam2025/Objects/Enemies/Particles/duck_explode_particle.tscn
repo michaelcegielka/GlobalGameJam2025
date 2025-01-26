@@ -29,15 +29,18 @@ radial_segments = 16
 rings = 8
 
 [node name="DuckExplodeParticle" type="Node3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_d6u5t")
 
 [node name="ExplodeParticle" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
 emitting = false
-amount = 16
+amount = 48
 lifetime = 3.0
 one_shot = true
+speed_scale = 3.0
 explosiveness = 1.0
+interpolate = false
 visibility_aabb = AABB(-50, -10, -50, 100, 20, 100)
 process_material = SubResource("ParticleProcessMaterial_55fcy")
 draw_pass_1 = SubResource("SphereMesh_ivnwc")

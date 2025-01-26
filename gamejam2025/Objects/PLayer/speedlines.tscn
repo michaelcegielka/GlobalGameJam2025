@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd8k4k3grwebs"]
+
+[ext_resource type="Shader" path="res://Objects/PLayer/speedlines.gdshader" id="1_ybp8w"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_oj21i"]
+noise_type = 5
+frequency = 0.2
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6iqpv"]
+noise = SubResource("FastNoiseLite_oj21i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ahd3"]
+shader = ExtResource("1_ybp8w")
+shader_parameter/line_color = Color(0.53, 0.851167, 1, 1)
+shader_parameter/line_count = 2.0
+shader_parameter/line_density = 1.0
+shader_parameter/line_faloff = 1.0
+shader_parameter/mask_size = 0.0
+shader_parameter/mask_edge = 1.0
+shader_parameter/animation_speed = 20.0
+shader_parameter/noise = SubResource("NoiseTexture2D_6iqpv")
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource("ShaderMaterial_6ahd3")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

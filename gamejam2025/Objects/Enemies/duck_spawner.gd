@@ -20,3 +20,4 @@ func spawn_ducks(player, idx, duck_type : int):
 		new_duck.set_player(player)
 		new_duck.global_position.x += randf_range(-SpawnRange, SpawnRange)
 		new_duck.global_position.z += randf_range(-SpawnRange, SpawnRange)
+		
