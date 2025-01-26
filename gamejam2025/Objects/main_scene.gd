@@ -133,7 +133,6 @@ func reset():
 	
 	spawn_timer.wait_time = start_spawn_time
 	spawn_timer.start()
-	current_wave = 1
 	
 	self.start_game()
 
@@ -144,12 +143,10 @@ func _on_spawn_timer_timeout():
 	### comput difficulty
 	if PlayerStats.current_time > self.IncreaseDifficultyTime2:
 		self.current_difficulty = 2
-		print("diff, 2")
 		self.current_enemy_limit = self.EnemyLimit2
 	elif PlayerStats.current_time > self.IncreaseDifficultyTime:
 		self.current_difficulty = 1
 		self.current_enemy_limit = self.EnemyLimit1
-		print("diff, 1")
 	else:
 		self.current_difficulty = 0
 		self.current_enemy_limit = self.DefaultEnemyLimit
