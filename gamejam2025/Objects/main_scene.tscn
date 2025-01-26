@@ -179,6 +179,7 @@ sky_material = SubResource("ProceduralSkyMaterial_n0aft")
 [sub_resource type="Environment" id="Environment_fgrld"]
 background_mode = 2
 sky = SubResource("Sky_73wsh")
+sky_custom_fov = 130.0
 reflected_light_source = 2
 tonemap_mode = 1
 tonemap_exposure = 1.2
@@ -335,6 +336,15 @@ snap_to_ground = false
 transform = Transform3D(0.911612, 0, 0.411053, 0, 1, 0, -0.411053, 0, 0.911612, -51.7327, 6.06098, 86.9221)
 snap_to_ground = false
 
+[node name="SoapDashCollect22" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(0.911612, 0, 0.411053, 0, 1, 0, -0.411053, 0, 0.911612, -70.6537, 14.6319, 88.8535)
+snap_to_ground = false
+
+[node name="SoapDashCollect23" parent="Collectables" instance=ExtResource("5_5mqlw")]
+transform = Transform3D(0.911612, 0, 0.411053, 0, 1, 0, -0.411053, 0, 0.911612, -68.118, 41.4776, 87.9622)
+snap_to_ground = false
+show_pop_up = true
+
 [node name="SoapDashCollect19" parent="Collectables" instance=ExtResource("5_5mqlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.849, 21.4505, 60.5374)
 snap_to_ground = false
@@ -398,7 +408,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -178.419, 69.2024, 74.5101)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -178.419, 69.2024, 42.2746)
 
 [node name="FinalCam" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 280, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 230, 0)
 
 [node name="Bathtub" parent="." instance=ExtResource("9_m7x11")]
 
@@ -424,6 +434,9 @@ transform = Transform3D(-0.9339, -0.104698, 0.341861, -0.0846631, 0.993728, 0.07
 
 [node name="Ramp3" parent="FixElements" instance=ExtResource("11_r4sra")]
 transform = Transform3D(0.936059, 0, -0.351842, 0, 1, 0, 0.351842, 0, 0.936059, 35.038, -13.3298, 18.4785)
+
+[node name="Ramp4" parent="FixElements" instance=ExtResource("11_r4sra")]
+transform = Transform3D(0.74833, 0, -0.663326, 0, 1, 0, 0.663326, 0, 0.74833, -73.7129, 2.30552, 92.2181)
 
 [node name="GrindRail" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
 transform = Transform3D(0.522767, 0, 0.852476, 0, 1, 0, -0.852476, 0, 0.522767, -66.2154, 3.08421, 77.8807)

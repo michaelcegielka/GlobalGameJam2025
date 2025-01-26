@@ -21,6 +21,10 @@ PlayerStats="*res://Objects/PLayer/player_stats.tscn"
 GlobalSignals="*res://Objects/global_signals.tscn"
 AudioHandler="*res://Objects/InGame/audio_handler.tscn"
 
+[display]
+
+window/size/mode=3
+
 [filesystem]
 
 import/blender/enabled=false
