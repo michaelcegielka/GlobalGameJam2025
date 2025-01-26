@@ -64,6 +64,8 @@ var current_combo_points := 0
 var current_stunts := 0
 var is_in_combo := false
 var last_trick := "" 
+var combo_cooldown_time := 0.0
+var can_start_combo := true
 
 const TRICK_POINTS = {
 	"sponge": 50,
@@ -78,7 +80,7 @@ const COMBO_SOUND = preload("res://Objects/PLayer/Sounds/Combo.wav")
 const COMBO_FINISH = preload("res://Objects/PLayer/Sounds/ComboFinish.wav")
 
 var unique_tricks_in_combo := []
-var combo_multiplier := 1 
+var combo_multiplier := 2 
 
 ### Attacks:
 @onready var dash_shape = $HurtBox/DashShape
@@ -248,6 +250,13 @@ func _physics_process(delta):
 		self.animation_player.play("Death_Ground")
 	
 	$Speedlines.material.set_shader_parameter("line_density", clamp((velocity.length() - 50) / 20, 0, 1))
+	
+	if not can_start_combo:
+		combo_cooldown_time -= delta
+		if combo_cooldown_time <= 0:
+			can_start_combo = true
+			combo_cooldown_time = 0.0
+	print(can_start_combo)
 
 func get_player_input(max_velo, accel, delta):
 	self.current_dir.x = -Input.get_action_strength("Left") + Input.get_action_strength("Right")
@@ -368,7 +377,10 @@ func trick_360(angle_1, angle_2):
 			_on_perform_trick("360")
 			
 
-func _on_perform_trick(trick: String):
+func _on_perform_trick(trick: String):		
+	if not can_start_combo:
+		return
+		
 	is_in_combo = true
 	if TRICK_POINTS.has(trick):
 		if trick == self.last_trick:
@@ -388,6 +400,9 @@ func _on_perform_trick(trick: String):
 		AudioHandler.add_sound_everwhere(self.COMBO_SOUND, 1+current_combo_points/2000.0)
 			
 func end_combo():
+	if not can_start_combo:
+		return
+		
 	self.is_in_combo = false
 	
 	self.combo_multiplier = self.unique_tricks_in_combo.size()
@@ -405,6 +420,9 @@ func end_combo():
 	self.current_stunts = 0
 	self.unique_tricks_in_combo.clear()
 	self.combo_multiplier = 1
+	
+	can_start_combo = false
+	combo_cooldown_time = 1.0  # 1 second delay
 
 func fall_move(delta):
 	self.soap_bubbles.emitting = false
