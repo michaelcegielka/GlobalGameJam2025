@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://8kntem7l4nai"]
+[gd_scene load_steps=4 format=3 uid="uid://t4mcf0401lj6"]
 
 [ext_resource type="PackedScene" uid="uid://byynd12qce2td" path="res://_3d/shower head.glb" id="1_pmjyq"]
 [ext_resource type="PackedScene" uid="uid://gu5yli2fhgw3" path="res://Objects/Obstacles/sponge.tscn" id="2_vcv7n"]
