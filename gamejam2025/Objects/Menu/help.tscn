@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://dywpmqhdlslaj"]
+
+[ext_resource type="Texture2D" uid="uid://db24vf7pap7dh" path="res://_2d/controls_titlescreen.png" id="1_hcf1y"]
+[ext_resource type="Theme" uid="uid://fybj3w55sxgm" path="res://_2d/mainUITheme.tres" id="2_6kaxk"]
+
+[node name="Help" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_hcf1y")
+
+[node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 100)
+layout_direction = 1
+layout_mode = 0
+offset_left = 100.0
+offset_top = 125.0
+offset_right = 300.0
+offset_bottom = 225.0
+theme = ExtResource("2_6kaxk")
+theme_override_font_sizes/font_size = 50
+text = "<"
