@@ -83,6 +83,7 @@ func _on_hitbox_area_entered(_area):
 	GlobalSignals.emit_signal("add_particle", new_explo)
 	new_explo.global_position = self.global_position
 	new_explo.set_material(self.body_material)
+	PlayerStats.current_ducks -= 1
 	self.queue_free()
 
 
