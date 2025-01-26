@@ -8,12 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://dwobrhpbxngmq" path="res://Objects/Collectables/soap_dash_collect.tscn" id="5_5mqlw"]
 [ext_resource type="PackedScene" uid="uid://gu5yli2fhgw3" path="res://Objects/Obstacles/sponge.tscn" id="7_2pjk2"]
 [ext_resource type="PackedScene" uid="uid://dettanh8g3s76" path="res://Objects/Bathtub/bathtub.tscn" id="9_m7x11"]
-[ext_resource type="PackedScene" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
+[ext_resource type="PackedScene" uid="uid://chfwpm7hb8edl" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
 [ext_resource type="PackedScene" uid="uid://b20r5ym40unqh" path="res://Objects/Obstacles/ramp.tscn" id="11_r4sra"]
 [ext_resource type="PackedScene" uid="uid://cbxkx8vb2r4ji" path="res://Objects/Obstacles/grind_rail.tscn" id="12_hpu5s"]
-[ext_resource type="PackedScene" uid="uid://t4mcf0401lj6" path="res://Objects/Obstacles/shower_head.tscn" id="13_d61pc"]
+[ext_resource type="PackedScene" uid="uid://8kntem7l4nai" path="res://Objects/Obstacles/shower_head.tscn" id="13_d61pc"]
 [ext_resource type="PackedScene" uid="uid://c2m6uu3waqjq4" path="res://Objects/Obstacles/deo.tscn" id="13_pl8pg"]
-[ext_resource type="PackedScene" path="res://Objects/Obstacles/lotion.tscn" id="13_tuf0d"]
+[ext_resource type="PackedScene" uid="uid://ewnrjqspkupx" path="res://Objects/Obstacles/lotion.tscn" id="13_tuf0d"]
 
 [sub_resource type="Animation" id="Animation_4yj2r"]
 resource_name = "FadeBlackIn"
@@ -328,11 +328,11 @@ show_pop_up = true
 transform = Transform3D(0.957893, 0.287126, 0, -0.287126, 0.957893, 0, 0, 0, 1, -105.802, 4.92164, 9.77887)
 
 [node name="SoapDashCollect17" parent="Collectables" instance=ExtResource("5_5mqlw")]
-transform = Transform3D(0.911612, 0, 0.411053, 0, 1, 0, -0.411053, 0, 0.911612, -79.6255, 7.21749, 69.6032)
+transform = Transform3D(0.911612, 0, 0.411053, 0, 1, 0, -0.411053, 0, 0.911612, -79.6255, 6.06098, 69.6032)
 snap_to_ground = false
 
 [node name="SoapDashCollect18" parent="Collectables" instance=ExtResource("5_5mqlw")]
-transform = Transform3D(0.911612, 0, 0.411053, 0, 1, 0, -0.411053, 0, 0.911612, -51.7327, 7.21749, 86.9221)
+transform = Transform3D(0.911612, 0, 0.411053, 0, 1, 0, -0.411053, 0, 0.911612, -51.7327, 6.06098, 86.9221)
 snap_to_ground = false
 
 [node name="SoapDashCollect19" parent="Collectables" instance=ExtResource("5_5mqlw")]
@@ -352,9 +352,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 102.451, 9.15002, 9.77887)
 
 [node name="SoapDashCollect4" parent="Collectables" instance=ExtResource("5_5mqlw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80773, 9.15002, 100.047)
-
-[node name="SoapDashCollect22" parent="Collectables" instance=ExtResource("5_5mqlw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.7435, 10.9593, 9.70147)
 
 [node name="Obstacles" type="Node3D" parent="."]
 
@@ -437,7 +434,7 @@ transform = Transform3D(0.826305, 0, -0.563224, 0, 1, 0, 0.563224, 0, 0.826305, 
 player = NodePath("../../Player")
 
 [node name="GrindRail3" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
-transform = Transform3D(-0.541958, 0, -0.840406, 0, 1, 0, 0.840406, 0, -0.541958, 86.7525, 3.14597, 84.4197)
+transform = Transform3D(-0.541958, 0, -0.840406, 0, 1, 0, 0.840406, 0, -0.541958, 63.5678, 3.14597, 71.5042)
 player = NodePath("../../Player")
 
 [node name="Deo" parent="FixElements" instance=ExtResource("13_pl8pg")]
