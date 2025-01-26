@@ -14,3 +14,5 @@ signal reset_bathub
 signal put_dirt_local
 @warning_ignore("unused_signal")
 signal erase_dirt_local
+@warning_ignore("unused_signal")
+signal perform_trick

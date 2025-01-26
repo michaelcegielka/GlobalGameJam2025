@@ -59,6 +59,22 @@ var was_dashing_before := false
 var start_angle_jump := 0.0
 var prev_angle := 0.0
 
+var current_combo_points := 0
+var is_in_combo := false
+var last_trick := "" 
+
+const TRICK_POINTS = {
+	"sponge": 50,
+	"grind": 70,
+	"360": 20,
+	"ramp": 200,
+	"enemy_jump": 150,
+	"bubble_jump": 100,
+}
+
+var unique_tricks_in_combo := []
+var combo_multiplier := 1 
+
 ### Attacks:
 @onready var dash_shape = $HurtBox/DashShape
 
@@ -83,6 +99,7 @@ var prev_angle := 0.0
 
 func _ready():
 	PlayerStats.connect("got_soap", self.show_heal_particles)
+	GlobalSignals.connect("perform_trick", self._on_perform_trick)
 	self.soap_bubbles.emitting = false
 	self.set_physics_process(false)
 
@@ -256,6 +273,8 @@ func check_dash(delta):
 		self.dash_shape.set_deferred("disabled", true)
 
 func ground_move(delta):
+	if self.is_in_combo:
+		end_combo()
 	self.soap_bubbles.emitting = (self.velocity.length() > 3)
 	self.get_player_input(self.MaxVelocity, self.Acceleration, delta)
 	PlayerStats.soap_amount -= PlayerStats.WalkCost
@@ -292,14 +311,12 @@ func ground_move(delta):
 		self.coyote_timer.start(self.CoyoteTime)
 		self.current_state = self.States.FALLING
 
-
 func start_jump():
 	self.current_state = self.States.JUMPING
 	PlayerStats.soap_amount -= PlayerStats.JumpCost
 	self.start_angle_jump = fposmod(self.model.rotation.y - PI, 2*PI)
 	if not Input.is_action_pressed("Dash"):
 		self.animation_player.play("Jump")
-
 
 func jump_move(delta):
 	if self.velocity.y < 0: self.soap_bubbles.emitting = false
@@ -325,6 +342,7 @@ func jump_move(delta):
 	if self.is_on_floor():
 		self.animation_player.play("IdleMove")
 		self.current_state = self.States.GROUNDED
+		end_combo()
 
 
 func trick_360(angle_1, angle_2):
@@ -333,6 +351,41 @@ func trick_360(angle_1, angle_2):
 	if mod_angle_1 < 2*PI and mod_angle_1 >= PI:
 		if mod_angle_2 >= 0 and mod_angle_2 < PI:
 			PlayerStats.soap_amount += PlayerStats.Trick360AirSoap
+			_on_perform_trick("360")
+			
+func _on_perform_trick(trick: String):
+	is_in_combo = true
+	if TRICK_POINTS.has(trick):
+		if trick == self.last_trick:
+			print("Repeated trick ignored: ", trick)
+			return
+		
+		self.last_trick = trick
+		
+		var points = TRICK_POINTS[trick]
+		print(trick.capitalize(), "! Gained ", points)
+		self.current_combo_points += points
+		
+		if not trick in self.unique_tricks_in_combo:
+			self.unique_tricks_in_combo.append(trick)
+			print("New unique trick added: ", trick)
+	else:
+		print("Unknown trick: ", trick)
+			
+func end_combo():
+	self.is_in_combo = false
+	
+	self.combo_multiplier = self.unique_tricks_in_combo.size()
+	if self.combo_multiplier == 0:
+		self.combo_multiplier = 1
+	
+	var total_points = self.current_combo_points * self.combo_multiplier
+	print("Combo ended! Total points: ", total_points, " (Multiplier: x", self.combo_multiplier, ")")
+	GlobalSignals.emit_signal("erase_dirt_local", self.global_position, 0.1 * total_points)
+	
+	self.current_combo_points = 0
+	self.unique_tricks_in_combo.clear()
+	self.combo_multiplier = 1
 
 func fall_move(delta):
 	self.soap_bubbles.emitting = false
@@ -349,6 +402,8 @@ func fall_move(delta):
 		Vector3.UP, delta * self.AirAcceleration / 5.0
 	)
 	self.tilt_model(self.current_floor_normal)
+	
+	self.is_in_combo = true
 	
 	if Input.is_action_just_pressed("Jump") and self.coyote_timer.time_left:
 		self.start_jump()
@@ -369,6 +424,8 @@ func dead_move(delta):
 	
 	if not self.animation_player.is_playing():
 		PlayerStats.emit_signal("player_died")
+	
+	end_combo()
 
 
 func grind_move(delta):
@@ -390,3 +447,4 @@ func grind_move(delta):
 		self.start_jump()
 		self.velocity += self.JumpStrength * self.current_floor_normal
 		self.global_position += 0.1 * self.current_floor_normal
+		_on_perform_trick("grind")

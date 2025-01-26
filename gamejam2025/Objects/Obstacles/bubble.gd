@@ -37,4 +37,5 @@ func _on_hitbox_body_entered(body : Player):
 	if body.global_position.y >= self.global_position.y + self.YOffSet:
 		body.velocity.y = 2.0*body.JumpStrength
 		PlayerStats.emit_signal("show_pop_up")
+		GlobalSignals.emit_signal("perform_trick", "bubble_jump")
 	

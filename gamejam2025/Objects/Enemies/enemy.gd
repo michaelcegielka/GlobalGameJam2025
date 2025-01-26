@@ -96,6 +96,7 @@ func _on_head_area_body_entered(body):
 	body.velocity.y = 2.0*body.JumpStrength
 	PlayerStats.emit_signal("show_pop_up")
 	self._on_hitbox_area_entered(null)
+	GlobalSignals.emit_signal("perform_trick", "enemy_jump")
 	
 func trigger_explosion(position: Vector3, radius: int):
 	for i in range(4):
