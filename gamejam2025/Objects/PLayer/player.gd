@@ -235,7 +235,7 @@ func _physics_process(delta):
 	
 	self.update_soap_thickness()
 	
-	if PlayerStats.soap_amount <= 0.0:
+	if PlayerStats.soap_amount <= 0.0 and not self.current_state == self.States.DEAD:
 		end_combo()
 		self.velocity.x = 0.0
 		self.velocity.z = 0.0
