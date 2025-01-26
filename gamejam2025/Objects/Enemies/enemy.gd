@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+const DeathY = -100
 const DUCK_DEATH = preload("res://Objects/Enemies/Sounds/duck_death.wav")
 const DUCK_QUACK = preload("res://Objects/Enemies/Sounds/duck_quack.wav")
 
@@ -23,7 +24,6 @@ var current_dir := Vector3.FORWARD
 @export var player : Player
 var surface_normal = Vector3.UP
 
-
 func _ready():
 	var rand_idx = randi_range(0, self.helmets.get_child_count())
 	if rand_idx < self.helmets.get_child_count():
@@ -37,11 +37,11 @@ func set_player(player_unit):
 func _physics_process(delta):
 	if randf() < 0.01:
 		AudioHandler.add_sound_effect(self.DUCK_QUACK, self.global_position)
-	if player:
-		update_surface_normal()
-		rotate_towards_player(delta)
-		move_forward(delta)
-		randomize_weapon_rotation(delta)
+	update_surface_normal()
+	rotate_towards_player(delta)
+	move_forward(delta)
+	if self.global_position.y < self.DeathY:
+		self.queue_free()
 
 func randomize_weapon_rotation(delta):
 	var random_rotation_x = randf_range(-weapon_swing_strength, weapon_swing_strength)
@@ -50,10 +50,10 @@ func randomize_weapon_rotation(delta):
 	weapon_mesh.rotation.z = lerp_angle(weapon_mesh.rotation.z, random_rotation_z, weapon_swing_speed * delta)
 
 func move_forward(_delta):
-	var move_direction = -transform.basis.z
+	var move_direction = self.current_dir # -transform.basis.z
 	self.velocity = move_direction * speed
-	#if not self.is_on_floor():
-	#	self.velocity.y -= 20.0
+	if not self.is_on_floor():
+		self.velocity.y = -20.0
 	move_and_slide()
 
 func rotate_towards_player(delta):
@@ -106,3 +106,11 @@ func _on_head_area_body_entered(body):
 	
 func trigger_explosion(local_position: Vector3, radius: int):
 	GlobalSignals.emit_signal("erase_dirt_local", local_position, radius)
+
+
+func _on_visible_on_screen_notifier_3d_screen_entered():
+	self.set_physics_process(true)
+
+
+func _on_visible_on_screen_notifier_3d_screen_exited():
+	self.set_physics_process(false)

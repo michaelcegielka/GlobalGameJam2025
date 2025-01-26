@@ -15,6 +15,7 @@ func spawn_ducks(player, idx, duck_type : int):
 			new_duck = DroneDuck.instantiate()
 		else:
 			new_duck = SwordDuck.instantiate()
+			
 		GlobalSignals.emit_signal("add_enemy", new_duck)
 		new_duck.global_position = self.global_position
 		new_duck.set_player(player)

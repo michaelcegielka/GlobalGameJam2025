@@ -363,34 +363,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80773, 9.15002, 100.047)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.314, 69.2024, 168.97)
 
 [node name="DuckSpawner2" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.7133, 69.2024, 174.627)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.2519, 69.2024, 155.464)
 
 [node name="DuckSpawner3" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -67.0941, 69.2024, -178.001)
 
 [node name="DuckSpawner4" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -85.2103, 70.1218, -179.698)
-
-[node name="DuckSpawner13" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -127.863, 101.198, -179.698)
-
-[node name="DuckSpawner14" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -133.197, 101.198, -140.466)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -152.557, 70.9692, -153.096)
 
 [node name="DuckSpawner5" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, -97.3458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 157.471, 69.2024, -51.784)
 
 [node name="DuckSpawner6" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, -116.441)
-
-[node name="DuckSpawner11" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 116.449, 69.2024, -175.154)
-
-[node name="DuckSpawner12" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.7526, -7.62939e-06, -199.496)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 151.247, 69.2024, -152.489)
 
 [node name="DuckSpawner7" parent="Spawner" instance=ExtResource("11_2oa1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172.969, 69.2024, 114.891)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 176.056, 69.923, 114.891)
 
 [node name="DuckSpawner8" parent="Spawner" instance=ExtResource("11_2oa1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 163.868, 69.2024, 137.319)
