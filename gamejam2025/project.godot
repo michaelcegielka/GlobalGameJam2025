@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GameJam2025"
-run/main_scene="res://Objects/main_scene.tscn"
+run/main_scene="res://Objects/Menu/menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -116,3 +116,4 @@ Dash={
 3d_physics/layer_4="Collectables"
 3d_physics/layer_5="Dash"
 3d_physics/layer_6="Projectiles"
+3d_physics/layer_7="InvisibleWall"
