@@ -2,8 +2,8 @@ extends Node3D
 
 #######
 ### Sounds
-const DUCK_SLAYER_MAIN_THEME = preload("res://Objects/InGame/DuckSlayer_MainTheme_FirstLoop.mp3")
-
+const DUCK_SLAYER_MAIN_THEME = preload("res://Objects/InGame/DuckSlayer_MainTheme_V01.mp3")
+const DUCK_QUACK = preload("res://Objects/Enemies/Sounds/duck_quack.wav")
 #######
 
 
@@ -165,7 +165,8 @@ func _on_spawn_timer_timeout():
 		self.duck_animation_player.play("ShowText")
 	
 	var current_enemies = self.enemies.get_child_count()
-
+	if current_enemies < self.current_enemy_limit:
+		AudioHandler.add_sound_everwhere(self.DUCK_QUACK, 0.5)
 	### spawn ducks
 	for spawner in self.all_spawner.get_children():
 		if current_enemies > self.current_enemy_limit:

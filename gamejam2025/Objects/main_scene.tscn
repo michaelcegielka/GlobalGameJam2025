@@ -266,7 +266,7 @@ shadow_enabled = true
 directional_shadow_max_distance = 500.0
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_40nht")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10.0291, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -13.4811, -44.3057)
 
 [node name="Collectables" type="Node3D" parent="."]
 

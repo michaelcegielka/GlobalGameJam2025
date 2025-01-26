@@ -42,6 +42,9 @@ material_override = SubResource("StandardMaterial3D_aahmm")
 [node name="WeaponMesh" parent="Model" index="8"]
 visible = false
 
+[node name="MeshInstance3D" parent="Model/Helmets/Helm0" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54949, -0.20467)
+
 [node name="BombTimer" type="Timer" parent="." index="3"]
 
 [node name="HurtBox" parent="." index="4"]

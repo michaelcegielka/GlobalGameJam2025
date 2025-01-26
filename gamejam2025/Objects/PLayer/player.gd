@@ -3,6 +3,7 @@ class_name Player
 
 const HealParticles = preload("res://Objects/PLayer/heal_particles.tscn")
 
+
 enum States {JUMPING, FALLING, GROUNDED, FAST, DEAD, GRINDING}
 
 const WallAngleMin = PI/8
@@ -95,6 +96,9 @@ var combo_multiplier := 1
 @onready var soap_bubbles : GPUParticles3D = $Model/SoapBubbles
 @onready var animation_player : AnimationPlayer = $Model/player/AnimationPlayer
 
+### Sound:
+@onready var dash_sound_player : AudioStreamPlayer3D = $AudioStreamPlayer3D
+
 
 
 func _ready():
@@ -102,6 +106,8 @@ func _ready():
 	GlobalSignals.connect("perform_trick", self._on_perform_trick)
 	self.soap_bubbles.emitting = false
 	self.set_physics_process(false)
+	
+	self.dash_sound_player.volume_db = -7
 
 
 func reset():
@@ -230,6 +236,7 @@ func _physics_process(delta):
 	self.update_soap_thickness()
 	
 	if PlayerStats.soap_amount <= 0.0:
+		end_combo()
 		self.velocity.x = 0.0
 		self.velocity.z = 0.0
 		self.current_state = self.States.DEAD
@@ -254,6 +261,7 @@ func get_player_input(max_velo, accel, delta):
 func check_dash(delta):
 	if Input.is_action_pressed("Dash") and PlayerStats.soap_amount > 0 and not self.current_dir == Vector3.ZERO:
 		if not self.was_dashing_before:
+			self.dash_sound_player.play (0.0)
 			self.animation_player.play("Boost_Start")
 			self.animation_player.queue("Boost_active")
 			self.was_dashing_before = true
@@ -267,6 +275,7 @@ func check_dash(delta):
 			self.DashAcceleration*delta)
 		self.velocity.y = y_velo
 	else:
+		self.dash_sound_player.stop()
 		if self.was_dashing_before:
 			self.was_dashing_before = false
 			self.animation_player.play("Boost_end")
@@ -357,22 +366,17 @@ func _on_perform_trick(trick: String):
 	is_in_combo = true
 	if TRICK_POINTS.has(trick):
 		if trick == self.last_trick:
-			print("Repeated trick ignored: ", trick)
 			return
 		
 		self.last_trick = trick
 		
 		var points = TRICK_POINTS[trick]
-		print(trick.capitalize(), "! Gained ", points)
 		self.current_combo_points += points
 		
 		PlayerStats.emit_signal("show_combo_trick", trick, self.current_combo_points)
 		
 		if not trick in self.unique_tricks_in_combo:
 			self.unique_tricks_in_combo.append(trick)
-			print("New unique trick added: ", trick)
-	else:
-		print("Unknown trick: ", trick)
 			
 func end_combo():
 	self.is_in_combo = false
@@ -382,8 +386,8 @@ func end_combo():
 		self.combo_multiplier = 1
 	
 	var total_points = self.current_combo_points * self.combo_multiplier
-	print("Combo ended! Total points: ", total_points, " (Multiplier: x", self.combo_multiplier, ")")
-	GlobalSignals.emit_signal("erase_dirt_local", self.global_position, 0.1 * total_points)
+	GlobalSignals.emit_signal("erase_dirt_local", self.global_position, 
+			min(0.05 * total_points, 250))
 	
 	self.current_combo_points = 0
 	self.unique_tricks_in_combo.clear()
@@ -426,8 +430,6 @@ func dead_move(delta):
 	
 	if not self.animation_player.is_playing():
 		PlayerStats.emit_signal("player_died")
-	
-	end_combo()
 
 
 func grind_move(delta):
