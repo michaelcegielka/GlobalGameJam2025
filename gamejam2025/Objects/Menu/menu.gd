@@ -3,7 +3,6 @@ extends Control
 @onready var start_game = $"HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/Start Game"
 @onready var options = $HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2/Options
 
-
 func _ready():
 	self.start_game.grab_focus()
 

@@ -33,7 +33,7 @@ func _on_grind_area_body_entered(_body):
 			self.player.current_state = self.player.States.GRINDING
 			# set position onto rail:
 			var local_pos = self.player.global_position - self.path_3d.global_position
-			var point_on_path = self.path_3d.curve.get_closest_point(local_pos)
+			# var point_on_path = self.path_3d.curve.get_closest_point(local_pos)
 			self.player.set_deferred("global_position", 
 				local_pos + self.path_3d.global_position)
 		

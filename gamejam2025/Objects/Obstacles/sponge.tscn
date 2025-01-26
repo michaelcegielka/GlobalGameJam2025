@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://gu5yli2fhgw3"]
+[gd_scene load_steps=10 format=3 uid="uid://gu5yli2fhgw3"]
 
 [ext_resource type="Script" path="res://Objects/Obstacles/sponge.gd" id="1_uc6j4"]
 
@@ -17,9 +17,6 @@ albedo_color = Color(0.19529, 0.346026, 0.104467, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_sh18h"]
 size = Vector3(8, 0.2, 8)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_267yw"]
-size = Vector3(7.5, 0.2, 7.5)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_w2s8n"]
 size = Vector3(8.3, 2.6, 8.3)
@@ -103,7 +100,6 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.924243, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("BoxShape3D_267yw")
 
 [node name="PlayerDetect" type="Area3D" parent="."]
 collision_layer = 0

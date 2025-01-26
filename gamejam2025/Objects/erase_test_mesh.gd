@@ -6,12 +6,13 @@ const WhitePixelsTotal := 1282207
 
 var mask_image: Image
 var mask_texture: ImageTexture
-@export var default_mask_path: String = "res://Objects/Bathtub/bath_mask.png"
+const default_mask_path: String = "res://Objects/Bathtub/bath_mask.png"
 
 func _ready():
 	self.player = self.get_tree().get_first_node_in_group("Player")
-	
-	mask_image = Image.load_from_file(default_mask_path)
+
+	var mask_image_resource = preload(default_mask_path)
+	mask_image = mask_image_resource.get_image()
 	mask_texture = ImageTexture.create_from_image(mask_image)
 
 	material_overlay.set("shader_param/mask_texture", mask_texture)
@@ -72,7 +73,7 @@ func compute_clean_score():
 	for i in range(self.mask_image.get_width()):
 		for j in range(self.mask_image.get_height()):
 			total_score += int(self.mask_image.get_pixel(i, j).r >= 0.99)
-	PlayerStats.current_score = (self.WhitePixelsTotal - total_score) / 100
+	PlayerStats.current_score = (self.WhitePixelsTotal - total_score) / 100.0
 
 func reset():
 	mask_image = Image.load_from_file(default_mask_path)

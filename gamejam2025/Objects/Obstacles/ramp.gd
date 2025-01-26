@@ -5,8 +5,8 @@ const CheckTime = 0.5
 @onready var timer : Timer = $Timer
 
 
-func _on_area_1_body_entered(body):
-	self.timer.start(self.CheckTime)
+#func _on_area_1_body_entered(body):
+	#self.timer.start(self.CheckTime)
 
 
 func _on_area_2_body_entered(body : Player):
