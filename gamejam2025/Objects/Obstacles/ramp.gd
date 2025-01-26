@@ -5,7 +5,7 @@ const CheckTime = 0.5
 @onready var timer : Timer = $Timer
 
 
-func _on_area_1_body_entered(body):
+func _on_area_1_body_entered(_body):
 	self.timer.start(self.CheckTime)
 
 

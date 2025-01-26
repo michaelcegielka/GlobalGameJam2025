@@ -366,6 +366,8 @@ func _on_perform_trick(trick: String):
 		print(trick.capitalize(), "! Gained ", points)
 		self.current_combo_points += points
 		
+		PlayerStats.emit_signal("show_combo_trick", trick, self.current_combo_points)
+		
 		if not trick in self.unique_tricks_in_combo:
 			self.unique_tricks_in_combo.append(trick)
 			print("New unique trick added: ", trick)

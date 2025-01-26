@@ -25,7 +25,7 @@ var highscore_clean := 0.0
 var highscore_time := 0.0
 
 var current_time := 0.0
-var current_score := 0.0
+var current_score := 0
 
 var sound_on := true
 
@@ -37,6 +37,8 @@ signal player_died
 signal compute_score
 @warning_ignore("unused_signal")
 signal show_pop_up
+@warning_ignore("unused_signal")
+signal show_combo_trick
 
 func reset():
 	self.soap_amount = MaxDashMeter

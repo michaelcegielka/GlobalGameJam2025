@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://pvkhv2ejruqy"]
+[gd_scene load_steps=8 format=3 uid="uid://cbxkx8vb2r4ji"]
 
 [ext_resource type="Script" path="res://Objects/Obstacles/grind_rail.gd" id="1_0okxh"]
 [ext_resource type="ArrayMesh" uid="uid://bv61dpo1p2f7t" path="res://Objects/Obstacles/Meshes/Toothbrush.obj" id="2_7bloy"]

@@ -73,7 +73,7 @@ func compute_clean_score():
 	for i in range(self.mask_image.get_width()):
 		for j in range(self.mask_image.get_height()):
 			total_score += int(self.mask_image.get_pixel(i, j).r >= 0.99)
-	PlayerStats.current_score = (self.WhitePixelsTotal - total_score) / 100.0
+	PlayerStats.current_score = max((self.WhitePixelsTotal - total_score) / 100, 0)
 
 func reset():
 	mask_image = Image.load_from_file(default_mask_path)
