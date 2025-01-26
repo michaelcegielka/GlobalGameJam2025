@@ -61,6 +61,7 @@ var start_angle_jump := 0.0
 var prev_angle := 0.0
 
 var current_combo_points := 0
+var current_stunts := 0
 var is_in_combo := false
 var last_trick := "" 
 
@@ -72,6 +73,9 @@ const TRICK_POINTS = {
 	"enemy_jump": 150,
 	"bubble_jump": 100,
 }
+
+const COMBO_SOUND = preload("res://Objects/PLayer/Sounds/Combo.wav")
+const COMBO_FINISH = preload("res://Objects/PLayer/Sounds/ComboFinish.wav")
 
 var unique_tricks_in_combo := []
 var combo_multiplier := 1 
@@ -363,6 +367,7 @@ func trick_360(angle_1, angle_2):
 			PlayerStats.soap_amount += PlayerStats.Trick360AirSoap
 			_on_perform_trick("360")
 			
+
 func _on_perform_trick(trick: String):
 	is_in_combo = true
 	if TRICK_POINTS.has(trick):
@@ -373,11 +378,14 @@ func _on_perform_trick(trick: String):
 		
 		var points = TRICK_POINTS[trick]
 		self.current_combo_points += points
+		self.current_stunts += 1
 		
 		PlayerStats.emit_signal("show_combo_trick", trick, self.current_combo_points)
 		
 		if not trick in self.unique_tricks_in_combo:
 			self.unique_tricks_in_combo.append(trick)
+			
+		AudioHandler.add_sound_everwhere(self.COMBO_SOUND, 1+current_combo_points/2000.0)
 			
 func end_combo():
 	self.is_in_combo = false
@@ -389,8 +397,12 @@ func end_combo():
 	var total_points = self.current_combo_points * self.combo_multiplier
 	GlobalSignals.emit_signal("erase_dirt_local", self.global_position, 
 			min(0.05 * total_points, 250))
+			
+	if(current_combo_points > 100):
+		AudioHandler.add_sound_everwhere(self.COMBO_FINISH, 1+current_combo_points/4000.0)
 	
 	self.current_combo_points = 0
+	self.current_stunts = 0
 	self.unique_tricks_in_combo.clear()
 	self.combo_multiplier = 1
 

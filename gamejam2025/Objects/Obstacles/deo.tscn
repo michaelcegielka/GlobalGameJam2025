@@ -1,24 +1,46 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2m6uu3waqjq4"]
+[gd_scene load_steps=8 format=3 uid="uid://c2m6uu3waqjq4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wn8sw"]
-albedo_color = Color(0.435192, 0.435192, 0.435192, 1)
+[ext_resource type="ArrayMesh" uid="uid://bvglfynh53pji" path="res://Objects/Obstacles/Meshes/Deo.obj" id="1_kxiso"]
+[ext_resource type="Script" path="res://Objects/Obstacles/deo.gd" id="1_x0fmw"]
+[ext_resource type="Texture2D" uid="uid://cjrt2d6thc7ks" path="res://_2d/DUCKSLAYER.png" id="2_ytkar"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_xpfsb"]
-top_radius = 3.0
-bottom_radius = 3.0
-height = 14.0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ue4ru"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.538772, 0.437876, 0.828395, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bjfg"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.0625169, 0.229147, 0.590766, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sy7j2"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.169245, 0.169245, 0.169245, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a15j2"]
 height = 14.0
 radius = 3.0
 
 [node name="Deo" type="Node3D"]
+script = ExtResource("1_x0fmw")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_wn8sw")
-mesh = SubResource("CylinderMesh_xpfsb")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.01, 0)
+layers = 5
+mesh = ExtResource("1_kxiso")
+surface_material_override/0 = SubResource("StandardMaterial3D_ue4ru")
+surface_material_override/1 = SubResource("StandardMaterial3D_0bjfg")
+surface_material_override/2 = SubResource("StandardMaterial3D_sy7j2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("CylinderShape3D_a15j2")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0992677, -0.995061, 0, 0.995061, -0.0992677, 0.0802002, -1.39106, 2.43542)
+size = Vector3(5.81519, 2, 6.90845)
+texture_albedo = ExtResource("2_ytkar")
+cull_mask = 4

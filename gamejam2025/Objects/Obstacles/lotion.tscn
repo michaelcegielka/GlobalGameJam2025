@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://ewnrjqspkupx"]
+
+[ext_resource type="ArrayMesh" uid="uid://tclnoeem4a57" path="res://Objects/Obstacles/Meshes/Lotion.obj" id="1_7ullx"]
+[ext_resource type="Texture2D" uid="uid://cjrt2d6thc7ks" path="res://_2d/DUCKSLAYER.png" id="2_04i25"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fg1h"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.8002, 0.613655, 0.337031, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1giwj"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.0338533, 0.0338533, 0.0338533, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ultbn"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.770552, 0.26193, 0.272522, 1)
+
+[node name="Lotion" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 5
+mesh = ExtResource("1_7ullx")
+surface_material_override/0 = SubResource("StandardMaterial3D_0fg1h")
+surface_material_override/1 = SubResource("StandardMaterial3D_1giwj")
+surface_material_override/2 = SubResource("StandardMaterial3D_ultbn")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0332424, -0.999448, 0, 0.999448, 0.0332424, 0.18328, 7.95138, 2.21669)
+size = Vector3(9.35126, 2, 8.39124)
+texture_albedo = ExtResource("2_04i25")
+cull_mask = 4
