@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bq3wyn1ecswce" path="res://_3d/SoapBumpMap.png" id="4_suq18"]
 [ext_resource type="Texture2D" uid="uid://bbd3h5dpdmkqi" path="res://_3d/player_Soap_Normal.png" id="5_qn4l7"]
 [ext_resource type="PackedScene" uid="uid://dd1vlxn8cpo6x" path="res://Objects/PopUps/PopUpText.tscn" id="6_bkoq1"]
-[ext_resource type="PackedScene" path="res://Objects/PLayer/speedlines.tscn" id="7_kv8vx"]
+[ext_resource type="PackedScene" uid="uid://bd8k4k3grwebs" path="res://Objects/PLayer/speedlines.tscn" id="7_kv8vx"]
 [ext_resource type="AudioStream" uid="uid://c4v68k76cerev" path="res://Objects/PLayer/Sounds/boost.wav" id="8_8xhgm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_iext5"]

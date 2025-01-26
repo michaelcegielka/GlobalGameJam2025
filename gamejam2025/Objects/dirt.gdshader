@@ -42,9 +42,9 @@ void fragment() {
 	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
 	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
 	ROUGHNESS = roughness_tex * roughness;
-	
+
     float opacity_value = texture(texture_opacity, base_uv).r;
-	
+
 	float mask_value = texture(mask_texture, UV).r;
     ALPHA = mask_value * opacity_value;
 }
