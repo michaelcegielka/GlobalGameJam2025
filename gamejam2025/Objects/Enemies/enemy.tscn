@@ -95,7 +95,7 @@ radius = 6.0
 radius = 5.443
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w7er7"]
-radius = 4.0
+radius = 4.5
 
 [sub_resource type="Animation" id="Animation_fw014"]
 length = 0.001
@@ -285,7 +285,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26703, -1.08602, -0.18785)
 shape = SubResource("SphereShape3D_hxmr2")
 
 [node name="HeadArea" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.04469, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.76094, 0)
 collision_layer = 0
 collision_mask = 2
 
