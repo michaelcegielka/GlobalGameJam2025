@@ -78,7 +78,7 @@ func _on_hitbox_area_entered(_area):
 		new_bubble.global_position.z += randf_range(-5.0, 5.0)
 	
 	# explosion:
-	GlobalSignals.emit_signal("erase_dirt_local", self.global_position, 50)
+	trigger_explosion(self.global_position, 50)
 	var new_explo = self.ExploderParticles.instantiate()
 	GlobalSignals.emit_signal("add_particle", new_explo)
 	new_explo.global_position = self.global_position
@@ -96,3 +96,13 @@ func _on_head_area_body_entered(body):
 	body.velocity.y = 2.0*body.JumpStrength
 	PlayerStats.emit_signal("show_pop_up")
 	self._on_hitbox_area_entered(null)
+	
+func trigger_explosion(position: Vector3, radius: int):
+	for i in range(4):
+		var offset_x = randf_range(-10, 10)
+		var offset_y = randf_range(-10, 10)
+		var random_radius = randf_range(radius * 0.8, radius * 1.2)
+		
+		var explosion_position = position + Vector3(offset_x, 0, offset_y)
+		
+		GlobalSignals.emit_signal("erase_dirt_local", explosion_position, random_radius)
