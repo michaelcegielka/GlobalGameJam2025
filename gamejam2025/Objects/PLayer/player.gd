@@ -256,7 +256,6 @@ func _physics_process(delta):
 		if combo_cooldown_time <= 0:
 			can_start_combo = true
 			combo_cooldown_time = 0.0
-	print(can_start_combo)
 
 func get_player_input(max_velo, accel, delta):
 	self.current_dir.x = -Input.get_action_strength("Left") + Input.get_action_strength("Right")
