@@ -74,6 +74,7 @@ const TRICK_POINTS = {
 	"ramp": 200,
 	"enemy_jump": 150,
 	"bubble_jump": 100,
+	"wallride": 80
 }
 
 const COMBO_SOUND = preload("res://Objects/PLayer/Sounds/Combo.wav")
@@ -403,6 +404,8 @@ func end_combo():
 		return
 		
 	if get_floor_angle() > 1:
+		if Input.is_action_just_pressed("Jump"):
+			_on_perform_trick("wallride")
 		return
 		
 	self.is_in_combo = false
@@ -424,7 +427,7 @@ func end_combo():
 	self.combo_multiplier = 1
 	
 	can_start_combo = false
-	combo_cooldown_time = 1.0  # 1 second delay
+	combo_cooldown_time = 0.6  # 1 second delay
 
 func fall_move(delta):
 	self.soap_bubbles.emitting = false
