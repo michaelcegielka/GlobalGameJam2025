@@ -79,7 +79,7 @@ focus_neighbor_top = NodePath("../Exit")
 focus_neighbor_bottom = NodePath("../Options")
 mouse_filter = 2
 button_mask = 0
-text = "Start Game"
+text = "START  GAME"
 
 [node name="Options" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -88,7 +88,7 @@ focus_neighbor_top = NodePath("../Start Game")
 focus_neighbor_bottom = NodePath("../Exit")
 mouse_filter = 2
 button_mask = 0
-text = "Sound: On"
+text = "HOW  TO  PLAY"
 
 [node name="Exit" type="Button" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
@@ -97,7 +97,7 @@ focus_neighbor_top = NodePath("../Options")
 focus_neighbor_bottom = NodePath("../Start Game")
 mouse_filter = 2
 button_mask = 0
-text = "Exit"
+text = "EXIT"
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/VBoxContainer2/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(0, 35)

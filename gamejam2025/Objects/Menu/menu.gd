@@ -11,11 +11,13 @@ func _on_start_game_pressed() -> void:
 
 
 func _on_options_pressed() -> void:
-	if PlayerStats.sound_on:
-		options.text = "Sound: Off"
-	else:
-		options.text = "Sound: On"
-	PlayerStats.sound_on = !PlayerStats.sound_on
+	
+	get_tree().change_scene_to_file("res://Objects/Menu/help.tscn")
+	#if PlayerStats.sound_on:
+		#options.text = "Sound: Off"
+	#else:
+		#options.text = "Sound: On"
+	#PlayerStats.sound_on = !PlayerStats.sound_on
 
 
 func _on_exit_pressed() -> void:
