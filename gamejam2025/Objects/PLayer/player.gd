@@ -36,7 +36,7 @@ const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
 
 const MinArmDistance = 8.0
-const MaxArmDistance = 9.0
+const MaxArmDistance = 7.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
 ### Make soap smaller
