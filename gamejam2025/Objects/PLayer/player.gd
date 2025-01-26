@@ -75,6 +75,7 @@ const TRICK_POINTS = {
 }
 
 const COMBO_SOUND = preload("res://Objects/PLayer/Sounds/Combo.wav")
+const COMBO_FINISH = preload("res://Objects/PLayer/Sounds/ComboFinish.wav")
 
 var unique_tricks_in_combo := []
 var combo_multiplier := 1 
@@ -396,6 +397,9 @@ func end_combo():
 	var total_points = self.current_combo_points * self.combo_multiplier
 	GlobalSignals.emit_signal("erase_dirt_local", self.global_position, 
 			min(0.05 * total_points, 250))
+			
+	if(current_combo_points > 100):
+		AudioHandler.add_sound_everwhere(self.COMBO_FINISH, 1+current_combo_points/4000.0)
 	
 	self.current_combo_points = 0
 	self.current_stunts = 0
