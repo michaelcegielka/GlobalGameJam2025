@@ -24,6 +24,7 @@ const MaxVelocity = 50.0
 const DashVelocity = 70.0
 const JumpStrength = 25.0
 const CoyoteTime = 0.1
+const LeanStrength = 0.5
 
 const Gravity = -80.0
 const AirGravity = -40.0
@@ -145,7 +146,7 @@ func tilt_model(up_vector):
 		var player_rotation = self.model.transform.basis
 		var tilt_direction_global = player_rotation * tilt_direction_local
 		
-		var tilt_amount = velocity_scale * 0.65 
+		var tilt_amount = velocity_scale * LeanStrength
 		var target_tilt = tilt_direction_global * tilt_amount
 		
 		target_up = (up_vector + target_tilt).normalized()
