@@ -35,7 +35,7 @@ const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
 
 const MinArmDistance = 8.0
-const MaxArmDistance = 6.0
+const MaxArmDistance = 9.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
 ### Make soap smaller
@@ -127,7 +127,7 @@ func control_cam(delta):
 		self.MinArmDistance, self.MaxArmDistance
 	)
 
-	self.camera_3d.fov = min(90 + velocity_scale * 9, 150)
+	self.camera_3d.fov = min(80 + velocity_scale * 9 + clamp((velocity.length() - 50), 0, 20), 150)
 
 #################################################################
 ### Model and visual stuff
@@ -217,6 +217,8 @@ func _physics_process(delta):
 		self.velocity.z = 0.0
 		self.current_state = self.States.DEAD
 		self.animation_player.play("Death_Ground")
+	
+	$Speedlines.material.set_shader_parameter("line_density", clamp((velocity.length() - 50) / 20, 0, 1))
 
 func get_player_input(max_velo, accel, delta):
 	self.current_dir.x = -Input.get_action_strength("Left") + Input.get_action_strength("Right")
