@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://o8goof8vof4"]
+
+[ext_resource type="Script" path="res://Objects/InGame/audio_handler.gd" id="1_34pmt"]
+[ext_resource type="AudioStream" uid="uid://bbm0vylfku3a3" path="res://Objects/InGame/DuckSlayer_MainTheme_FirstLoop.mp3" id="1_60uxd"]
+
+[node name="AudioHandler" type="Node3D"]
+script = ExtResource("1_34pmt")
+
+[node name="BackgroundMusic" type="Node3D" parent="."]
+
+[node name="BGM1" type="AudioStreamPlayer" parent="BackgroundMusic"]
+stream = ExtResource("1_60uxd")
+
+[node name="BGM2" type="AudioStreamPlayer" parent="BackgroundMusic"]
+
+[node name="SoundEffects" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D2" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D3" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D4" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D5" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D6" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D7" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D8" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D9" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AudioStreamPlayer3D10" type="AudioStreamPlayer3D" parent="SoundEffects"]
+
+[node name="AlwaysSoundEffects" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AlwaysSoundEffects"]
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="AlwaysSoundEffects"]
+
+[node name="AudioStreamPlayer3" type="AudioStreamPlayer" parent="AlwaysSoundEffects"]
+
+[node name="AudioStreamPlayer4" type="AudioStreamPlayer" parent="AlwaysSoundEffects"]
+
+[node name="AudioStreamPlayer5" type="AudioStreamPlayer" parent="AlwaysSoundEffects"]

@@ -46,8 +46,8 @@ func reset():
 	self.highscore_time = max(self.highscore_time, self.current_time)
 	self.highscore_clean = max(self.highscore_clean, self.current_score)
 	self.current_time = 0.0
-	self.current_score = 0.0
-	self.current_ducks = 0.0
+	self.current_score = 0
+	self.current_ducks = 0
 
 func trasform_time_to_string(time_in_seconds):
 	var minutes = time_in_seconds / 60 # seconds variable should be an int

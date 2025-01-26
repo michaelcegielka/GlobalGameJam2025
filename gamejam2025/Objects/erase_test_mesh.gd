@@ -8,7 +8,11 @@ var mask_image: Image
 var mask_texture: ImageTexture
 const default_mask_path: String = "res://Objects/Bathtub/bath_mask.png"
 
+#var draw_thread : Thread
+
 func _ready():
+	#self.draw_thread = Thread.new()
+	
 	self.player = self.get_tree().get_first_node_in_group("Player")
 
 	var mask_image_resource = preload(default_mask_path)
@@ -26,6 +30,14 @@ func _process(_delta):
 		var player_position = player.global_position
 		erase_dirt(player_position, 8)
 		
+
+#func erase_dirt_thread(local_pos : Vector3, radius):
+#	if self.draw_thread.is_started():
+#		await  self.draw_thread.wait_to_finish()
+#		self.draw_thread.start(self.erase_dirt.bind(local_pos, radius))
+#	else:
+#		await  self.draw_thread.wait_to_finish()
+#		self.draw_thread.start(self.erase_dirt.bind(local_pos, radius))
 
 @warning_ignore("shadowed_variable_base_class")
 func erase_dirt(position: Vector3, radius = 8):
@@ -73,7 +85,7 @@ func compute_clean_score():
 	for i in range(self.mask_image.get_width()):
 		for j in range(self.mask_image.get_height()):
 			total_score += int(self.mask_image.get_pixel(i, j).r >= 0.99)
-	PlayerStats.current_score = max((self.WhitePixelsTotal - total_score) / 100, 0)
+	PlayerStats.current_score = max((self.WhitePixelsTotal - total_score) / 100.0, 0)
 
 func reset():
 	mask_image = Image.load_from_file(default_mask_path)

@@ -1,5 +1,12 @@
 extends Node3D
 
+#######
+### Sounds
+const DUCK_SLAYER_MAIN_THEME = preload("res://Objects/InGame/DuckSlayer_MainTheme_FirstLoop.mp3")
+
+#######
+
+
 const IncreaseDifficultyTime = 120.0
 const IncreaseDifficultyTime2 = 300.0
 const DefaultEnemyLimit = 5
@@ -52,6 +59,8 @@ func _ready():
 	self.original_player_pos = self.player.global_position
 	self.set_process(false)
 	self.start_game()
+	
+	AudioHandler.set_bgm(self.DUCK_SLAYER_MAIN_THEME)
 	
 
 func start_game():

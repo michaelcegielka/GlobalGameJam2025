@@ -44,7 +44,7 @@ visible = false
 
 [node name="BombTimer" type="Timer" parent="." index="3"]
 
-[node name="HurtBox" parent="." index="5"]
+[node name="HurtBox" parent="." index="4"]
 visible = false
 
 [node name="CollisionShape3D" parent="HurtBox" index="0"]

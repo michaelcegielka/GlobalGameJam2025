@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 PlayerStats="*res://Objects/PLayer/player_stats.tscn"
 GlobalSignals="*res://Objects/global_signals.tscn"
+AudioHandler="*res://Objects/InGame/audio_handler.tscn"
 
 [filesystem]
 
