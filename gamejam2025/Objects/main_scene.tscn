@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://nrtfjmfxo36m"]
+[gd_scene load_steps=25 format=3 uid="uid://nrtfjmfxo36m"]
 
 [ext_resource type="Script" path="res://Objects/main_scene.gd" id="1_7is67"]
 [ext_resource type="PackedScene" uid="uid://ore5g1k0lwj6" path="res://Objects/PLayer/player.tscn" id="1_40nht"]
@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dwobrhpbxngmq" path="res://Objects/Collectables/soap_dash_collect.tscn" id="5_5mqlw"]
 [ext_resource type="PackedScene" uid="uid://gu5yli2fhgw3" path="res://Objects/Obstacles/sponge.tscn" id="7_2pjk2"]
 [ext_resource type="PackedScene" uid="uid://dettanh8g3s76" path="res://Objects/Bathtub/bathtub.tscn" id="9_m7x11"]
-[ext_resource type="PackedScene" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
+[ext_resource type="PackedScene" uid="uid://chfwpm7hb8edl" path="res://Objects/Enemies/duck_spawner.tscn" id="11_2oa1m"]
 [ext_resource type="PackedScene" uid="uid://b20r5ym40unqh" path="res://Objects/Obstacles/ramp.tscn" id="11_r4sra"]
 [ext_resource type="PackedScene" uid="uid://cbxkx8vb2r4ji" path="res://Objects/Obstacles/grind_rail.tscn" id="12_hpu5s"]
-[ext_resource type="PackedScene" uid="uid://t4mcf0401lj6" path="res://Objects/Obstacles/shower_head.tscn" id="13_d61pc"]
+[ext_resource type="PackedScene" uid="uid://8kntem7l4nai" path="res://Objects/Obstacles/shower_head.tscn" id="13_d61pc"]
 [ext_resource type="PackedScene" uid="uid://c2m6uu3waqjq4" path="res://Objects/Obstacles/deo.tscn" id="13_pl8pg"]
 [ext_resource type="PackedScene" uid="uid://ewnrjqspkupx" path="res://Objects/Obstacles/lotion.tscn" id="13_tuf0d"]
 
@@ -481,6 +481,7 @@ transform = Transform3D(-0.993661, 0.111485, 0.0144932, -0.0289228, -0.128926, -
 
 [node name="Lotion4" parent="FixElements" instance=ExtResource("13_tuf0d")]
 transform = Transform3D(-0.886131, 0, 0.463435, 0, 1, 0, -0.463435, 0, -0.886131, 33.6985, 66.4879, 145.65)
+
 [node name="GrindRail4" parent="FixElements" node_paths=PackedStringArray("player") instance=ExtResource("12_hpu5s")]
 transform = Transform3D(-0.420086, 0, 0.907484, 0, 1, 0, -0.907484, 0, -0.420086, -60.2008, 3.08522, -80.19)
 player = NodePath("../../Player")

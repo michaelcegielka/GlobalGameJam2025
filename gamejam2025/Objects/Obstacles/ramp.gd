@@ -5,9 +5,9 @@ const CheckTime = 0.5
 @onready var timer : Timer = $Timer
 
 
-func _on_area_1_body_entered(_body, body : Player):
+func _on_area_1_body_entered(body : Player):
 	self.timer.start(self.CheckTime)
-	body.velocity = 1.6*body.velocity.length() * Vector3.FORWARD
+	#body.velocity = 1.6*body.velocity.length() * Vector3.FORWARD
 
 func _on_area_2_body_entered(body : Player):
 	if self.timer.time_left > 0:
