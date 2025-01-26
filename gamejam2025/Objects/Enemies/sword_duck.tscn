@@ -103,7 +103,7 @@ transform = Transform3D(0.869192, -0.000303441, -0.000423598, 0.000431101, 0.611
 material_override = SubResource("StandardMaterial3D_toomo")
 
 [node name="WeaponMesh" parent="Model" index="6"]
-transform = Transform3D(0.129604, -0.0394711, -0.0144622, 0.0168616, 0.0868515, 0.126931, -0.00915045, -0.399014, 0.0290591, -0.391409, 0.169833, -0.347693)
+transform = Transform3D(0.129847, -0.0252773, -0.0154848, 0.0141366, -0.0614193, 0.128765, -0.0102519, -0.404848, -0.0185681, -0.328322, 0.169833, -0.436915)
 mesh = SubResource("BoxMesh_t8cl0")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model/WeaponMesh" index="0"]
@@ -123,3 +123,6 @@ libraries = {
 "": SubResource("AnimationLibrary_2yjy3")
 }
 autoplay = "Cut"
+
+[node name="StabPLayer" parent="." index="7"]
+autoplay = ""

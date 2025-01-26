@@ -36,7 +36,7 @@ const MaxCamAngle = -1.0 # max angle for camera down
 const MaxCamRotDifference = -PI/8.0
 
 const MinArmDistance = 8.0
-const MaxArmDistance = 9.0
+const MaxArmDistance = 7.0
 const VelocityScale = 10.0
 const UnderVelocityAngle = 10.0
 ### Make soap smaller
@@ -113,6 +113,7 @@ func _ready():
 func reset():
 	self.soap_bubbles.emitting = false
 	self.current_state = States.FALLING
+	self.spring_arm_3d.rotation.y = PI/2
 	self.velocity = Vector3.ZERO
 	self.model.rotation = Vector3.ZERO
 	self.current_dir = Vector3.ZERO

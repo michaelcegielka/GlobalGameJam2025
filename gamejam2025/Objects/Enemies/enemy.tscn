@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://s0njjrds4vfx"]
+[gd_scene load_steps=25 format=3 uid="uid://s0njjrds4vfx"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/enemy.gd" id="1_8gbia"]
 
@@ -7,9 +7,8 @@ diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0.997844, 0.592995, 3.85046e-07, 1)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gvm0k"]
-radius = 2.167
-height = 9.334
+[sub_resource type="SphereShape3D" id="SphereShape3D_pot82"]
+radius = 1.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_te0bi"]
 diffuse_mode = 3
@@ -98,6 +97,69 @@ radius = 5.443
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_w7er7"]
 radius = 4.0
 
+[sub_resource type="Animation" id="Animation_fw014"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/WeaponMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.328322, 0.169833, -0.436915)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/WeaponMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.38519, -2.44649, 2.51709)]
+}
+
+[sub_resource type="Animation" id="Animation_3qe18"]
+resource_name = "Stab"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Model/WeaponMesh:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.328322, 0.169833, -0.436915), Vector3(-0.328322, 0.0460303, -0.286646), Vector3(-0.199856, 0.0703254, -0.542324)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Model/WeaponMesh:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-1.2357, -0.367615, 0.410915), Vector3(-1.38519, -2.44649, 2.51709), Vector3(-1.28553, -1.27204, 1.11297)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ardm"]
+_data = {
+"RESET": SubResource("Animation_fw014"),
+"Stab": SubResource("Animation_3qe18")
+}
+
 [node name="EnemyBody" type="CharacterBody3D"]
 collision_layer = 4
 floor_max_angle = 1.39626
@@ -105,8 +167,8 @@ script = ExtResource("1_8gbia")
 body_material = SubResource("StandardMaterial3D_a74n1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.43247, 0.084493)
-shape = SubResource("CapsuleShape3D_gvm0k")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.24797, 0.084493)
+shape = SubResource("SphereShape3D_pot82")
 
 [node name="Model" type="Node3D" parent="."]
 transform = Transform3D(9, 0, 0, 0, 9, 0, 0, 0, 9, 0.000124931, 2.71591, -0.00530195)
@@ -154,7 +216,7 @@ mesh = SubResource("SphereMesh_stcqb")
 skeleton = NodePath("")
 
 [node name="WeaponMesh" type="MeshInstance3D" parent="Model"]
-transform = Transform3D(0.123593, -0.134335, -0.00704408, 0.0168615, 0.0868509, 0.126931, -0.040071, -0.377789, 0.0316854, -0.444214, 0.169833, -0.347693)
+transform = Transform3D(0.129847, -0.0252792, -0.0154851, 0.0141367, -0.0614204, 0.128765, -0.0102525, -0.404848, -0.0185683, -0.328322, 0.169833, -0.436915)
 layers = 4
 material_override = SubResource("StandardMaterial3D_agmpv")
 mesh = SubResource("CylinderMesh_pespu")
@@ -164,6 +226,7 @@ transform = Transform3D(0.125, 0, 0, 0, 0.125, 0, 0, 0, 0.125, -1.56164e-05, 0.4
 
 [node name="Helm0" type="Node3D" parent="Model/Helmets"]
 transform = Transform3D(1, 0, 0, 0, 0.937105, -0.349046, 0, 0.349046, 0.937105, 0, 0.846928, 0.30068)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Model/Helmets/Helm0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.54949, -0.20467)
@@ -230,6 +293,17 @@ collision_mask = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.39322, 0)
 shape = SubResource("CylinderShape3D_w7er7")
 
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+aabb = AABB(-12.5, -2, -12.5, 25, 15, 25)
+
+[node name="StabPLayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3ardm")
+}
+autoplay = "Stab"
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]
 [connection signal="body_entered" from="HeadArea" to="." method="_on_head_area_body_entered"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]
