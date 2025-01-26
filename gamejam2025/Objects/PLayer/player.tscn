@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://ore5g1k0lwj6"]
+[gd_scene load_steps=18 format=3 uid="uid://ore5g1k0lwj6"]
 
 [ext_resource type="Script" path="res://Objects/PLayer/player.gd" id="1_8ti7c"]
 [ext_resource type="PackedScene" uid="uid://brbbceyyo8n2v" path="res://_3d/player.glb" id="2_3o81h"]
 [ext_resource type="Shader" path="res://Objects/PLayer/bubble_simple.gdshader" id="3_qoltx"]
 [ext_resource type="Texture2D" uid="uid://bq3wyn1ecswce" path="res://_3d/SoapBumpMap.png" id="4_suq18"]
+[ext_resource type="Texture2D" uid="uid://bbd3h5dpdmkqi" path="res://_3d/player_Soap_Normal.png" id="5_qn4l7"]
 [ext_resource type="PackedScene" uid="uid://dd1vlxn8cpo6x" path="res://Objects/PopUps/PopUpText.tscn" id="6_bkoq1"]
 [ext_resource type="PackedScene" path="res://Objects/PLayer/speedlines.tscn" id="7_kv8vx"]
 [ext_resource type="AudioStream" uid="uid://c4v68k76cerev" path="res://Objects/PLayer/Sounds/boost.wav" id="8_8xhgm"]
@@ -33,6 +34,7 @@ specular_mode = 1
 albedo_color = Color(0.951654, 0.44154, 0.58075, 1)
 roughness = 0.46
 normal_enabled = true
+normal_texture = ExtResource("5_qn4l7")
 clearcoat_enabled = true
 clearcoat_roughness = 0.0
 heightmap_scale = 3.393
